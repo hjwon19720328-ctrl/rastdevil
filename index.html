@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aeterna - 심연의 새로운 질서</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #020202;
+            --text-main: #e0e0e8;
+            --text-dim: #888899;
+            --accent-purple: #7b61ff;
+            --accent-blue: #4facfe;
+            --accent-red: #da0037;
+            --accent-gold: #d4af37;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Serif KR', serif; }
+
+        body { 
+            background-color: var(--bg-base); color: var(--text-main); line-height: 1.6; overflow-x: hidden;
+            cursor: crosshair; 
+        }
+        
+        /* 부드러운 스크롤을 위한 고정 배경 레이어 */
+        #fixed-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            z-index: -2; pointer-events: none;
+        }
+
+        a, button, .staff-card, .lore-card, .close-btn { cursor: crosshair; }
+
+        /* 심연의 먼지(패럴랙스 레이어) */
+        #abyss-dust {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 200vh;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: -1; pointer-events: none;
+            animation: drift 120s linear infinite;
+        }
+        @keyframes drift {
+            from { transform: translateY(0); }
+            to { transform: translateY(-50%); }
+        }
+
+        #mainWrapper { width: 100%; min-height: 100vh; }
+
+        /* --- [인트로] --- */
+        #introOverlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 10001;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        
+        #introCompany { display: flex; flex-direction: column; align-items: center; width: 90%; animation: fadeIn 1s ease forwards; }
+        .intro-logo { font-size: 8rem; font-weight: 900; letter-spacing: 15px; color: #fff; margin-bottom: 2rem; text-shadow: 0 0 20px var(--accent-purple); text-align: center; }
+        .intro-text { font-size: 1rem; color: #aaa; margin-bottom: 4rem; opacity: 0.8; letter-spacing: 1px; line-height: 2; word-break: keep-all; }
+        
+        .btn-intro { background: transparent; color: #7b61ff; border: 1px solid rgba(123, 97, 255, 0.4); padding: 15px 40px; border-radius: 4px; font-size: 1.1rem; transition: all 0.3s; letter-spacing: 2px; }
+        .btn-intro:hover { background: #7b61ff; color: #fff; box-shadow: 0 0 20px #7b61ff; }
+
+        #introOverlay.fade-out { animation: fadeOut 0.8s ease forwards; pointer-events: none; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+        /* --- 네비게이션 헤더 --- */
+        header {
+            display: none; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: rgba(2, 2, 2, 0.9); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1); position: fixed; width: 100%; top: 0; z-index: 1000;
+        }
+        .logo-text { font-size: 1.6rem; font-weight: 900; letter-spacing: 4px; color: #fff; cursor: pointer; transition: text-shadow 0.3s; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { font-size: 0.95rem; color: var(--text-dim); transition: 0.3s; text-decoration: none; letter-spacing: 1px; }
+        
+        #nav-home.active { color: #7b61ff; text-shadow: 0 0 10px #7b61ff; }
+        #nav-lore.active { color: #da0037; text-shadow: 0 0 10px #da0037; }
+        #nav-staff.active { color: #4facfe; text-shadow: 0 0 10px #4facfe; }
+        #nav-recruit.active { color: #d4af37; text-shadow: 0 0 10px #d4af37; }
+
+        /* --- 페이지 라우팅 --- */
+        .page-view { display: none; padding-top: 100px; min-height: 100vh; padding-bottom: 5rem; }
+        .page-view.active { display: block; animation: fadeIn 0.5s ease forwards; }
+
+        .section-wrap { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
+        .page-header { text-align: center; margin-bottom: 3.5rem; }
+        .page-header h2 { font-size: 2.5rem; margin-bottom: 1rem; word-break: keep-all; }
+        .page-header p { color: var(--text-dim); font-size: 1.05rem; word-break: keep-all; }
+
+        /* PPT 슬라이드 (홈) */
+        .ppt-wrapper { position: relative; width: 100%; max-width: 900px; margin: 0 auto; background: rgba(15, 10, 25, 0.6); border: 1px solid rgba(123, 97, 255, 0.3); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px); }
+        .ppt-slide { display: none; padding: 5rem 3rem; text-align: center; flex-direction: column; justify-content: center; min-height: 350px; }
+        .ppt-slide.active { display: flex; }
+        .ppt-controls { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 20px; pointer-events: none; }
+        .ppt-btn { pointer-events: auto; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid #7b61ff; border-radius: 50%; width: 45px; height: 45px; transition: 0.3s; }
+        .ppt-btn:hover { background: #7b61ff; box-shadow: 0 0 15px #7b61ff; }
+        .ppt-dots { display: flex; justify-content: center; gap: 10px; padding-bottom: 20px; }
+        .dot { width: 10px; height: 10px; background: rgba(255,255,255,0.2); border-radius: 50%; cursor: pointer; }
+        .dot.active { background: #7b61ff; box-shadow: 0 0 10px #7b61ff; }
+
+        /* 세계관 (Lore) */
+        #page-lore .page-header h2 { color: #da0037; text-shadow: 0 0 15px rgba(218, 0, 55, 0.4); }
+        .lore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .lore-card { background: #070202; border: 1px solid #331111; border-left: 4px solid #da0037; padding: 2.5rem; transition: 0.3s; }
+        .lore-card:hover { border-color: #da0037; transform: translate(-5px, -5px); box-shadow: 10px 10px 0 rgba(218, 0, 55, 0.1); }
+        .lore-card h3 { font-size: 1.4rem; color: #da0037; margin-bottom: 1.5rem; border-bottom: 1px dashed #551111; padding-bottom: 10px; }
+        .lore-card p { color: #bbb; line-height: 1.8; word-break: keep-all;}
+        .grade-list { list-style: none; margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .grade-list li { color: #ddd; display: flex; align-items: center; font-size: 0.95rem; }
+        .grade-badge { background: rgba(218, 0, 55, 0.1); color: #da0037; padding: 4px 10px; border: 1px solid #da0037; font-size: 0.8rem; font-weight: bold; margin-right: 15px; width: 70px; text-align: center; flex-shrink: 0;}
+
+        /* 필터 메뉴 */
+        .filter-menu { display: flex; justify-content: center; gap: 10px; margin-bottom: 3.5rem; flex-wrap: wrap; }
+        .filter-btn { background: transparent; color: #6688aa; border: 1px solid rgba(79,172,254,0.3); padding: 8px 20px; border-radius: 30px; transition: 0.3s; font-size: 0.9rem;}
+        .filter-btn.active, .filter-btn:hover { background: rgba(79,172,254,0.1); color: #fff; border-color: #4facfe; box-shadow: 0 0 15px rgba(79,172,254,0.4); }
+
+        /* 인물 명부 (Staff) */
+        #page-staff .page-header h2 { color: #4facfe; text-shadow: 0 0 15px rgba(79, 172, 254, 0.5); }
+        .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+        .staff-card { background: rgba(1, 8, 18, 0.8); border: 1px solid rgba(79,172,254,0.2); text-align: center; padding: 2.5rem 1rem; border-radius: 15px; transition: 0.4s; }
+        .staff-card:hover { transform: translateY(-10px); border-color: #4facfe; box-shadow: 0 10px 25px rgba(79,172,254,0.2); background: rgba(10, 20, 35, 0.9); }
+        .staff-img-wrap { width: 100px; height: 100px; margin: 0 auto 1.5rem; border-radius: 50%; padding: 3px; background: rgba(79,172,254,0.3); transition: 0.4s; }
+        .staff-card:hover .staff-img-wrap { background: #4facfe; box-shadow: 0 0 20px #4facfe; }
+        .staff-img-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid #010812; }
+        .staff-name { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 5px; }
+        .staff-role { font-size: 0.85rem; color: #4facfe; letter-spacing: 1px; }
+
+        /* 입사 지원 (Recruit) */
+        #page-recruit .page-header h2 { color: #d4af37; text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+        .recruit-container { max-width: 700px; margin: 0 auto; background: rgba(15, 12, 5, 0.8); border: 2px solid #d4af37; padding: 3rem; position: relative; outline: 1px solid #d4af37; outline-offset: -8px; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; color: #d4af37; margin-bottom: 0.8rem; font-size: 0.95rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 15px; background: rgba(0,0,0,0.6); border: 1px solid rgba(212, 175, 55, 0.3); color: #fff; font-size: 1rem; transition: 0.3s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #d4af37; background: rgba(0,0,0,0.9); }
+        .form-group textarea { height: 150px; resize: vertical; }
+        .btn-gold { background: transparent; color: #d4af37; border: 1px solid #d4af37; padding: 15px; width: 100%; font-size: 1.1rem; font-weight: bold; transition: 0.3s; letter-spacing: 2px; }
+        .btn-gold:hover { background: #d4af37; color: #000; box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+        .recruit-success { display: none; text-align: center; }
+
+        /* 모달창 */
+        .modal-overlay { 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 2000; 
+            justify-content: center; align-items: center; 
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-window { 
+            background: #0a0a0c; border: 1px solid #333; border-radius: 8px; width: 90%; max-width: 600px; 
+            max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 0 50px #000;
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: #050505; border-bottom: 1px solid #222; }
+        .modal-header span { color: #fff; font-weight: bold; font-size: 0.8rem; letter-spacing: 2px; }
+        .close-btn { color: #888; font-size: 1.8rem; transition: 0.3s; line-height: 1; }
+        .close-btn:hover { color: #fff; }
+        
+        .modal-body { padding: 2rem; overflow-y: auto; text-align: center; }
+        
+        /* 자세히보기 이미지 크기 */
+        .prof-img { 
+            width: 250px; height: 250px; border-radius: 50%; object-fit: cover; 
+            border: 4px solid #555; margin-bottom: 1.5rem; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+        
+        .prof-name { font-size: 2.2rem; color: #fff; font-weight: 900; margin-bottom: 0.2rem; letter-spacing: 2px; }
+        .prof-role { font-size: 1.1rem; color: #888; margin-bottom: 0.5rem; }
+        .prof-meta { font-size: 0.9rem; color: var(--accent-blue); margin-bottom: 1rem; font-weight: bold; letter-spacing: 1px; }
+        
+        .prof-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 2rem; }
+        .prof-tag { background: rgba(255,255,255,0.05); color: #ccc; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.1); }
+        .prof-desc { text-align: left; color: #bbb; background: rgba(255,255,255,0.03); padding: 1.5rem; border-left: 3px solid #555; margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.8; word-break: keep-all;}
+        
+        .btn-scan { background: #111; color: #fff; border: 1px solid #555; padding: 12px; width: 100%; transition: 0.3s; font-weight: bold; font-size: 1rem; }
+        .btn-scan:hover { background: #fff; color: #000; }
+
+        #viewAbility { display: none; text-align: left; }
+        .abil-title { font-size: 1.6rem; color: #fff; margin-bottom: 1.5rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .abil-text { background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 8px; color: #ddd; line-height: 2; white-space: pre-wrap; font-size: 1rem; }
+        .btn-return { background: transparent; color: #777; border: 1px solid #444; padding: 12px; width: 100%; margin-top: 1.5rem; transition: 0.3s; font-weight: bold; font-size: 1rem;}
+        .btn-return:hover { color: #fff; border-color: #fff; }
+
+        /* 링크 스타일 */
+        .aeterna-link {
+            color: var(--accent-blue); text-decoration: none; font-weight: bold; transition: 0.3s; border-bottom: 1px solid transparent;
+        }
+        .aeterna-link:hover { color: #fff; border-bottom: 1px solid var(--accent-blue); text-shadow: 0 0 10px var(--accent-blue); }
+
+        /* 모바일 반응형 처리 (핸드폰 완벽 최적화) */
+        @media (max-width: 768px) {
+            .intro-logo { font-size: 3.5rem; letter-spacing: 5px; }
+            .intro-text { font-size: 0.9rem; }
+            
+            header { flex-direction: column; padding: 1rem; gap: 10px; }
+            .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+            .page-view { padding-top: 110px; }
+            
+            /* 홈 화면 PPT 슬라이드 축소 및 여백 확보 */
+            #page-home h1 { font-size: 1.6rem; }
+            .hero p { font-size: 0.95rem; margin-bottom: 2rem; }
+            
+            .ppt-wrapper { border-radius: 15px; margin: 0 5%; width: 90%; }
+            .ppt-slide { padding: 2rem 3.5rem; min-height: 200px; } 
+            .ppt-slide h3 { font-size: 1.2rem; margin-bottom: 0.8rem; }
+            .ppt-slide p { font-size: 0.9rem; line-height: 1.6; }
+            
+            .ppt-controls { padding: 0 10px; }
+            .ppt-btn { width: 35px; height: 35px; font-size: 0.8rem; }
+            
+            .page-header h2 { font-size: 1.8rem; }
+            .page-header p { font-size: 0.9rem; }
+            
+            /* 명단 카드 2열 배치 및 크기 축소 */
+            .staff-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+            .staff-card { padding: 1.5rem 0.5rem; }
+            .staff-img-wrap { width: 70px; height: 70px; margin-bottom: 1rem; }
+            .staff-name { font-size: 1.1rem; }
+            .staff-role { font-size: 0.75rem; }
+
+            .recruit-container { padding: 1.5rem; }
+            .modal-body { padding: 1.5rem; }
+            
+            .prof-img { width: 150px; height: 150px; border-width: 3px; }
+            .prof-name { font-size: 1.8rem; }
+        }
+
+        /* 터치 기기에서는 커스텀 커서를 꺼서 오작동 방지 */
+        @media (hover: none) and (pointer: coarse) {
+            body, a, button, .staff-card, .lore-card, .close-btn { cursor: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div id="fixed-bg"></div>
+    <div id="abyss-dust"></div>
+
+    <audio id="bgmNormal" src="NOMAL.mp3" loop></audio>
+    <audio id="bgmGod" src="GOD.mp3" loop></audio>
+
+    <div id="introOverlay">
+        <div id="introCompany">
+            <div class="intro-logo">AETERNA</div>
+            <div class="intro-text">
+                여러분의 모든 것을 책임지겠습니다.<br>
+                <span style="color:var(--accent-red); font-weight:bold; font-size:1.1rem;">영혼까지도.</span>
+            </div>
+            <button class="btn-intro" onclick="enterSite()">심연으로 입장</button>
+        </div>
+    </div>
+
+    <div id="mainWrapper">
+        <header id="mainHeader">
+            <div class="logo-container" onclick="navigate('page-home')">
+                <span class="logo-text">AETERNA</span>
+            </div>
+            <ul class="nav-links">
+                <li><a id="nav-home" class="active" onclick="navigate('page-home')">홈 (The Void)</a></li>
+                <li><a id="nav-lore" onclick="navigate('page-lore')">세계관 (Blood)</a></li>
+                <li><a id="nav-staff" onclick="navigate('page-staff')">명부 (Matrix)</a></li>
+                <li><a id="nav-recruit" onclick="navigate('page-recruit')">지원 (Pact)</a></li>
+            </ul>
+        </header>
+
+        <main id="page-home" class="page-view">
+            <div class="section-wrap hero">
+                <h1 style="font-weight: 900; margin-bottom: 1rem; text-shadow: 0 0 20px rgba(123, 97, 255, 0.5);">심연의 질서를 수립하다</h1>
+                <p>Aeterna 코퍼레이션은 필멸의 끝에서 시작되는 사후 여정을 완벽하게 통제합니다.</p>
+            </div>
+            <div class="section-wrap" style="padding-top: 0;">
+                <div class="ppt-wrapper">
+                    <div class="ppt-controls">
+                        <button class="ppt-btn" onclick="prevSlide()">❮</button>
+                        <button class="ppt-btn" onclick="nextSlide()">❯</button>
+                    </div>
+                    <div class="ppt-slide active">
+                        <h3>01. 영혼 수집 및 안전 인도</h3>
+                        <p>현세에서 수명을 다한 영혼들을 신속하게 거두어들입니다.<br>심연의 틈새에서 발생하는 변수를 차단하고 안전하게 호송하는 것이 우리의 임무입니다.</p>
+                    </div>
+                    <div class="ppt-slide">
+                        <h3>02. 생전 카르마 데이터 정산</h3>
+                        <p>인도된 영혼들의 생전 기억과 행적을 데이터화합니다.<br>죄와 벌의 무게를 오차 없이 측정하여 공정한 판결을 내립니다.</p>
+                    </div>
+                    <div class="ppt-slide">
+                        <h3>03. 이승 및 저승 차원 방역</h3>
+                        <p>부정적인 감정에서 발생한 악령과 이승에 간섭하는 이탈자들을 규제합니다.<br>파견 요원들이 이들을 즉각 정화시켜 두 세계의 질서를 유지합니다.</p>
+                    </div>
+                    <div class="ppt-dots">
+                        <div class="dot active" onclick="setSlide(0)"></div>
+                        <div class="dot" onclick="setSlide(1)"></div>
+                        <div class="dot" onclick="setSlide(2)"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <main id="page-lore" class="page-view">
+            <div class="section-wrap">
+                <div class="page-header">
+                    <h2>피의 계약 및 사내 지침서</h2>
+                    <p>현장 업무 시 숙지해야 할 주요 종족과 생태계 등급 분류입니다.</p>
+                </div>
+                <div class="lore-grid">
+                    <div class="lore-card">
+                        <h3>악마 (Demons)</h3>
+                        <p>단순히 저승 환경에서 태어난 '태생적 종족명'입니다. 인간들의 편견 때문에 고생을 하지만, 실제로는 철저한 계약과 규율을 따르는 우수한 실무진들입니다.</p>
+                    </div>
+                    <div class="lore-card">
+                        <h3>악귀 및 악령 (Evil Spirits)</h3>
+                        <p>극심한 공포가 뭉쳐져 스폰되는 파생 개체들입니다. 발견 즉시 정화 및 소멸 절차를 밟아야 하며, 일부 특수 개체는 상층부의 허가 없이 접근을 금지합니다.(하지만 극히 일부는 실험, 연구 목적으로 회사에서 관리할 수 있습니다.)</p>
+                    </div>
+                    <div class="lore-card">
+                        <h3>사후 1000년의 진로 선택</h3>
+                        <p> 영혼은 사후 1000년이 되는 해에 최종 진로를 결정해야 합니다. 현세로 돌아가 새로운 생을 시작하는 <strong>[환생]</strong>, 모든 굴레를 벗고 영원히 잠드는 <strong>[안식]</strong>, 그리고 에테르나 코퍼레이션의 정규직 사역마로 계약하는 <strong>[취업]</strong> 중 하나를 선택할 수 있습니다.(취업은 본인이 원할시 사후 100년 이상이라면 면접을 볼 수 있습니다)</p>
+                    </div>
+                    <div class="lore-card" style="grid-column: 1 / -1;">
+                        <h3>공통 위협 등급 체계</h3>
+                        <p style="margin-bottom: 1.5rem;">체내 마력량과 영적 영향력에 따라 전 종족은 5단계로 분류됩니다.</p>
+                        <ul class="grade-list">
+                            <li><span class="grade-badge">최상급</span> 자연재해 이상의 규격 외 존재</li>
+                            <li><span class="grade-badge">상급</span> 대규모 지역 통제가 가능한 강자</li>
+                            <li><span class="grade-badge">중급</span> 숙련된 현장 실무진 및 중간 관리자</li>
+                            <li><span class="grade-badge">하급</span> 일반적인 서류 및 기본 현장직</li>
+                            <li><span class="grade-badge">최하급</span> 미약한 영체, 지능이나 능력이 희미함</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <main id="page-staff" class="page-view">
+            <div class="section-wrap">
+                <div class="page-header">
+                    <h2>영혼 데이터베이스 매트릭스</h2>
+                    <p>소속 부서를 필터링하고 카드를 클릭하여 기밀을 열람하십시오.</p>
+                </div>
+                
+                <div class="filter-menu">
+                    <button class="filter-btn active" onclick="filterCategory(event, 'all')">전체 열람</button>
+                    <button class="filter-btn" onclick="filterCategory(event, 'underworld')">저승 부서</button>
+                    <button class="filter-btn" onclick="filterCategory(event, 'human')">이승 부서</button>
+                    <button class="filter-btn" onclick="filterCategory(event, 'etc')">그 외 (특수 개체)</button>
+                </div>
+                
+                <div class="staff-grid" id="staffGrid">
+                    <div class="staff-card" data-category="etc" onclick="openModal('god')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/c/1" alt="고드"></div>
+                        <div class="staff-name">고드</div><div class="staff-role">장기 체류자</div>
+                    </div>
+                    <div class="staff-card" data-category="etc" onclick="openModal('leviathan')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/w/1" alt="레비아탄"></div>
+                        <div class="staff-name">레비아탄</div><div class="staff-role">최상급 악령</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('lilith')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/d/1" alt="릴리스"></div>
+                        <div class="staff-name">릴리스</div><div class="staff-role">회장</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('satan')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/h/1" alt="사탄"></div>
+                        <div class="staff-name">사탄</div><div class="staff-role">비서실장</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('death')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/g/1" alt="데스"></div>
+                        <div class="staff-name">데스</div><div class="staff-role">사장</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('lua')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/j/1" alt="루아"></div>
+                        <div class="staff-name">루아</div><div class="staff-role">사신(후계자)</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('mavis')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/l/1" alt="메이비스"></div>
+                        <div class="staff-name">메이비스</div><div class="staff-role">소속원</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('isabella')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/p/1" alt="이사벨라"></div>
+                        <div class="staff-name">이사벨라</div><div class="staff-role">소속원</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('serena')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/m/1" alt="세레나"></div>
+                        <div class="staff-name">세레나</div><div class="staff-role">소속원</div>
+                    </div>
+                    <div class="staff-card" data-category="human" onclick="openModal('eris')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/n/1" alt="에리스"></div>
+                        <div class="staff-name">에리스</div><div class="staff-role">이승 담당</div>
+                    </div>
+                    <div class="staff-card" data-category="human" onclick="openModal('erina')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/t/1" alt="에리나"></div>
+                        <div class="staff-name">에리나</div><div class="staff-role">이승 담당</div>
+                    </div>
+                    <div class="staff-card" data-category="human" onclick="openModal('baal')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/r/1" alt="바알"></div>
+                        <div class="staff-name">바알</div><div class="staff-role">이승 담당</div>
+                    </div>
+                    <div class="staff-card" data-category="human" onclick="openModal('paimon')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/q/1" alt="파이몬"></div>
+                        <div class="staff-name">파이몬</div><div class="staff-role">이승 담당</div>
+                    </div>
+                    <div class="staff-card" data-category="etc" onclick="openModal('lucifer')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/v/1" alt="루시퍼"></div>
+                        <div class="staff-name">루시퍼</div><div class="staff-role">무소속</div>
+                    </div>
+                    <div class="staff-card" data-category="etc" onclick="openModal('rabbit')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/k/1" alt="미스 래빗"></div>
+                        <div class="staff-name">미스 래빗</div><div class="staff-role">연구 개체</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <main id="page-recruit" class="page-view">
+            <div class="section-wrap">
+                <div class="page-header">
+                    <h2>신규 사역마 영구 계약서</h2>
+                    <p>저승의 질서를 함께 관리할 영체 및 계약자를 모집합니다.<br><span style="color:#d4af37; font-size:0.85rem;">(※ 서류는 1회만 제출 가능하며, 파기가 불가합니다.)</span></p>
+                </div>
+                <div class="recruit-container">
+                    <form id="applyForm" onsubmit="submitForm(event)">
+                        <div class="form-group">
+                            <label>지원자 이름 (또는 진명)</label>
+                            <input type="text" placeholder="예: 무명의 계약자" required>
+                        </div>
+                        <div class="form-group">
+                            <label>마력 / 영력 등급</label>
+                            <input type="text" placeholder="예: 중급, 일반인 등" required>
+                        </div>
+                        <div class="form-group">
+                            <label>업무에 활용 가능한 보유 능력</label>
+                            <textarea placeholder="질서 유지 및 차원 관리에 도움 될 만한 능력을 상세히 기재하십시오." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-gold">피의 서약 송신</button>
+                    </form>
+                    <div id="recruitSuccess" class="recruit-success">
+                        <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 1rem;">[ 서약 체결 완료 ]</h3>
+                        <p style="color: #aaa;">지원서가 Aeterna 심연 데이터베이스에 각인되었습니다.<br>능력 검증 후 합격자에 한해 사자가 방문합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="unifiedModal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <span>[ CONFIDENTIAL DATA ]</span>
+                <span class="close-btn" onclick="closeModal(event)">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="viewProfile">
+                    <img id="profImg" class="prof-img" src="">
+                    <h3 id="profName" class="prof-name">이름</h3>
+                    <p id="profRole" class="prof-role">직책</p>
+                    
+                    <div class="prof-meta">
+                        <span id="profAge">나이</span> | <span id="profMbti">MBTI</span>
+                    </div>
+
+                    <div id="profTags" class="prof-tags"></div>
+                    <div id="profDesc" class="prof-desc">설명</div>
+                    <button class="btn-scan" onclick="showAbility()">[ 영적 능력 데이터 스캔 ]</button>
+                </div>
+                <div id="viewAbility" style="display:none;">
+                    <h3 id="abilName" class="abil-title">이름의 능력</h3>
+                    <div id="abilContent" class="abil-text">능력 설명</div>
+                    <button class="btn-return" onclick="showProfile()">◀ 프로필 데이터로 복귀</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const bgmNormal = document.getElementById('bgmNormal');
+        const bgmGod = document.getElementById('bgmGod');
+
+        function enterSite() {
+            document.getElementById('introOverlay').classList.add('fade-out');
+            
+            setTimeout(() => {
+                document.getElementById('introOverlay').style.display = 'none';
+                document.getElementById('mainHeader').style.display = 'flex';
+                document.getElementById('page-home').classList.add('active');
+                document.getElementById('mainHeader').style.borderColor = 'rgba(123, 97, 255, 0.4)';
+                document.querySelector('.logo-text').style.textShadow = '0 0 10px #7b61ff';
+            }, 800);
+
+            bgmNormal.volume = 0.4;
+            bgmNormal.play().catch(() => {});
+        }
+
+        function navigate(id) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            const navId = 'nav-' + id.split('-')[1];
+            if(document.getElementById(navId)) document.getElementById(navId).classList.add('active');
+            
+            const header = document.getElementById('mainHeader');
+            if(id === 'page-home') { header.style.borderColor = 'rgba(123, 97, 255, 0.4)'; }
+            else if(id === 'page-lore') { header.style.borderColor = 'rgba(218, 0, 55, 0.4)'; }
+            else if(id === 'page-staff') { header.style.borderColor = 'rgba(79, 172, 254, 0.4)'; }
+            else if(id === 'page-recruit') { header.style.borderColor = 'rgba(212, 175, 55, 0.4)'; }
+            
+            window.scrollTo(0,0);
+        }
+
+        function filterCategory(event, cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.querySelectorAll('.staff-card').forEach(card => {
+                card.style.display = (cat === 'all' || card.getAttribute('data-category') === cat) ? 'block' : 'none';
+            });
+        }
+
+        const charData = {
+            'god': { 
+                name: '고드', role: '장기 체류자', img: 'https://igx.kr/u/zP/c/1', 
+                age: '380억 세 (측정불가)', mbti: 'INTP', tags: ['창조신', '단거최고', '탕후루중독', '관찰자'],
+                desc: '귀차니즘이 매우 심하고 단 것을 매우 좋아한다. 최근에는 인간계의 <strong>탕후루</strong>에 빠져 있으며, 설탕 코팅의 두께에 따라 그날 우주의 운명이 결정된다는 소문이 있다. 자다가 기침 한 번으로 유성을 떨어뜨려 릴리스를 고생시키기도 한다.', 
+                ability: '【 인과율 초월 및 우주적 재창조 (Genesis & Oblivion) 】\n\n물리 법칙, 시간, 공간의 제약을 무시하고 의지만으로 우주를 소멸시키거나 재구축합니다. 현재는 단순한 \'관찰자\' 역할을 수행 중입니다.\n\n<span style="color:#da0037; font-size:0.8em;">(※ 관측 불가 수준의 영력. 접근 금지 등급. 무슨일이 있어도 그녀의 신경을 건들이지 말것)</span>' 
+            },
+            'leviathan': {
+                name: '레비아탄', role: '최상급 악령 (방관자)', img: 'https://igx.kr/u/zP/w/1',
+                age: '측정불가', mbti: 'ISTP', tags: ['심해의지배자', '행방불명', '술집단골', '방관자'],
+                desc: '심연과 어둠의 공포에서 태어난 최상급 악령입니다. 현재 에테르나의 통제를 벗어나 현세 어딘가에서 방관 중입니다. 정확한 행방은 알 수 없으나, 항간의 소문에 의하면 어느 허름한 인간계 술집에 머물고 있다고 합니다.',
+                ability: '【 심해의 압박 & 심연의 공포 】\n주변 공간의 영적 밀도를 무한히 높여 모든 존재를 압착시킵니다. 대상에게 심연을 부여주어 트라우마를 생성합니다.'
+            },
+            'lilith': { 
+                name: '릴리스', role: '회장 (최상급)', img: 'https://igx.kr/u/zP/d/1', 
+                age: '9821만 세', mbti: 'ISFJ', tags: ['외강내유', '월급인상최고', '테라리움', '맛집공유'],
+                desc: '차가운 외모와 달리 직원들에게 매주 금요일 맛집 쿠폰을 쏘는 따뜻한 회장님. 집무실에서 키우는 작은 <strong>테라리움</strong>은 사실 실제 행성 하나와 연결되어 있다. 벌레를 극도로 무서워하며, 일을 미루지 않고 직접 처리하는 완벽주의자다.', 
+                ability: '【 영혼의 계약 & 영혼 사슬 】\n영혼을 구속하는 강력한 계약을 맺습니다. 영혼을 직접적으로 타격하고 속박할 수 있는 붉은 사슬을 사용합니다' 
+            },
+            'satan': { 
+                name: '사탄', role: '비서실장 (최상급)', img: 'https://igx.kr/u/zP/h/1', 
+                age: '4534만 세', mbti: 'ENTP', tags: ['장난꾸러기', '오픈런장인', '간식셔틀', '존댓말'],
+                desc: '활발하고 남 놀리기를 좋아하는 악마. 사내 장난 금지 대상 1호지만 정작 본인이 규정을 만든다. 고드의 간식을 챙기기 위해 인간계 유명 디저트 카페 <strong>오픈런</strong>을 수만 번 뛴 경력이 있다.', 
+                ability: '【 칠흑의 업화 】\n모든 것을 태워버리는 검은 불꽃을 자유자재로 다룬다.' 
+            },
+            'death': { 
+                name: '데스', role: '운영 총괄 사장 (사신)', img: 'https://igx.kr/u/zP/g/1', 
+                age: '210억 세', mbti: 'ISTJ', tags: ['츤데레', '분재다듬기', '야근요정', '과묵함'],
+                desc: '에테르나의 공동 창업자. 요즘 취미는 <strong>분재 다듬기</strong>지만 손을 대는 식물마다 영원한 안식(고사)에 들어 고민이다. 야근하는 직원 책상에 조용히 에너지 드링크를 두고 사라지는 츤데레의 정석이다.', 
+                ability: '【 영혼 회수 & 영혼 절단 】\n수명을 다한 영혼을 거두어들이거나, 부정한 영혼을 베어버린다.' 
+            },
+            'lua': { 
+                name: '루아', role: '운영팀 사원 (사신 후계자)', img: 'https://igx.kr/u/zP/j/1', 
+                age: '100만 세', mbti: 'ENFP', tags: ['덜렁이', '재능천재', '활발함'],
+                desc: '차기 죽음의 신. 실수를 너무 많이 하여 데스의 추가 업무를 만든다. 데스의 낫을 몰래 가져가다 걸려 반성문을 쓴 전적이 있다.', 
+                ability: '【 영혼 회수 & 영혼 절단 】\n기본적인 사신의 능력을 지녔으며 잠재력은 데스 이상이다.' 
+            },
+            'mavis': { 
+                name: '메이비스', role: '소속원 (상급)', img: 'https://igx.kr/u/zP/l/1', 
+                age: '1200만 세', mbti: 'ISTP', tags: ['만성피로', '고양이집사', '퇴사불가', '커피중독'],
+                desc: '업무의 핵심 인력. 월급의 대부분을 <strong>고양이 간식</strong>에 쓴다. "메이비스가 퇴사하는 날이 회사가 망하는 날"이라는 평판이 돌 만큼 유능하다.', 
+                ability: '【 무제한 포탈 생성 】\n크기 제한이 없는 포탈을 연다. 단, 크기가 커질수록 마력 소모가 극심해진다.' 
+            },
+            'isabella': { 
+                name: '이사벨라', role: '소속원 (중급)', img: 'https://igx.kr/u/zP/p/1', 
+                age: '700만 세', mbti: 'ESFJ', tags: ['무지개정리', '서류의달인', '감수성폭발', '인싸'],
+                desc: '모든 서류를 <strong>무지개색 순서</strong>대로 정리해야 직성이 풀린다. 가끔 망자의 기억을 시각화하다가 너무 감동적인 로맨스를 보면 업무를 중단하고 펑펑 울기도 하는 감수성 풍부한 악마.', 
+                ability: '【 기억 및 문서 시각화 】\n망자의 생전 기억이나 복잡한 서류 속 내용을 허공에 시각화하여 띄운다.' 
+            },
+            'serena': { 
+                name: '세리나', role: '소속원 (하급)', img: 'https://igx.kr/u/zP/m/1', 
+                age: '150만 세', mbti: 'INFJ', tags: ['영혼판독기', '냄새판별', '독설가', '통찰력'],
+                desc: '눈을 감고도 <strong>영혼의 냄새</strong>만으로 카르마를 맞힌다. 나쁜 영혼은 썩은 청국장 냄새가 난다고. 평소 조용하지만 판결을 번복하려는 악령에게는 무시무시한 독설을 내뱉는 반전 매력이 있다.', 
+                ability: '【 죄악 판독 】\n영혼이 품고 있는 죄의 무게와 질을 꿰뚫어 본다.' 
+            },
+            'eris': { 
+                name: '에리스', role: '이승 담당 (인간)', img: 'https://igx.kr/u/zP/n/1', 
+                age: '1500 세', mbti: 'ESFP', tags: ['맛집지도', '인싸', '피지컬천재', '쌍둥이언니'],
+                desc: '에리나의 쌍둥이 누나. <strong>맛집 지도</strong>를 업데이트하는 것이 취미다. 마력은 없지만 동생을 건드리는 악령은 순수 피지컬로 소멸시켜버리는 무서운 언니다.', 
+                ability: '【 능력 없음 】\n타고난 특수 능력은 없으나 친화력과 열정으로 업무를 완수한다.' 
+            },
+            'erina': { 
+                name: '에리나', role: '이승 담당 (인간)', img: 'https://igx.kr/u/zP/t/1', 
+                age: '1500 세', mbti: 'INFP', tags: ['영혼터치', '언니바라기', '비밀일기', '아싸'],
+                desc: '에리스의 쌍둥이 동생. 영혼을 만지는 능력 때문에 가끔 길 가던 영혼이 등을 밀어달라고 부탁해 곤혹스러워한다. 비밀 일기장은 언니에 대한 <strong>찬양글</strong>로 가득 차 있는 귀여운 동생.', 
+                ability: '【 영체 간섭 】\n순수 인간임에도 영혼을 육안으로 보고 물리적으로 만질 수 있다.' 
+            },
+            'baal': { 
+                name: '바알', role: '이승 담당 (상급)', img: 'https://igx.kr/u/zP/r/1', 
+                age: '5800만 세', mbti: 'INTJ', tags: ['지옥의헬창', '시간엄수', '다정한업어주기', '마력깡패'],
+                desc: '날개와 뿔, 꼬리가 없는 돌연변이 콤플렉스를 숨기고 있다. 무뚝뚝해 보이지만 길 잃은 어린 영혼을 보면 목적지까지 묵묵히 업어다 주는 다정한 성격이다.', 
+                ability: '【 파멸의 뇌전 】\n모든 것을 파괴하고 어떤 재질이든 전도되는 붉은 번개를 다룬다.' 
+            },
+            'paimon': { 
+                name: '파이몬', role: '이승 담당 (상급)', img: 'https://igx.kr/u/zP/q/1', 
+                age: '4000만 세', mbti: 'ENTJ', tags: ['해커', '게이머1위', '플랜Z', '보석좋아'],
+                desc: '인간계 CCTV 해커. 틈날 때마다 게임 서버를 해킹해 <strong>랭킹 1위</strong>를 차지하는 것이 낙이다. 루아의 돌발 행동에 대비해 언제나 플랜 Z까지 세워두는 철저한 전략가.', 
+                ability: '【 환술 & 시간 정지 】\n광범위한 지역에 거대한 환술을 걸거나, 일시적으로 시간을 멈출 수 있다.' 
+            },
+            'lucifer': { 
+                name: '루시퍼', role: '무소속 (혼혈)', img: 'https://igx.kr/u/zP/v/1', 
+                age: '2000만 세', mbti: 'ESTP', tags: ['복직신청', '종이비행기', '짝짝이날개', '추방자'],
+                desc: '고드에게 까불다 추방된 혼혈. 고드는 까먹은듯 하다', 
+                ability: '【 빛과 어둠의 검 】\n신성력, 마력 모두 사용 가능.' 
+            },
+            'rabbit': { 
+                name: '미스 래빗', role: '연구 개체 (최하급)', img: 'https://igx.kr/u/zP/k/1', 
+                age: '3 세', mbti: 'ISFP', tags: ['관종', '애정결핍', '꽃다발', '울보토끼'],
+                desc: '사랑받지 못한 토끼들의 슬픔이 모인 존재. 어째선지 숙소 근처에 꽃밭에 장미를 기르고 그 장미로 꽃다발을 만들어 들고다닌다. 퇴근하는 직원들이 인사해주지 않으면 밤새 연구소 전체에 슬픈 울음소리를 울려 퍼뜨린다.', 
+                ability: '【 귀여운 분열 】\n작은 모습 여러 개로 분열할 수 있으며 이때 크기가 작아지고 매우 귀여워지며 힘도 약해진다.' 
+            }
+        };
+
+        function openModal(id) {
+            const data = charData[id];
+            if(!data) return;
+            
+            document.getElementById('profImg').src = data.img;
+            document.getElementById('profName').innerText = data.name;
+            document.getElementById('profRole').innerText = data.role;
+            document.getElementById('profAge').innerText = data.age;
+            document.getElementById('profMbti').innerText = data.mbti;
+            document.getElementById('profDesc').innerHTML = data.desc;
+            document.getElementById('abilName').innerText = data.name + "의 능력 데이터";
+            document.getElementById('abilContent').innerHTML = data.ability;
+            
+            const tags = document.getElementById('profTags');
+            tags.innerHTML = '';
+            data.tags.forEach(t => tags.innerHTML += `<span class="prof-tag">#${t}</span>`);
+
+            // 오디오 전환 로직
+            if(id === 'god') {
+                bgmNormal.pause();
+                bgmGod.currentTime = 0;
+                bgmGod.play().catch(() => {});
+            } else {
+                bgmGod.pause();
+                bgmNormal.play().catch(() => {});
+            }
+
+            showProfile();
+            document.getElementById('unifiedModal').classList.add('active');
+        }
+
+        function closeModal(event) {
+            if(event && event.target.id !== 'unifiedModal' && !event.target.classList.contains('close-btn')) return;
+            document.getElementById('unifiedModal').classList.remove('active');
+            bgmGod.pause();
+            bgmNormal.play().catch(() => {});
+        }
+
+        function showAbility() {
+            document.getElementById('viewProfile').style.display = 'none';
+            document.getElementById('viewAbility').style.display = 'block';
+        }
+
+        function showProfile() {
+            document.getElementById('viewProfile').style.display = 'block';
+            document.getElementById('viewAbility').style.display = 'none';
+        }
+
+        // PPT 슬라이드 
+        let slideIdx = 0;
+        function nextSlide() {
+            const s = document.querySelectorAll('.ppt-slide');
+            s[slideIdx].classList.remove('active');
+            slideIdx = (slideIdx + 1) % s.length;
+            s[slideIdx].classList.add('active');
+            updateDots();
+        }
+        function prevSlide() {
+            const s = document.querySelectorAll('.ppt-slide');
+            s[slideIdx].classList.remove('active');
+            slideIdx = (slideIdx - 1 + s.length) % s.length;
+            s[slideIdx].classList.add('active');
+            updateDots();
+        }
+        function updateDots() {
+            const d = document.querySelectorAll('.dot');
+            d.forEach((dot, i) => dot.classList.toggle('active', i === slideIdx));
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            document.getElementById('applyForm').style.display = 'none';
+            document.getElementById('recruitSuccess').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

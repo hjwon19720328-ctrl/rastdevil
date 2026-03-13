@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Aeterna - 심연의 새로운 질서</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #020202;
+            --text-main: #e0e0e8;
+            --text-dim: #888899;
+            --accent-purple: #7b61ff;
+            --accent-blue: #4facfe;
+            --accent-red: #da0037;
+            --accent-gold: #d4af37;
+            --current-theme: var(--accent-purple); 
+        }
+
+        /* 🍬 [고드의 장난 모드 CSS] 🍬 */
+        body.god-prank-mode {
+            --bg-base: #fffdf5; 
+            --text-main: #6b4c7a; 
+            --text-dim: #ff8ab3; 
+            --current-theme: #ff6b8b !important;
+            --accent-purple: #ffb347; 
+            --accent-blue: #5bc0eb; 
+            --accent-red: #ff6b8b; 
+            --accent-gold: #ffd700; 
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+        
+        body.god-prank-mode * { 
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><text y="20" font-size="20">🍬</text></svg>'), auto !important; 
+        }
+
+        body.god-prank-mode #fixed-bg { background-color: #fffdf5; background-image: repeating-linear-gradient(45deg, #fffdf5, #fffdf5 20px, #ffe8ee 20px, #ffe8ee 40px); opacity: 1; z-index: -3; }
+        body.god-prank-mode #abyss-dust { background-image: radial-gradient(circle, rgba(255, 215, 0, 0.4) 3px, transparent 3px); background-size: 80px 80px; }
+        
+        body.god-prank-mode header { background: rgba(255, 255, 255, 0.9); border-bottom: 3px dashed var(--accent-red) !important; }
+        body.god-prank-mode .logo-text { color: var(--accent-red); text-shadow: 2px 2px 0px var(--accent-gold) !important; font-family: sans-serif;}
+        body.god-prank-mode .nav-links a { color: var(--text-main); font-weight: bold; }
+        body.god-prank-mode .nav-links a.active { color: var(--accent-red) !important; text-shadow: 0 0 10px var(--accent-gold); }
+
+        body.god-prank-mode .ppt-wrapper { background: rgba(255, 255, 255, 0.9); border: 4px dashed var(--accent-gold); box-shadow: 10px 10px 0px rgba(255, 107, 139, 0.2); }
+        body.god-prank-mode .ppt-slide h3 { color: var(--accent-red); }
+        body.god-prank-mode .ppt-slide p { color: var(--text-main); font-weight: bold; }
+
+        body.god-prank-mode .lore-card { background: #fff; border: 3px dashed var(--accent-blue); border-left: 8px solid var(--accent-gold); box-shadow: 8px 8px 0px rgba(91, 192, 235, 0.2); }
+        body.god-prank-mode .lore-card h3 { color: var(--accent-red); }
+        body.god-prank-mode .lore-card p { color: var(--text-main); font-weight: bold; }
+        body.god-prank-mode .lore-note { color: var(--accent-blue); font-size: 0.9rem; font-family: sans-serif; }
+
+        body.god-prank-mode .staff-card { background: #fff; border: 3px dashed var(--accent-red); box-shadow: 8px 8px 0px rgba(255, 107, 139, 0.2); }
+        body.god-prank-mode .staff-card:hover { background: #ffe8ee; transform: translateY(-10px) rotate(3deg); border-color: var(--accent-gold); box-shadow: 15px 15px 0px rgba(255, 215, 0, 0.4);}
+        body.god-prank-mode .staff-name { color: var(--accent-red); font-family: sans-serif; text-shadow: 1px 1px 0px var(--accent-gold); }
+        body.god-prank-mode .staff-img-wrap { background: var(--accent-gold); border: 2px dashed #fff; }
+
+        body.god-prank-mode .recruit-container { background: rgba(255, 255, 255, 0.9); border: 4px dashed var(--accent-gold); box-shadow: 10px 10px 0px rgba(255, 215, 0, 0.3); }
+        body.god-prank-mode .form-control { background: #fff; border: 2px solid var(--accent-red); color: var(--text-main); font-weight: bold; }
+        body.god-prank-mode .form-control:focus { background: #fffdf5; box-shadow: 0 0 15px var(--accent-gold); }
+        
+        body.god-prank-mode .modal-window { background: #fffdf5; border: 5px dashed var(--accent-gold); box-shadow: 0 0 50px rgba(255, 107, 139, 0.5); }
+        body.god-prank-mode .modal-header { background: var(--accent-red); border-bottom: 3px dashed #fff;}
+        body.god-prank-mode .modal-header span { color: #fff; text-shadow: none; font-family: sans-serif;}
+        body.god-prank-mode .prof-name { color: var(--accent-red); text-shadow: 2px 2px 0px var(--accent-gold); }
+        body.god-prank-mode .prof-desc, body.god-prank-mode .abil-text { background: #fff; border: 3px dashed var(--accent-blue) !important; color: var(--text-main); font-weight: bold; }
+        body.god-prank-mode .prof-tag { background: #ffe8ee; border-color: var(--accent-red); color: var(--accent-red); font-weight: bold; }
+        body.god-prank-mode .btn-scan, body.god-prank-mode .btn-return { background: #fff; color: var(--accent-red); border: 3px dashed var(--accent-red); }
+        body.god-prank-mode .btn-scan:hover, body.god-prank-mode .btn-return:hover { background: var(--accent-red); color: #fff; }
+
+        @keyframes bouncePrank { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+        #godPrankBtn { display: none; color: #ff6b8b; background: #fff; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; cursor: pointer; animation: bouncePrank 1s infinite; margin-right: 15px; border: 2px solid #ffd700; box-shadow: 0 0 10px #ffd700; font-family: sans-serif;}
+        #godPrankBtn:hover { background: #ff6b8b; color: #fff; }
+        /* ---------------------------------------------------- */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Serif KR', serif; outline: none !important; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-base); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100vw; cursor: crosshair; transition: background 0.8s ease; word-break: keep-all; }
+
+        #fixed-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png'); z-index: -2; pointer-events: none; opacity: 0.5; transition: all 0.5s;}
+        #abyss-dust { position: fixed; top: 0; left: 0; width: 100vw; height: 200vh; background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; pointer-events: none; animation: drift 120s linear infinite; }
+        @keyframes drift { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+
+        /* 인트로 */
+        #introOverlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 10001; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        #introCompany { animation: fadeIn 1.5s ease forwards; width: 90%; }
+        .intro-logo { font-size: clamp(3rem, 10vw, 8rem); font-weight: 900; letter-spacing: clamp(5px, 3vw, 15px); color: #fff; margin-bottom: 2rem; text-shadow: 0 0 20px var(--accent-purple); }
+        .intro-text { font-size: 1rem; color: #aaa; margin-bottom: 4rem; letter-spacing: 1px; line-height: 2; }
+        .btn-intro { background: transparent; color: #7b61ff; border: 1px solid rgba(123, 97, 255, 0.4); padding: 15px 40px; border-radius: 4px; font-size: 1.1rem; transition: 0.3s; letter-spacing: 2px; cursor: pointer; }
+        .btn-intro:hover { background: #7b61ff; color: #fff; box-shadow: 0 0 30px #7b61ff; }
+        #introOverlay.fade-out { animation: fadeOut 0.8s ease forwards; pointer-events: none; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+        /* 헤더 */
+        header { display: none; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: rgba(2, 2, 2, 0.85); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); position: fixed; width: 100%; top: 0; z-index: 1000; transition: border 0.5s; }
+        .logo-container { cursor: pointer; position: relative; }
+        .logo-text { font-size: 1.6rem; font-weight: 900; letter-spacing: 4px; color: #fff; transition: 0.3s, text-shadow 0.5s; }
+        .logo-container:hover .logo-text { text-shadow: 0 0 15px var(--current-theme); }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { font-size: 0.95rem; color: var(--text-dim); transition: 0.3s; text-decoration: none; letter-spacing: 1px; cursor: pointer; position: relative; padding-bottom: 5px;}
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%; background-color: var(--current-theme); transition: width 0.3s ease, left 0.3s ease, background-color 0.5s; transform: translateX(-50%); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a.active { color: #fff; font-weight: bold; }
+
+        /* 라우팅 */
+        .page-view { display: none; padding-top: 100px; min-height: 100vh; padding-bottom: 5rem; opacity: 0; transition: opacity 0.6s ease-out; }
+        .page-view.active { display: block; opacity: 1; }
+        .section-wrap { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
+        .page-header { text-align: center; margin-bottom: 3.5rem; }
+        .page-header h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+
+        /* 슬라이드 */
+        .ppt-wrapper { position: relative; width: 100%; max-width: 900px; margin: 0 auto; background: rgba(15, 10, 25, 0.6); border: 1px solid rgba(123, 97, 255, 0.15); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px); transition: border-color 0.5s; }
+        .ppt-slide { display: none; padding: 5rem 6rem; text-align: center; flex-direction: column; justify-content: center; min-height: 350px; }
+        .ppt-slide.active { display: flex; animation: fadeIn 0.5s; }
+        .ppt-slide h3 { margin-bottom: 1rem; font-size: 1.5rem; }
+        .ppt-slide p { line-height: 1.8; color:#bbb; }
+        .ppt-controls { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 20px; pointer-events: none; }
+        .ppt-btn { pointer-events: auto; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; width: 45px; height: 45px; transition: 0.3s; cursor: pointer; }
+        .ppt-btn:hover { background: var(--current-theme); box-shadow: 0 0 15px var(--current-theme); border-color: transparent; }
+        .ppt-dots { display: flex; justify-content: center; gap: 10px; padding-bottom: 20px; }
+        .dot { width: 10px; height: 10px; background: rgba(255,255,255,0.2); border-radius: 50%; cursor: pointer; transition: 0.3s;}
+        .dot.active { background: var(--current-theme); box-shadow: 0 0 10px var(--current-theme); transform: scale(1.2);}
+
+        /* 세계관 & 수기 메모 */
+        .lore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .lore-card { background: #070202; border: 1px solid #331111; border-left: 4px solid var(--accent-red); padding: 2.5rem; transition: 0.4s; position: relative; overflow: hidden; }
+        .lore-card:hover { border-color: #da0037; box-shadow: 10px 10px 0 rgba(218, 0, 55, 0.1); }
+        .lore-card h3 { font-size: 1.4rem; color: var(--accent-red); margin-bottom: 1.5rem; border-bottom: 1px dashed #551111; padding-bottom: 10px; }
+        .lore-card p { color: #bbb; line-height: 1.8; }
+        .lore-note { position: absolute; bottom: 15px; right: 15px; font-size: 0.8rem; color: rgba(218, 0, 55, 0.5); font-style: italic; transform: rotate(-3deg); pointer-events: none; user-select: none; font-weight: bold; letter-spacing: -0.5px; }
+        .grade-list { list-style: none; margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .grade-list li { color: #ddd; display: flex; align-items: center; font-size: 0.95rem; }
+        .grade-badge { background: rgba(218, 0, 55, 0.1); color: var(--accent-red); padding: 4px 10px; border: 1px solid var(--accent-red); font-size: 0.8rem; font-weight: bold; margin-right: 15px; width: 70px; text-align: center; flex-shrink: 0;}
+
+        /* 필터 */
+        .filter-menu { display: flex; justify-content: center; gap: 12px; margin-bottom: 3.5rem; flex-wrap: wrap; }
+        .filter-btn { background: transparent; padding: 10px 25px; border-radius: 30px; transition: 0.4s; font-size: 0.9rem; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); color: var(--text-dim); cursor: pointer;}
+        @keyframes pulseRed { 0% { box-shadow: 0 0 0px var(--accent-red); } 50% { box-shadow: 0 0 15px var(--accent-red); } 100% { box-shadow: 0 0 0px var(--accent-red); } }
+        @keyframes pulseBlue { 0% { box-shadow: 0 0 0px var(--accent-blue); } 50% { box-shadow: 0 0 15px var(--accent-blue); } 100% { box-shadow: 0 0 0px var(--accent-blue); } }
+        @keyframes pulseGold { 0% { box-shadow: 0 0 0px var(--accent-gold); } 50% { box-shadow: 0 0 15px var(--accent-gold); } 100% { box-shadow: 0 0 0px var(--accent-gold); } }
+        .btn-all.active { border-color: var(--current-theme); color: #fff; background: rgba(255,255,255,0.05); }
+        .btn-under.active { border-color: var(--accent-red); color: #fff; animation: pulseRed 3s infinite; }
+        .btn-human.active { border-color: var(--accent-blue); color: #fff; animation: pulseBlue 3s infinite; }
+        .btn-etc.active { border-color: var(--accent-gold); color: #fff; animation: pulseGold 3s infinite; }
+
+        /* 명부 */
+        .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+        .staff-card { background: rgba(1, 8, 18, 0.6); border: 1px solid rgba(255,255,255,0.05); text-align: center; padding: 2.5rem 1rem; border-radius: 15px; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); cursor: pointer; }
+        .staff-card:hover { transform: translateY(-12px); border-color: rgba(255,255,255,0.3); background: rgba(10, 20, 35, 0.9); }
+        .staff-card[data-category="underworld"]:hover { box-shadow: 0 15px 30px rgba(218, 0, 55, 0.15); }
+        .staff-card[data-category="human"]:hover { box-shadow: 0 15px 30px rgba(79, 172, 254, 0.15); }
+        .staff-card[data-category="etc"]:hover { box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15); }
+        .staff-img-wrap { width: 100px; height: 100px; margin: 0 auto 1.5rem; border-radius: 50%; padding: 3px; background: rgba(255,255,255,0.1); transition: 0.4s; }
+        .staff-card:hover .staff-img-wrap { transform: scale(1.05); background: rgba(255,255,255,0.4); }
+        .staff-img-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid #010812; }
+        .staff-name { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 5px; transition: 0.3s;}
+        .staff-role { font-size: 0.85rem; color: #888; letter-spacing: 1px; transition: 0.3s;}
+
+        /* 지원서 */
+        .recruit-container { max-width: 700px; margin: 0 auto; background: rgba(15, 12, 5, 0.8); border: 1px solid rgba(212, 175, 55, 0.5); padding: 3rem; position: relative; border-radius: 8px; box-shadow: inset 0 0 50px rgba(0,0,0,0.8); }
+        .form-group { margin-bottom: 1.8rem; position: relative; }
+        .form-group label { display: block; color: var(--accent-gold); margin-bottom: 0.8rem; font-size: 0.95rem; font-weight: bold; letter-spacing: 1px;}
+        .form-control { width: 100%; padding: 15px; background: rgba(0,0,0,0.7); border: 1px solid rgba(212, 175, 55, 0.3); color: #fff; font-size: 1rem; transition: 0.3s; border-radius: 4px; }
+        .form-control:focus { border-color: var(--accent-gold); background: rgba(10,8,0,0.9); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+        .form-group textarea.form-control { height: 120px; resize: vertical; }
+        select.form-control { appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill="%23d4af37" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); background-repeat: no-repeat; background-position-x: 98%; background-position-y: 50%; cursor: pointer; }
+        select.form-control option { background: #111; color: #fff; padding: 10px; }
+
+        /* 체크박스 & 금기어 */
+        .checkbox-group { display: flex; align-items: flex-start; gap: 15px; margin-top: 2.5rem; margin-bottom: 2rem; padding: 15px; background: rgba(218, 0, 55, 0.05); border-left: 3px solid #da0037; }
+        .checkbox-group label { color: #ccc; font-size: 0.9rem; margin-bottom: 0; font-weight: normal; cursor: pointer; line-height: 1.6;}
+        .checkbox-group input[type="checkbox"] { appearance: none; min-width: 22px; height: 22px; border: 1px solid #da0037; background: #000; cursor: pointer; position: relative; transition: 0.3s; margin-top: 3px; }
+        .checkbox-group input[type="checkbox"]:checked { background: #da0037; box-shadow: 0 0 10px #da0037; }
+        .checkbox-group input[type="checkbox"]:checked::after { content: '✔'; position: absolute; color: #fff; font-size: 14px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        #forbiddenWarning { display: none; color: #ff0000; font-size: 0.85rem; margin-top: 8px; font-weight: bold; animation: pulseRed 1s infinite; text-align: right; }
+
+        .btn-gold { background: transparent; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 18px; width: 100%; font-size: 1.1rem; font-weight: bold; transition: 0.3s; letter-spacing: 2px; cursor: pointer; position: relative; overflow: hidden; }
+        .btn-gold::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent); transition: 0.5s; }
+        .btn-gold:hover::before { left: 100%; }
+        .btn-gold:hover { background: var(--accent-gold); color: #000; box-shadow: 0 0 25px rgba(212, 175, 55, 0.5); }
+        .btn-gold.loading { background: #333; color: #888; border-color: #555; pointer-events: none; box-shadow: none; animation: pulseLoading 1s infinite alternate; }
+        @keyframes pulseLoading { from { opacity: 0.6; } to { opacity: 1; } }
+        .recruit-success { display: none; text-align: center; animation: fadeIn 1s; }
+
+        /* 모달창 */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; transition: opacity 0.3s; }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-window { background: #0a0a0c; border: 1px solid #333; border-radius: 12px; width: 90%; max-width: 600px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 0 50px #000; transform: scale(0.95); opacity: 0; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transition: transform 0.3s; }
+        @keyframes popIn { to { transform: scale(1); opacity: 1; } }
+
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: #050505; border-bottom: 1px solid #222; }
+        .modal-header span { color: #fff; font-weight: bold; font-size: 0.8rem; letter-spacing: 2px; }
+        .close-btn { color: #888; font-size: 1.8rem; transition: 0.3s; line-height: 1; cursor: pointer; }
+        .close-btn:hover { color: #fff; }
+        
+        .modal-body { padding: 2.5rem; overflow-y: auto; text-align: center; overscroll-behavior: contain; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 20px 20px; }
+        
+        .img-perspective-wrap { perspective: 1000px; margin-bottom: 1.5rem; display: inline-block; }
+        .prof-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 4px solid #333; box-shadow: 0 0 30px rgba(0,0,0,0.8); transition: transform 0.1s ease-out; }
+        
+        /* 🔥 데이터 스르륵 등장 연출 (Cascade Fade-in) */
+        .data-cascade { opacity: 0; animation: fadeUp 0.5s ease forwards; }
+        .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; } .delay-4 { animation-delay: 0.4s; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .prof-name { font-size: 2.2rem; color: #fff; font-weight: 900; margin-bottom: 0.2rem; letter-spacing: 2px; }
+        .prof-role { font-size: 1.1rem; color: #888; margin-bottom: 0.5rem; }
+        .prof-meta { font-size: 0.9rem; color: var(--accent-blue); margin-bottom: 1rem; font-weight: bold; letter-spacing: 1px; }
+        .prof-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 2rem; }
+        .prof-tag { background: rgba(255,255,255,0.05); color: #ccc; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.1); }
+        .prof-desc { text-align: left; color: #bbb; background: rgba(0,0,0,0.4); padding: 1.5rem; border-left: 3px solid var(--current-theme); margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.8; word-break: keep-all; min-height: 100px;}
+        
+        .btn-scan { background: #111; color: var(--current-theme); border: 1px solid var(--current-theme); padding: 15px; width: 100%; transition: 0.3s; font-weight: bold; font-size: 1rem; cursor: pointer; letter-spacing: 1px; }
+        .btn-scan:hover { background: var(--current-theme); color: #000; box-shadow: 0 0 15px var(--current-theme);}
+
+        #viewAbility { display: none; text-align: left; }
+        .abil-title { font-size: 1.6rem; color: #fff; margin-bottom: 1.5rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .abil-text { background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 8px; color: #ddd; line-height: 2; white-space: pre-wrap; font-size: 1rem; border: 1px solid rgba(255,255,255,0.05); min-height: 100px;}
+        .btn-return { background: transparent; color: #777; border: 1px solid #444; padding: 15px; width: 100%; margin-top: 1.5rem; transition: 0.3s; font-weight: bold; font-size: 1rem; cursor: pointer;}
+        .btn-return:hover { color: #fff; border-color: #fff; }
+
+        /* 글리치 오버레이 (관리자 모드) */
+        #glitchOverlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(123, 97, 255, 0.1); z-index: 20000; pointer-events: none; display: none; opacity: 0; }
+        .glitch-active #glitchOverlay { display: block; animation: glitchEffect 0.3s ease infinite, fadeInOut 0.6s ease forwards; }
+        @keyframes glitchEffect { 0% { transform: translate(0); } 20% { transform: translate(-5px, 5px); background-color: rgba(218,0,55,0.1); } 40% { transform: translate(5px, -5px); background-color: rgba(79,172,254,0.1); } 60% { transform: translate(-5px, -5px); } 80% { transform: translate(5px, 5px); background-color: rgba(212,175,55,0.1); } 100% { transform: translate(0); } }
+        @keyframes fadeInOut { 0% { opacity: 0; } 30% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; } }
+
+        #adminMessage { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); border: 2px solid var(--accent-red); color: var(--accent-red); padding: 20px 40px; font-family: monospace; font-size: 1.2rem; font-weight: bold; letter-spacing: 2px; z-index: 20001; pointer-events: none; display: none; box-shadow: 0 0 30px rgba(218,0,55,0.5); }
+        .glitch-active #adminMessage { display: block; animation: fadeInOut 1s ease forwards, textPulse 0.2s ease infinite; }
+        @keyframes textPulse { from { opacity: 0.8; } to { opacity: 1; } }
+
+        .pc-br { display: block; } .mobile-br { display: none; }
+
+        @media (max-width: 768px) {
+            .section-wrap { padding: 3rem 5%; }
+            .page-header h2 { font-size: 1.8rem; }
+            .intro-logo { font-size: 3.5rem; letter-spacing: 5px; }
+            header { flex-direction: column; padding: 1rem; gap: 10px; }
+            .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; }
+            .page-view { padding-top: 120px; }
+            #page-home h1 { font-size: 1.6rem; }
+            .ppt-wrapper { width: 95%; margin: 0 auto; border-radius: 15px; }
+            .ppt-slide { padding: 2rem 3.5rem; min-height: auto; } 
+            .ppt-slide h3 { font-size: 1.2rem; margin-bottom: 0.8rem; }
+            .ppt-controls { padding: 0 5px; }
+            .ppt-btn { width: 35px; height: 35px; font-size: 0.8rem; }
+            .lore-grid { grid-template-columns: 1fr; }
+            .staff-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; }
+            .staff-card { padding: 1.5rem 0.5rem; }
+            .staff-img-wrap { width: 80px; height: 80px; margin-bottom: 1rem; }
+            .staff-name { font-size: 1.1rem; }
+            .staff-role { font-size: 0.75rem; }
+            .recruit-container { padding: 1.5rem; }
+            .modal-window { width: 95%; }
+            .modal-body { padding: 1.5rem; }
+            .prof-img { width: 160px; height: 160px; }
+            .pc-br { display: none; } .mobile-br { display: block; }
+        }
+        @media (min-width: 769px) { .mobile-br { display: none; } }
+        @media (hover: none) and (pointer: coarse) { body, a, button, .staff-card, .lore-card, .close-btn { cursor: auto; } }
+    </style>
+</head>
+<body id="bodyEl">
+    <div id="fixed-bg"></div>
+    <div id="abyss-dust"></div>
+    
+    <div id="glitchOverlay"></div>
+    <div id="adminMessage">[ SYSTEM ALERT: ADMIN ACCESS GRANTED ]</div>
+
+    <audio id="bgmNormal" src="NORMAL.mp3" loop></audio>
+    <audio id="bgmGod" src="GOD.mp3" loop></audio>
+
+    <div id="introOverlay">
+        <div id="introCompany">
+            <div class="intro-logo" data-prank="GOD'S PLAYGROUND">AETERNA</div>
+            <div class="intro-text" data-prank="아... 대충 환영해. 사탕나 먹고 가...🍬">
+                여러분의 모든 것을 책임지겠습니다.<br>
+                <span style="color:var(--accent-red); font-weight:bold; font-size:1.1rem;" data-prank="다 같이 누워서 숨이나 쉬자...">영혼까지도.</span>
+            </div>
+            <button class="btn-intro" onclick="enterSite()" data-prank="문 열어둘 테니 알아서 들어와...">심연으로 입장</button>
+        </div>
+    </div>
+
+    <div id="mainWrapper">
+        <header id="mainHeader">
+            <div class="logo-container" id="logoBtn"><span class="logo-text" data-prank="GOD'S TOYBOX">AETERNA</span></div>
+            <ul class="nav-links">
+                <li><a id="nav-home" class="active" onclick="navigate('page-home')" data-prank="귀찮은 놀이터">홈 (The Void)</a></li>
+                <li><a id="nav-lore" onclick="navigate('page-lore')" data-prank="대충 만든 규칙">세계관 (Blood)</a></li>
+                <li><a id="nav-staff" onclick="navigate('page-staff')" data-prank="피곤한 장난감들">명부 (Matrix)</a></li>
+                <li><a id="nav-recruit" onclick="navigate('page-recruit')" data-prank="노예 구함 (급함)">지원 (Pact)</a></li>
+            </ul>
+        </header>
+
+        <main id="page-home" class="page-view">
+            <div class="section-wrap hero">
+                <h1 style="font-weight: 900; margin-bottom: 1rem; text-shadow: 0 0 20px var(--current-theme); transition: text-shadow 0.5s;" data-prank="우주 대통합 누워있기 파티...">심연의 질서를 수립하다</h1>
+                <p data-prank="나 고드님이 심심해서 만든 곳인데... 관리하기도 귀찮네. 알아서 놀아라...">Aeterna 코퍼레이션은 필멸의 끝에서 시작되는<br class="mobile-br"> 사후 여정을 완벽하게 통제합니다.</p>
+            </div>
+            <div class="section-wrap" style="padding-top: 0;">
+                <div class="ppt-wrapper">
+                    <div class="ppt-controls">
+                        <button class="ppt-btn" onclick="prevSlide()">❮</button>
+                        <button class="ppt-btn" onclick="nextSlide()">❯</button>
+                    </div>
+                    <div class="ppt-slide active">
+                        <h3 data-prank="01. 알아서 기어들어와">01. 영혼 수집 및 인도</h3>
+                        <p data-prank="아... 영혼 줍는 것도 귀찮아. 그냥 좀 알아서 찾아오면 안 되나.">현세에서 수명을 다한 영혼들을 신속하게 거두어들입니다.<br class="pc-br">심연의 틈새에서 발생하는 변수를 차단하고<br class="mobile-br"> 안전하게 호송합니다.</p>
+                    </div>
+                    <div class="ppt-slide">
+                        <h3 data-prank="02. 대충 판독기">02. 카르마 데이터 정산</h3>
+                        <p data-prank="사탕 안 사온 애들은 다 썩은 귤 형벌이야. 묻지마 귀찮으니까.">인도된 영혼들의 생전 행적을 데이터화합니다.<br class="pc-br">죄와 벌의 무게를 오차 없이 측정하여<br class="mobile-br"> 공정한 판결을 내립니다.</p>
+                    </div>
+                    <div class="ppt-slide">
+                        <h3 data-prank="03. 귀찮은 애들 박멸">03. 차원 이탈자 방역</h3>
+                        <p data-prank="내 파티에서 진지 빠는 애들 제일 피곤해... 그냥 알아서 꺼져.">악령과 이승에 간섭하는 이탈자를 규제합니다.<br class="pc-br">파견 요원들이 즉각 정화시켜<br class="mobile-br"> 두 세계의 질서를 유지합니다.</p>
+                    </div>
+                    <div class="ppt-dots">
+                        <div class="dot active" onclick="setSlide(0)"></div>
+                        <div class="dot" onclick="setSlide(1)"></div>
+                        <div class="dot" onclick="setSlide(2)"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <main id="page-lore" class="page-view">
+            <div class="section-wrap">
+                <div class="page-header">
+                    <h2 data-prank="고드님이 침대에서 정한 규칙...">피의 계약 및 사내 지침서</h2>
+                    <p data-prank="내 말이 곧 법인데... 아, 설명하기도 귀찮다.">현장 업무 시 숙지해야 할 주요 종족과 생태계 등급 분류입니다.</p>
+                </div>
+                <div class="lore-grid">
+                    <div class="lore-card">
+                        <h3 data-prank="장난감 1호 (Demons)">악마 (Demons)</h3>
+                        <p data-prank="일은 잘하는데 너무 진지해서 피곤한 애들. 그래도 내 간식 셔틀이니까 봐줌...">단순히 저승 환경에서 태어난 '태생적 종족명'입니다. 인간들의 편견 때문에 고생을 하지만, 실제로는 철저한 계약과 규율을 따르는 우수한 실무진들입니다.</p>
+                        <div class="lore-note" data-prank="※ 뿔 달렸다고 다 무서운 거 아님. 피곤할 뿐.">※ 수정: 최근 이승 방역팀 예산 삭감됨 - 사탄</div>
+                    </div>
+                    <div class="lore-card">
+                        <h3 data-prank="우주 먼지 (Evil Spirits)">악귀 및 악령 (Evil Spirits)</h3>
+                        <p data-prank="그냥 돌아다니는 먼지 같은 애들. 청소기 돌리기도 귀찮아... 대충 밟아.">극심한 공포가 뭉쳐져 스폰되는 파생 개체들입니다. 발견 즉시 정화 및 소멸 절차를 밟아야 하며, 일부 특수 개체는 상층부의 허가 없이 접근을 금지합니다.</p>
+                        <div class="lore-note" data-prank="※ 먼지 좀 치워줘... 쿨럭.">※ 경고: 래빗은 회장님 허가 없이 포획 금지 - 릴리스</div>
+                    </div>
+                    <div class="lore-card">
+                        <h3 data-prank="천년의 눈치게임">사후 1000년의 진로 선택</h3>
+                        <p data-prank="1000년... 아, 기다리다 지치겠다. 나랑 안 놀아주면 1000년 더 꿇어.">영혼은 사후 1000년이 되는 해에 최종 진로를 결정해야 합니다. [환생], [안식], 그리고 에테르나의 사역마로 계약하는 [취업] 중 하나를 선택할 수 있습니다.</p>
+                        <div class="lore-note" data-prank="※ 취업 안 할 거면 귤이나 까놔.">※ 취업 사기 적발 시 영혼 소멸형 - 인사팀</div>
+                    </div>
+                    <div class="lore-card" style="grid-column: 1 / -1;">
+                        <h3 data-prank="대충 나눈 우주 서열표">공통 위협 등급 체계</h3>
+                        <p style="margin-bottom: 1.5rem;" data-prank="0순위는 난데, 증명하기도 귀찮아...">체내 마력량과 영적 영향력에 따라 전 종족은 5단계로 분류됩니다.</p>
+                        <ul class="grade-list">
+                            <li><span class="grade-badge">최상급</span> <span data-prank="나 빼고 젤 쎈 언니들. 아 엮이기 피곤해.">자연재해 이상의 규격 외 존재</span></li>
+                            <li><span class="grade-badge">상급</span> <span data-prank="대충 부려먹기 좋은 셔틀들.">대규모 지역 통제가 가능한 강자</span></li>
+                            <li><span class="grade-badge">중급</span> <span data-prank="맨날 뛰어다니는 개미들. 피곤하게 산다.">숙련된 현장 실무진 및 중간 관리자</span></li>
+                            <li><span class="grade-badge">하급</span> <span data-prank="누구세요... 이름 외우기도 귀찮아.">일반적인 서류 및 기본 현장직</span></li>
+                            <li><span class="grade-badge">최하급</span> <span data-prank="숨 쉬면 날아가는 먼지.">미약한 영체, 지능이나 능력이 희미함</span></li>
+                        </ul>
+                        <div class="lore-note" style="bottom: 25px;" data-prank="※ 내 사탕 건드리면 등급 상관없이 멸망이야...">※ 고드님 간식비는 예외 등급(S+)으로 처리할 것. - 비서실</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <main id="page-staff" class="page-view">
+            <div class="section-wrap">
+                <div class="page-header">
+                    <h2 data-prank="대충 모아둔 내 장난감들">영혼 데이터베이스 매트릭스</h2>
+                    <p data-prank="클릭하면 알려주긴 할 텐데... 아, 귀찮다.">소속 부서를 필터링하고 카드를 클릭하여 기밀을 열람하십시오.</p>
+                </div>
+                
+                <div class="filter-menu">
+                    <button class="filter-btn btn-all active" onclick="filterCategory(event, 'all')" data-prank="다 모여">전체 열람</button>
+                    <button class="filter-btn btn-under" onclick="filterCategory(event, 'underworld')" data-prank="지하 애들">저승 부서</button>
+                    <button class="filter-btn btn-human" onclick="filterCategory(event, 'human')" data-prank="땅위 애들">이승 부서</button>
+                    <button class="filter-btn btn-etc" onclick="filterCategory(event, 'etc')" data-prank="이상한 애들">그 외 (특수 개체)</button>
+                </div>
+                
+                <div class="staff-grid" id="staffGrid">
+                    <div class="staff-card" data-category="etc" onclick="openModal('god')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/c/1" alt="고드"></div>
+                        <div class="staff-name" data-prank="★고드님★">고드</div><div class="staff-role" data-prank="우주 대장">장기 체류자</div>
+                    </div>
+                    <div class="staff-card" data-category="etc" onclick="openModal('leviathan')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/w/1" alt="레비아탄"></div>
+                        <div class="staff-name" data-prank="물고기 언니">레비아탄</div><div class="staff-role" data-prank="술쟁이">최상급 악령</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('lilith')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/d/1" alt="릴리스"></div>
+                        <div class="staff-name" data-prank="잔소리꾼">릴리스</div><div class="staff-role" data-prank="피곤한 회장">회장</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('satan')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/h/1" alt="사탄"></div>
+                        <div class="staff-name" data-prank="간식 셔틀">사탄</div><div class="staff-role" data-prank="내 꼬붕">비서실장</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('death')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/g/1" alt="데스"></div>
+                        <div class="staff-name" data-prank="해골 언니">데스</div><div class="staff-role" data-prank="야근 노예">사장</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('lua')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/j/1" alt="루아"></div>
+                        <div class="staff-name" data-prank="사고뭉치">루아</div><div class="staff-role" data-prank="내 꼬붕 2">사신(후계자)</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('mavis')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/l/1" alt="메이비스"></div>
+                        <div class="staff-name" data-prank="고양이 바보">메이비스</div><div class="staff-role" data-prank="일개미">소속원</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('isabella')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/p/1" alt="이사벨라"></div>
+                        <div class="staff-name" data-prank="울보 언니">이사벨라</div><div class="staff-role" data-prank="무지개 덕후">소속원</div>
+                    </div>
+                    <div class="staff-card" data-category="underworld" onclick="openModal('serena')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/m/1" alt="세레나"></div>
+                        <div class="staff-name" data-prank="개코 언니">세레나</div><div class="staff-role" data-prank="팩폭기">소속원</div>
+                    </div>
+                    <div class="staff-card" data-category="human" onclick="openModal('eris')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/n/1" alt="에리스"></div>
+                        <div class="staff-name" data-prank="힘 쎈 언니">에리스</div><div class="staff-role" data-prank="맛집 담당">이승 담당</div>
+                    </div>
+                    <div class="staff-card" data-category="human" onclick="openModal('erina')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/t/1" alt="에리나"></div>
+                        <div class="staff-name" data-prank="껌딱지 동생">에리나</div><div class="staff-role" data-prank="쫄보">이승 담당</div>
+                    </div>
+                    <div class="staff-card" data-category="human" onclick="openModal('baal')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/r/1" alt="바알"></div>
+                        <div class="staff-name" data-prank="인형 언니">바알</div><div class="staff-role" data-prank="수공예 달인">이승 담당</div>
+                    </div>
+                    <div class="staff-card" data-category="human" onclick="openModal('paimon')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/q/1" alt="파이몬"></div>
+                        <div class="staff-name" data-prank="겜순이 언니">파이몬</div><div class="staff-role" data-prank="해커">이승 담당</div>
+                    </div>
+                    <div class="staff-card" data-category="etc" onclick="openModal('lucifer')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/v/1" alt="루시퍼"></div>
+                        <div class="staff-name" data-prank="누구더라?">루시퍼</div><div class="staff-role" data-prank="까먹음">무소속</div>
+                    </div>
+                    <div class="staff-card" data-category="etc" onclick="openModal('rabbit')">
+                        <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/k/1" alt="미스 래빗"></div>
+                        <div class="staff-name" data-prank="우는 솜뭉치">미스 래빗</div><div class="staff-role" data-prank="시끄러움">연구 개체</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <main id="page-recruit" class="page-view">
+            <div class="section-wrap">
+                <div class="page-header">
+                    <h2 data-prank="고드님의 간식 셔틀 모집 (안 쓰면 후회함)">신규 사역마 영구 계약서</h2>
+                    <p data-prank="대충 적어 내면 무를 수 없어... 도망 못 감.">저승의 질서를 함께 관리할 영체 및 계약자를 모집합니다.<br><span style="color:#da0037; font-size:0.85rem;">(※ 경고: 서류는 단 1회만 제출 가능하며, 전송 후 절대 파기가 불가합니다.)</span></p>
+                </div>
+                <div class="recruit-container">
+                    <form id="applyForm" onsubmit="submitForm(event)">
+                        
+                        <div class="form-group">
+                            <label data-prank="너 이름이 뭐야? 타이핑하기도 귀찮네.">지원자 이름 (또는 진명)</label>
+                            <input type="text" class="form-control" placeholder="예: 무명의 계약자" required autocomplete="off">
+                        </div>
+                        
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                            <div class="form-group" style="flex: 1; min-width: 200px;">
+                                <label data-prank="넌 어디서 굴러왔어?">출신 종족</label>
+                                <select class="form-control" required>
+                                    <option value="" disabled selected>선택하십시오</option>
+                                    <option value="human">인간 (사후 영체)</option>
+                                    <option value="demon">악마 (순혈/혼혈)</option>
+                                    <option value="spirit">정화된 악령</option>
+                                    <option value="etc">기타 특수 개체</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="flex: 1; min-width: 200px;">
+                                <label data-prank="얼마나 쎈지 대충 체크해.">마력 / 영력 등급</label>
+                                <select class="form-control" required>
+                                    <option value="" disabled selected>선택하십시오</option>
+                                    <option value="s">최상급 (재해급)</option>
+                                    <option value="a">상급 (광역 통제)</option>
+                                    <option value="b">중급 (실무진)</option>
+                                    <option value="c">하급 (서류직)</option>
+                                    <option value="f">최하급 (연구 개체)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-prank="어디서 노가다 할래?">희망 근무 부서</label>
+                            <select class="form-control" required>
+                                <option value="" disabled selected>선택하십시오</option>
+                                <option value="underworld">저승 차원 관리 및 심판 부서</option>
+                                <option value="human">이승 차원 이탈자 방역 부서</option>
+                                <option value="research">기밀 특수 개체 연구 부서</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-prank="나한테 무슨 간식을 바칠 건지 대충 적어봐.">업무에 활용 가능한 보유 능력</label>
+                            <textarea id="recruitAbility" class="form-control" placeholder="질서 유지 및 차원 관리에 도움 될 만한 능력을 상세히 기재하십시오." required></textarea>
+                            <div id="forbiddenWarning">※ 시스템 경고: 금기된 자의 이름을 함부로 거론하지 마십시오.</div>
+                        </div>
+                        
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="soulAgree" required>
+                            <label for="soulAgree" data-prank="평생 내 셔틀 할 거임? 체크 안 하면 천 년 연장.">
+                                본 서약을 에테르나 코퍼레이션에 전송함과 동시에, 지원자의 <strong>생사결정권 및 영혼 귀속권</strong>이 사측에 영구적으로 양도됨을 완전히 이해하고 동의합니다.
+                            </label>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn-gold" data-prank="대충 도장 쾅... 🍬">피의 서약 송신</button>
+                    </form>
+                    
+                    <div id="recruitSuccess" class="recruit-success">
+                        <img src="https://img.icons8.com/nolan/128/da0037/contract.png" alt="Contract" style="width:80px; margin-bottom:1rem; opacity:0.8; filter: grayscale(1) sepia(1) hue-rotate(340deg);">
+                        <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 1rem; letter-spacing: 2px;" data-prank="[ 장난감 등록 완료... 아 피곤해 ]">[ 서약 체결 완료 ]</h3>
+                        <p style="color: #bbb; line-height: 1.8;" data-prank="이제 넌 내 거야... 알아서 간식이나 사와...">지원서가 Aeterna 심연 데이터베이스에 각인되었습니다.<br>당신의 영혼은 이제 우리의 관리를 받습니다.<br><br>능력 검증 후 합격자에 한해, 곧 사자가 방문할 예정입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="unifiedModal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <span id="modalHeaderTitle">[ CONFIDENTIAL DATA ]</span>
+                <div style="display: flex; align-items: center;">
+                    <span id="godPrankBtn" onclick="togglePrankMode()">🍬 고드의 장난 눌러보세요!</span>
+                    <span class="close-btn" onclick="closeModal(event)">&times;</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div id="viewProfile">
+                    <div class="img-perspective-wrap">
+                        <img id="profImg" class="prof-img data-cascade delay-1" src="">
+                    </div>
+                    <h3 id="profName" class="prof-name data-cascade delay-1">이름</h3>
+                    <p id="profRole" class="prof-role data-cascade delay-2">직책</p>
+                    
+                    <div class="prof-meta data-cascade delay-2">
+                        <span id="profAge">나이</span> | <span id="profMbti">MBTI</span>
+                    </div>
+
+                    <div id="profTags" class="prof-tags data-cascade delay-3"></div>
+                    <div id="profDesc" class="prof-desc data-cascade delay-3">설명</div>
+                    <button id="btnScan" class="btn-scan data-cascade delay-4" onclick="showAbility()">[ 영적 능력 데이터 스캔 ]</button>
+                </div>
+                <div id="viewAbility" style="display:none;">
+                    <h3 id="abilName" class="abil-title data-cascade delay-1">이름의 능력</h3>
+                    <div id="abilContent" class="abil-text data-cascade delay-2">능력 설명</div>
+                    <button id="btnReturn" class="btn-return data-cascade delay-3" onclick="showProfile()">◀ 프로필 데이터로 복귀</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const body = document.getElementById('bodyEl');
+        const header = document.getElementById('mainHeader');
+        const bgmNormal = document.getElementById('bgmNormal');
+        const bgmGod = document.getElementById('bgmGod');
+        
+        let currentActiveTab = 'home';
+        let isAdminMode = false;
+        let isPrankMode = false;
+        let eyeTrackingHandler = null;
+
+        function enterSite() {
+            document.getElementById('introOverlay').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('introOverlay').style.display = 'none';
+                header.style.display = 'flex';
+                setTimeout(() => { document.getElementById('page-home').classList.add('active'); }, 50);
+            }, 800);
+            bgmNormal.volume = 0.4;
+            bgmNormal.play().catch(() => {});
+        }
+
+        function navigate(id) {
+            currentActiveTab = id.split('-')[1];
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            
+            setTimeout(() => {
+                document.getElementById(id).classList.add('active');
+                const navId = 'nav-' + currentActiveTab;
+                if(document.getElementById(navId)) document.getElementById(navId).classList.add('active');
+                
+                if(!isAdminMode && !isPrankMode) {
+                    if(id === 'page-home') { header.style.borderColor = 'rgba(123, 97, 255, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #7b61ff'; document.documentElement.style.setProperty('--current-theme', '#7b61ff');}
+                    else if(id === 'page-lore') { header.style.borderColor = 'rgba(218, 0, 55, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #da0037'; document.documentElement.style.setProperty('--current-theme', '#da0037');}
+                    else if(id === 'page-staff') { header.style.borderColor = 'rgba(79, 172, 254, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #4facfe'; document.documentElement.style.setProperty('--current-theme', '#4facfe');}
+                    else if(id === 'page-recruit') { header.style.borderColor = 'rgba(212, 175, 55, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #d4af37'; document.documentElement.style.setProperty('--current-theme', '#d4af37');}
+                }
+            }, 100);
+            window.scrollTo(0,0);
+        }
+
+        // 🔥 PC 전용: 바알 설정 수공예 장인으로 변경 완료!
+        const charData = {
+            'god': { name: '고드', role: '장기 체류자', img: 'https://igx.kr/u/zP/c/1', age: '380억 세 (측정불가)', mbti: 'INTP', tags: ['창조신', '단거최고', '사탕중독', '관찰자'], desc: '귀차니즘이 매우 심하고 단 것을 매우 좋아합니다. 최근에는 인간계의 <strong>사탕</strong>에 빠져 있으며, 설탕 코팅의 두께에 따라 그날 우주의 운명이 결정된다는 소문이 있습니다. 자다가 기침 한 번으로 유성을 떨어뜨려 릴리스를 고생시키기도 합니다.', ability: '【 인과율 초월 및 우주적 재창조 (Genesis & Oblivion) 】\n\n물리 법칙, 시간, 공간의 제약을 무시하고 의지만으로 우주를 소멸시키거나 재구축합니다. 현재는 단순한 \'관찰자\' 역할을 수행 중입니다.\n\n<span style="color:#da0037; font-size:0.8em;">(※ 관측 불가 수준의 영력. 접근 금지 등급. 무슨 일이 있어도 그녀의 신경을 건드리지 마십시오.)</span>' },
+            'leviathan': { name: '레비아탄', role: '최상급 악령 (방관자)', img: 'https://igx.kr/u/zP/w/1', age: '측정불가', mbti: 'ISTP', tags: ['심해의지배자', '행방불명', '술집단골', '방관자'], desc: '심연과 어둠의 공포에서 태어난 최상급 악령입니다. 현재 에테르나의 통제를 벗어나 현세 어딘가에서 방관 중입니다. 정확한 행방은 알 수 없으나, 항간의 소문에 의하면 어느 허름한 인간계 술집에 머물고 있다고 합니다.', ability: '【 심해의 압박 & 심연의 공포 】\n주변 공간의 영적 밀도를 무한히 높여 모든 존재를 압착시킵니다. 대상에게 심연을 보여주어 트라우마를 생성합니다.' },
+            'lilith': { name: '릴리스', role: '회장 (최상급)', img: 'https://igx.kr/u/zP/d/1', age: '9821만 세', mbti: 'ISFJ', tags: ['외강내유', '월급인상최고', '테라리움', '맛집공유'], desc: '차가운 외모와 달리 직원들에게 매주 금요일 맛집 쿠폰을 쏘는 따뜻한 회장님입니다. 집무실에서 키우는 작은 <strong>테라리움</strong>은 사실 실제 행성 하나와 연결되어 있습니다. 벌레를 극도로 무서워하며, 일을 미루지 않고 직접 처리하는 완벽주의자입니다.', ability: '【 영혼의 계약 & 영혼 사슬 】\n영혼을 구속하는 강력한 계약을 맺습니다. 영혼을 직접적으로 타격하고 속박할 수 있는 붉은 사슬을 사용합니다.' },
+            'satan': { name: '사탄', role: '비서실장 (최상급)', img: 'https://igx.kr/u/zP/h/1', age: '4534만 세', mbti: 'ENTP', tags: ['장난꾸러기', '오픈런장인', '간식셔틀', '존댓말'], desc: '활발하고 남 놀리기를 좋아하는 악마입니다. 사내 장난 금지 대상 1호지만 정작 본인이 규정을 만듭니다. 고드의 간식을 챙기기 위해 인간계 유명 디저트 카페 <strong>오픈런</strong>을 수만 번 뛰는 경력이 있습니다.', ability: '【 칠흑의 업화 】\n모든 것을 태워버리는 검은 불꽃을 자유자재로 다룹니다.' },
+            'death': { name: '데스', role: '운영 총괄 사장 (사신)', img: 'https://igx.kr/u/zP/g/1', age: '210억 세', mbti: 'ISTJ', tags: ['츤데레', '분재다듬기', '야근요정', '과묵함'], desc: '에테르나의 공동 창업자입니다. 요즘 취미는 <strong>분재 다듬기</strong>지만 손을 대는 식물마다 영원한 안식(고사)에 들어 고민입니다. 야근하는 직원 책상에 조용히 에너지 드링크를 두고 사라지는 츤데레의 정석입니다.', ability: '【 영혼 회수 & 영혼 절단 】\n수명을 다한 영혼을 거두어들이거나, 부정한 영혼을 베어버립니다.' },
+            'lua': { name: '루아', role: '운영팀 사원 (사신 후계자)', img: 'https://igx.kr/u/zP/j/1', age: '100만 세', mbti: 'ENFP', tags: ['덜렁이', '재능천재', '활발함'], desc: '차기 죽음의 신입니다. 실수를 너무 많이 하여 데스의 추가 업무를 만듭니다. 데스의 낫을 몰래 가져가다 걸려 반성문을 쓴 전적이 있습니다.', ability: '【 영혼 회수 & 영혼 절단 】\n기본적인 사신의 능력을 지녔으며 잠재력은 데스 이상입니다.' },
+            'mavis': { name: '메이비스', role: '소속원 (상급)', img: 'https://igx.kr/u/zP/l/1', age: '1200만 세', mbti: 'ISTP', tags: ['만성피로', '고양이집사', '퇴사불가', '커피중독'], desc: '업무의 핵심 인력입니다. 월급의 대부분을 <strong>고양이 간식</strong>에 씁니다. "메이비스가 퇴사하는 날이 회사가 망하는 날"이라는 평판이 돌 만큼 유능합니다.', ability: '【 무제한 포탈 생성 】\n크기 제한이 없는 포탈을 엽니다. 단, 크기가 커질수록 마력 소모가 극심해집니다.' },
+            'isabella': { name: '이사벨라', role: '소속원 (중급)', img: 'https://igx.kr/u/zP/p/1', age: '700만 세', mbti: 'ESFJ', tags: ['무지개정리', '서류의달인', '감수성폭발', '인싸'], desc: '모든 서류를 <strong>무지개색 순서</strong>대로 정리해야 직성이 풀립니다. 가끔 망자의 기억을 시각화하다가 너무 감동적인 로맨스를 보면 업무를 중단하고 펑펑 울기도 하는 감수성 풍부한 악마입니다.', ability: '【 기억 및 문서 시각화 】\n망자의 생전 기억이나 복잡한 서류 속 내용을 허공에 시각화하여 띄웁니다.' },
+            'serena': { name: '세리나', role: '소속원 (하급)', img: 'https://igx.kr/u/zP/m/1', age: '150만 세', mbti: 'INFJ', tags: ['영혼판독기', '냄새판별', '독설가', '통찰력'], desc: '눈을 감고도 <strong>영혼의 냄새</strong>만으로 카르마를 맞힙니다. 나쁜 영혼은 썩은 청국장 냄새가 난다고 합니다. 평소 조용하지만 판결을 번복하려는 악령에게는 무시무시한 독설을 내뱉는 반전 매력이 있습니다.', ability: '【 죄악 판독 】\n영혼이 품고 있는 죄의 무게와 질을 꿰뚫어 봅니다.' },
+            'eris': { name: '에리스', role: '이승 담당 (인간)', img: 'https://igx.kr/u/zP/n/1', age: '1500 세', mbti: 'ESFP', tags: ['맛집지도', '인싸', '피지컬천재', '쌍둥이언니'], desc: '에리나의 쌍둥이 언니입니다. <strong>맛집 지도</strong>를 업데이트하는 것이 취미입니다. 마력은 없지만 동생을 건드리는 악령은 순수 피지컬로 소멸시켜버리는 무서운 언니입니다.', ability: '【 능력 없음 】\n타고난 특수 능력은 없으나 친화력과 열정으로 업무를 완수합니다.' },
+            'erina': { name: '에리나', role: '이승 담당 (인간)', img: 'https://igx.kr/u/zP/t/1', age: '1500 세', mbti: 'INFP', tags: ['영혼터치', '언니바라기', '비밀일기', '아싸'], desc: '에리스의 쌍둥이 동생입니다. 영혼을 만지는 능력 때문에 가끔 길 가던 영혼이 등을 밀어달라고 부탁해 곤혹스러워합니다. 비밀 일기장은 언니에 대한 <strong>찬양글</strong>로 가득 차 있는 귀여운 동생입니다.', ability: '【 영체 간섭 】\n순수 인간임에도 영혼을 육안으로 보고 물리적으로 만질 수 있습니다.' },
+            'baal': { name: '바알', role: '이승 담당 (상급)', img: 'https://igx.kr/u/zP/r/1', age: '5800만 세', mbti: 'INTJ', tags: ['손재주장인', '시간엄수', '다정한업어주기', '반전매력'], desc: '날개와 뿔, 꼬리가 없는 돌연변이 콤플렉스를 숨기고 있습니다. 무뚝뚝하고 차가운 인상과 달리, 남몰래 <strong>귀여운 동물 인형</strong>을 뜨개질하는 취미가 있으며 길 잃은 어린 영혼에게 슬쩍 쥐여주곤 합니다.', ability: '【 그림자 직조 (Shadow Weaving) 】\n그림자를 실처럼 자아내어 절대 끊어지지 않는 결계를 치거나 상대를 포박합니다. 필요할 땐 영혼들을 위한 푹신한 쿠션으로 만들 수도 있습니다.' },
+            'paimon': { name: '파이몬', role: '이승 담당 (상급)', img: 'https://igx.kr/u/zP/q/1', age: '4000만 세', mbti: 'ENTJ', tags: ['해커', '게이머1위', '플랜Z', '보석좋아'], desc: '인간계 CCTV 해커입니다. 틈날 때마다 게임 서버를 해킹해 <strong>랭킹 1위</strong>를 차지하는 것이 낙입니다. 루아의 돌발 행동에 대비해 언제나 플랜 Z까지 세워두는 철저한 전략가입니다.', ability: '【 환술 & 시간 정지 】\n광범위한 지역에 거대한 환술을 걸거나, 일시적으로 시간을 멈출 수 있습니다.' },
+            'lucifer': { name: '루시퍼', role: '무소속 (혼혈)', img: 'https://igx.kr/u/zP/v/1', age: '2000만 세', mbti: 'ESTP', tags: ['복직신청', '종이비행기', '짝짝이날개', '추방자'], desc: '고드에게 까불다 추방된 혼혈입니다. 고드는 까먹은 듯합니다.', ability: '【 빛과 어둠의 검 】\n신성력, 마력 모두 사용 가능합니다.' },
+            'rabbit': { name: '미스 래빗', role: '연구 개체 (최하급)', img: 'https://igx.kr/u/zP/k/1', age: '20 세', mbti: 'ISFP', tags: ['관종', '애정결핍', '꽃다발', '울보토끼'], desc: '사랑받지 못한 토끼들의 슬픔이 모인 존재입니다. 어째선지 숙소 근처 꽃밭에 장미를 기르고 그 장미로 꽃다발을 만들어 들고 다닙니다. 퇴근하는 직원들이 인사해 주지 않으면 밤새 연구소 전체에 슬픈 울음소리를 울려 퍼뜨립니다.', ability: '【 귀여운 분열 】\n작은 모습 여러 개로 분열할 수 있으며 이때 크기가 작아지고 매우 귀여워지며 힘도 약해집니다.' }
+        };
+
+        const prankCharData = {
+            'god': { name: '★우주최강 고드님★', role: '우주 대장', img: 'https://igx.kr/u/zP/c/1', age: '알게 뭐야...', mbti: 'CUTE', tags: ['내가짱이야', '사탕사줘', '귀찮아', '신이다'], desc: '나야 나... 아, 설명하기도 귀찮다. 사탕나 입에 넣어줘. 우주 최고 존엄이긴 한데... 움직이는 거 너무 싫어. 알아서들 놀아라...', ability: '【 우주 대충 바꾸기 】\n우주? 아 몰라, 귀찮아서 안 바꿀래. 그냥 솜사탕이나 줘.' },
+            'leviathan': { name: '물고기 언니', role: '술쟁이', img: 'https://igx.kr/u/zP/w/1', age: '아줌마', mbti: 'ISTP', tags: ['술냄새', '덩치큼', '피곤해'], desc: '술 냄새나는 커다란 물고기 언니. 아, 쳐다보기도 귀찮아. 내 사탕 건드리면 진짜 국물도 없어.', ability: '【 대충 납작 쿵! 】\n귀찮으니까 그냥 한 번에 싹 다 납작하게 누름. 사탕 부서지면 화냄.' },
+            'lilith': { name: '잔소리 대마왕', role: '겁쟁이 회장', img: 'https://igx.kr/u/zP/d/1', age: '할매', mbti: 'ISFJ', tags: ['잔소리', '벌레싫어', '겁쟁이'], desc: '아... 맨날 일하라고 잔소리해. 피곤하게 진짜. 벌레 하나 던져주고 난 가서 자야지.', ability: '【 귀찮은 빨간 끈 】\n빨간 끈으로 꽁꽁 묶음. 묶는 것도 사실 귀찮을걸?' },
+            'satan': { name: '간식 셔틀', role: '내 꼬붕 1호', img: 'https://igx.kr/u/zP/h/1', age: '몰라', mbti: 'ENTP', tags: ['셔틀', '존댓말', '오픈런'], desc: '내 간식 셔틀 1호. 사탕 사오라고 시키고 난 누워 있어야지. 아, 씹어 먹는 것도 귀찮네.', ability: '【 까만 불꽃 】\n까만 불로 마시멜로 굽기. 빨리 좀 구워라 현기증 나니까.' },
+            'death': { name: '해골 언니', role: '야근 노예', img: 'https://igx.kr/u/zP/g/1', age: '화석', mbti: 'ISTJ', tags: ['노잼', '야근맨', '분재파괴자'], desc: '맨날 사무실에서 야근만 하는 불쌍한 해골 언니... 보기만 해도 내가 다 피곤해. 난 일 절대 안 해.', ability: '【 대충 싹둑싹둑 】\n엄청 큰 낫으로 대충 다 자름. 무거운데 저걸 굳이 왜 들고 다니지?' },
+            'lua': { name: '사고뭉치 꼬붕', role: '내 꼬붕 2호', img: 'https://igx.kr/u/zP/j/1', age: '애기', mbti: 'ENFP', tags: ['덜렁이', '시끄러워'], desc: '맨날 사고 치고 다니는 시끄러운 꼬붕... 수습하는 건 어차피 릴리스가 하겠지 뭐. 난 잘래.', ability: '【 싹둑 얍! 】\n해골 언니 따라 하는데 허접해. 쳐다보는 것도 귀찮다.' },
+            'mavis': { name: '고양이 바보', role: '일개미', img: 'https://igx.kr/u/zP/l/1', age: '몰라', mbti: 'ISTP', tags: ['집사', '커피중독', '피곤해'], desc: '맨날 다크서클 달고 다니는 피곤해 보이는 언니... 쳐다보면 나도 피곤해지네. 츄르나 던져주고 피해야지.', ability: '【 구멍 뚫기 】\n아무 데나 구멍 뚫어서 순간이동. 걷기 귀찮을 땐 저게 최고야.' },
+            'isabella': { name: '울보지각생', role: '무지개 덕후', img: 'https://igx.kr/u/zP/p/1', age: '어른', mbti: 'ESFJ', tags: ['무지개', '울보'], desc: '서류를 무조건 무지개색으로 정리하는 언니... 아 눈부셔, 피곤해. 그냥 대충 다 검은색으로 통일하지.', ability: '【 허공에 그림 그리기 】\n기억 같은 거 공중에 둥둥 띄움. 누워서 영화 볼 땐 좀 편하겠네.' },
+            'serena': { name: '개코 언니', role: '팩폭기', img: 'https://igx.kr/u/zP/m/1', age: '언니', mbti: 'INFJ', tags: ['개코', '팩폭'], desc: '코가 엄청 예민한 언니... 내 방에서 단내 난다고 뭐라 할 듯. 아 귀찮아 피해 다녀야지.', ability: '【 찌릿찌릿 스캔 】\n냄새만 맡고 다 알아냄. 진짜 피곤하게 산다.' },
+            'eris': { name: '힘쎈 인간 언니', role: '인간 요원', img: 'https://igx.kr/u/zP/n/1', age: '인간', mbti: 'ESFP', tags: ['근육', '맛집내놔'], desc: '에리나 쌍둥이 언니. 힘 무식하게 쎄... 나 대신 악령들 좀 다 패주면 좋겠다. 난 손가락 까딱하기도 싫어.', ability: '【 주먹 쾅! 】\n그냥 때림. 맞는 애가 알아서 날아갔으면.' },
+            'erina': { name: '껌딱지 동생', role: '인간 요원', img: 'https://igx.kr/u/zP/t/1', age: '인간', mbti: 'INFP', tags: ['소심이', '언니덕후'], desc: '에리스 언니한테 맨날 착 달라붙어 있는 쫄보 동생... 떨어지질 않네. 보는 내가 다 덥고 귀찮다.', ability: '【 만지작 만지작 】\n인간인데 우리 만질 수 있음. 귀찮게 왜 자꾸 만져.' },
+            'baal': { name: '인형 만드는 언니', role: '수공예 달인', img: 'https://igx.kr/u/zP/r/1', age: '화석', mbti: 'INTJ', tags: ['뜨개질', '다정함', '반전매력'], desc: '악만데 뿔도 없고 날개도 없는 무뚝뚝한 언니. 맨날 구석에서 꼬물꼬물 인형 만들고 있던데, 나도 푹신한 베개 하나 만들어달라고 하려다 귀찮아서 말았음.', ability: '【 까만 실뭉치 】\n그림자로 털실 뭉치 같은 걸 만듦. 푹신해서 베개로 쓰기 딱 좋아. 나 잘 때 하나만 던져주고 가라.' },
+            'paimon': { name: '겜순이 언니', role: '해커', img: 'https://igx.kr/u/zP/q/1', age: '어른', mbti: 'ENTJ', tags: ['게임', '보석충'], desc: '맨날 컴퓨터만 하는 겜순이 언니. 마우스 딸깍거리는 것도 안 귀찮나? 체력 진짜 대단하네.', ability: '【 얼음 땡! 】\n시간 멈추거나 환상 보여줌. 오, 시간 멈추고 낮잠 자면 개꿀이겠다.' },
+            'lucifer': { name: '누구더라?', role: '무소속', img: 'https://igx.kr/u/zP/v/1', age: '몰라', mbti: 'ESTP', tags: ['종이비행기'], desc: '누구더라... 나한테 까불었던 거 같긴 한데 기억해 내기도 귀찮다. 그냥 투명인간 취급해야지.', ability: '【 반짝반짝 검 】\n반짝이는 칼 씀. 아 눈부셔... 저리 가.' },
+            'rabbit': { name: '우는 솜뭉치', role: '연구 대상', img: 'https://igx.kr/u/zP/k/1', age: '애기', mbti: 'ISFP', tags: ['관종', '울보'], desc: '아... 맨날 엉엉 우는 시끄러운 토끼. 우는 것도 다 체력인데 안 지치나. 귀 막고 자야겠다.', ability: '【 쪼꼬미 변신 】\n작게 나눠짐. 쪼끄만 게 돌아다니니까 밟을까 봐 귀찮네.' }
+        };
+
+        function resetCascadeAnimations() {
+            document.querySelectorAll('.data-cascade').forEach(el => {
+                el.style.animation = 'none';
+                el.offsetHeight; 
+                el.style.animation = null; 
+            });
+        }
+
+        let currentProfileId = null;
+
+        function openModal(id) {
+            const data = isPrankMode ? prankCharData[id] : charData[id];
+            if(!data) return;
+            currentProfileId = id;
+
+            const img = document.getElementById('profImg');
+            img.src = data.img;
+            document.getElementById('profName').innerHTML = data.name;
+            document.getElementById('profRole').innerHTML = data.role;
+            document.getElementById('profAge').innerHTML = data.age;
+            document.getElementById('profMbti').innerHTML = data.mbti;
+            
+            document.getElementById('abilName').innerHTML = data.name + (isPrankMode ? "의 능력!" : "의 능력 데이터");
+            
+            const tags = document.getElementById('profTags');
+            tags.innerHTML = '';
+            data.tags.forEach(t => tags.innerHTML += `<span class="prof-tag">#${t}</span>`);
+
+            const prankBtn = document.getElementById('godPrankBtn');
+            if(id === 'god') {
+                prankBtn.style.display = 'inline-block';
+                prankBtn.innerText = isPrankMode ? '🍬 장난 끄기 귀찮다...' : '🍬 대충 만든 장난 버튼...';
+
+                bgmNormal.pause(); bgmGod.currentTime = 0; bgmGod.play().catch(() => {});
+                
+                eyeTrackingHandler = (e) => {
+                    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                    img.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) scale(1.05)`;
+                };
+                document.addEventListener('mousemove', eyeTrackingHandler);
+            } else {
+                prankBtn.style.display = 'none';
+                bgmGod.pause(); bgmNormal.play().catch(() => {});
+            }
+
+            showProfile();
+            document.getElementById('unifiedModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+            resetCascadeAnimations();
+        }
+
+        function togglePrankMode() {
+            isPrankMode = !isPrankMode;
+            
+            if (isPrankMode) {
+                document.body.classList.add('god-prank-mode');
+                document.querySelectorAll('[data-prank]').forEach(el => {
+                    if (!el.hasAttribute('data-original')) el.setAttribute('data-original', el.innerHTML);
+                    el.innerHTML = el.getAttribute('data-prank');
+                });
+                
+                document.getElementById('modalHeaderTitle').innerText = '[ 귀찮은 다이어리... 💖 ]';
+                document.getElementById('btnScan').innerText = '[ 대충 캔디 스캔... ]';
+                document.getElementById('btnReturn').innerText = '◀ 아... 돌아가기';
+            } else {
+                document.body.classList.remove('god-prank-mode');
+                document.querySelectorAll('[data-original]').forEach(el => {
+                    el.innerHTML = el.getAttribute('data-original');
+                });
+                
+                document.getElementById('modalHeaderTitle').innerText = '[ CONFIDENTIAL DATA ]';
+                document.getElementById('btnScan').innerText = '[ 영적 능력 데이터 스캔 ]';
+                document.getElementById('btnReturn').innerText = '◀ 프로필 데이터로 복귀';
+            }
+            
+            if (currentProfileId) { openModal(currentProfileId); }
+        }
+
+        function closeModal(event) {
+            if(event && event.target.id !== 'unifiedModal' && !event.target.classList.contains('close-btn')) return;
+            
+            if(eyeTrackingHandler) {
+                document.removeEventListener('mousemove', eyeTrackingHandler);
+                eyeTrackingHandler = null;
+                document.getElementById('profImg').style.transform = 'none';
+            }
+
+            document.getElementById('unifiedModal').classList.remove('active');
+            document.body.style.overflow = ''; 
+            bgmGod.pause(); bgmNormal.play().catch(() => {});
+        }
+
+        function showAbility() {
+            document.getElementById('viewProfile').style.display = 'none';
+            document.getElementById('viewAbility').style.display = 'block';
+            document.getElementById('abilContent').innerHTML = isPrankMode ? prankCharData[currentProfileId].ability : charData[currentProfileId].ability;
+            resetCascadeAnimations();
+        }
+
+        function showProfile() {
+            document.getElementById('viewProfile').style.display = 'block';
+            document.getElementById('viewAbility').style.display = 'none';
+            document.getElementById('profDesc').innerHTML = isPrankMode ? prankCharData[currentProfileId].desc : charData[currentProfileId].desc;
+            resetCascadeAnimations();
+        }
+
+        let slideIdx = 0;
+        function nextSlide() { moveSlide(1); }
+        function prevSlide() { moveSlide(-1); }
+        function moveSlide(n) {
+            const slides = document.querySelectorAll('.ppt-slide');
+            slides[slideIdx].classList.remove('active');
+            slideIdx = (slideIdx + n + slides.length) % slides.length;
+            slides[slideIdx].classList.add('active');
+            updateDots();
+        }
+        function setSlide(n) {
+            const slides = document.querySelectorAll('.ppt-slide');
+            slides[slideIdx].classList.remove('active');
+            slideIdx = n;
+            slides[slideIdx].classList.add('active');
+            updateDots();
+        }
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === slideIdx));
+        }
+
+        function filterCategory(event, cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.querySelectorAll('.staff-card').forEach(card => {
+                card.style.display = (cat === 'all' || card.getAttribute('data-category') === cat) ? 'block' : 'none';
+            });
+        }
+
+        const abilityInput = document.getElementById('recruitAbility');
+        const warningMsg = document.getElementById('forbiddenWarning');
+        const forbiddenWords = ['고드', '릴리스', '데스'];
+
+        abilityInput.addEventListener('input', (e) => {
+            if(isPrankMode) return; 
+            const val = e.target.value;
+            let hasForbidden = false;
+            for(let word of forbiddenWords) { if(val.includes(word)) hasForbidden = true; }
+            if(hasForbidden) {
+                abilityInput.style.borderColor = '#ff0000';
+                abilityInput.style.boxShadow = '0 0 15px rgba(255,0,0,0.5)';
+                warningMsg.style.display = 'block';
+            } else {
+                abilityInput.style.borderColor = '';
+                abilityInput.style.boxShadow = '';
+                warningMsg.style.display = 'none';
+            }
+        });
+
+        function submitForm(event) {
+            event.preventDefault(); 
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = isPrankMode ? '대충 계약 도장 찍는 중...💖' : '영혼 서명 각인 중... (Processing)';
+            btn.classList.add('loading');
+
+            setTimeout(() => {
+                document.getElementById('applyForm').style.display = 'none';
+                document.getElementById('recruitSuccess').style.display = 'block';
+                document.querySelector('.recruit-container').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 1500);
+        }
+
+        let logoClickCount = 0;
+        let logoClickTimer = null;
+        const logoBtn = document.getElementById('logoBtn');
+
+        logoBtn.addEventListener('click', () => {
+            if(isPrankMode) return; 
+            logoClickCount++;
+            clearTimeout(logoClickTimer);
+            logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 1000);
+
+            if (logoClickCount === 7) {
+                logoClickCount = 0;
+                toggleAdminMode();
+            }
+        });
+
+        function toggleAdminMode() {
+            isAdminMode = !isAdminMode;
+            body.classList.add('glitch-active');
+
+            setTimeout(() => {
+                body.classList.remove('glitch-active');
+                if (isAdminMode) { 
+                    document.documentElement.style.setProperty('--current-theme', '#da0037'); 
+                    header.style.borderColor = 'rgba(218,0,55,0.3)';
+                } else { 
+                    navigate('page-' + currentActiveTab); 
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

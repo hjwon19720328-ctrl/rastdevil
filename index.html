@@ -31,40 +31,30 @@
             --accent-orange: #ffb347;
             text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
         }
-        
         body.god-prank-mode * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><text y="20" font-size="20">🍬</text></svg>'), auto !important; }
-
         body.god-prank-mode #fixed-bg { background-color: #fffdf5; background-image: repeating-linear-gradient(45deg, #fffdf5, #fffdf5 20px, #ffe8ee 20px, #ffe8ee 40px); opacity: 1; z-index: -3; }
         body.god-prank-mode #abyss-dust { background-image: radial-gradient(circle, rgba(255, 215, 0, 0.4) 3px, transparent 3px); background-size: 80px 80px; }
-        
         body.god-prank-mode header { background: rgba(255, 255, 255, 0.9); border-bottom: 3px dashed var(--accent-red) !important; }
         body.god-prank-mode .logo-text { color: var(--accent-red); text-shadow: 2px 2px 0px var(--accent-gold) !important; font-family: sans-serif;}
         body.god-prank-mode .nav-links a { color: var(--text-main); font-weight: bold; }
         body.god-prank-mode .nav-links a.active { color: var(--accent-red) !important; text-shadow: 0 0 10px var(--accent-gold); }
-
         body.god-prank-mode .ppt-wrapper { background: rgba(255, 255, 255, 0.9); border: 4px dashed var(--accent-gold); box-shadow: 10px 10px 0px rgba(255, 107, 139, 0.2); }
         body.god-prank-mode .ppt-slide h3 { color: var(--accent-red); }
         body.god-prank-mode .ppt-slide p { color: var(--text-main); font-weight: bold; }
-
         body.god-prank-mode .lore-card { background: #fff; border: 3px dashed var(--accent-blue); border-left: 8px solid var(--accent-gold); box-shadow: 8px 8px 0px rgba(91, 192, 235, 0.2); }
         body.god-prank-mode .lore-card h3 { color: var(--accent-red); }
         body.god-prank-mode .lore-card p { color: var(--text-main); font-weight: bold; }
         body.god-prank-mode .lore-note { color: var(--accent-blue); font-size: 0.9rem; font-family: sans-serif; }
-        
-        /* 사건사고 아코디언 장난모드 */
         body.god-prank-mode .accordion-card { border-color: var(--accent-orange) !important; }
         body.god-prank-mode .accordion-card h3 { color: var(--accent-orange) !important; }
         body.god-prank-mode .accordion-card .accordion-content { border-top: 2px dashed var(--accent-gold); }
-
         body.god-prank-mode .staff-card { background: #fff; border: 3px dashed var(--accent-red); box-shadow: 8px 8px 0px rgba(255, 107, 139, 0.2); }
         body.god-prank-mode .staff-card:hover { background: #ffe8ee; transform: translateY(-10px) rotate(3deg); border-color: var(--accent-gold); box-shadow: 15px 15px 0px rgba(255, 215, 0, 0.4);}
         body.god-prank-mode .staff-name { color: var(--accent-red); font-family: sans-serif; text-shadow: 1px 1px 0px var(--accent-gold); }
         body.god-prank-mode .staff-img-wrap { background: var(--accent-gold); border: 2px dashed #fff; }
-
         body.god-prank-mode .recruit-container { background: rgba(255, 255, 255, 0.9); border: 4px dashed var(--accent-gold); box-shadow: 10px 10px 0px rgba(255, 215, 0, 0.3); }
         body.god-prank-mode .form-control { background: #fff; border: 2px solid var(--accent-red); color: var(--text-main); font-weight: bold; }
         body.god-prank-mode .form-control:focus { background: #fffdf5; box-shadow: 0 0 15px var(--accent-gold); }
-        
         body.god-prank-mode .modal-window { background: #fffdf5; border: 5px dashed var(--accent-gold); box-shadow: 0 0 50px rgba(255, 107, 139, 0.5); }
         body.god-prank-mode .modal-header { background: var(--accent-red); border-bottom: 3px dashed #fff;}
         body.god-prank-mode .modal-header span { color: #fff; text-shadow: none; font-family: sans-serif;}
@@ -73,7 +63,6 @@
         body.god-prank-mode .prof-tag { background: #ffe8ee; border-color: var(--accent-red); color: var(--accent-red); font-weight: bold; }
         body.god-prank-mode .btn-scan, body.god-prank-mode .btn-return { background: #fff; color: var(--accent-red); border: 3px dashed var(--accent-red); }
         body.god-prank-mode .btn-scan:hover, body.god-prank-mode .btn-return:hover { background: var(--accent-red); color: #fff; }
-
         @keyframes bouncePrank { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
         #godPrankBtn { display: none; color: #ff6b8b; background: #fff; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; cursor: pointer; animation: bouncePrank 1s infinite; margin-right: 15px; border: 2px solid #ffd700; box-shadow: 0 0 10px #ffd700; font-family: sans-serif;}
         #godPrankBtn:hover { background: #ff6b8b; color: #fff; }
@@ -82,7 +71,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Serif KR', serif; outline: none !important; -webkit-tap-highlight-color: transparent; }
         html { scroll-behavior: smooth; }
         body { background-color: var(--bg-base); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100vw; cursor: crosshair; transition: background 0.8s ease; word-break: keep-all; }
-
         #fixed-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png'); z-index: -2; pointer-events: none; opacity: 0.5; transition: all 0.5s;}
         #abyss-dust { position: fixed; top: 0; left: 0; width: 100vw; height: 200vh; background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; pointer-events: none; animation: drift 120s linear infinite; }
         @keyframes drift { from { transform: translateY(0); } to { transform: translateY(-50%); } }
@@ -141,35 +129,18 @@
         .grade-list li { color: #ddd; display: flex; align-items: center; font-size: 0.95rem; }
         .grade-badge { background: rgba(218, 0, 55, 0.1); color: var(--accent-red); padding: 4px 10px; border: 1px solid var(--accent-red); font-size: 0.8rem; font-weight: bold; margin-right: 15px; width: 70px; text-align: center; flex-shrink: 0;}
 
-        /* 🔥 사건사고 전용 아코디언 스타일 */
-        .accordion-card .accordion-header {
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed #551111;
-        }
+        /* 사건사고 전용 아코디언 스타일 */
+        .accordion-card .accordion-header { cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px dashed #551111; }
         .accordion-card h3 { margin-bottom: 0 !important; border-bottom: none !important; padding-bottom: 0 !important; transition: 0.3s; }
         .accordion-card .toggle-icon { color: var(--accent-orange); font-size: 1.2rem; transition: transform 0.4s ease; font-family: sans-serif; }
         .accordion-card.active .accordion-header { border-bottom: none; }
         .accordion-card.active .toggle-icon { transform: rotate(180deg); }
-        .accordion-card .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            margin-top: 0;
-            padding-top: 0;
-            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), opacity 0.4s ease-out, margin-top 0.4s ease-out;
-        }
-        .accordion-card.active .accordion-content {
-            max-height: 800px; /* 텍스트가 잘리지 않도록 넉넉하게 */
-            opacity: 1;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px dashed #551111;
-            transition: max-height 0.8s ease-in-out, opacity 0.5s ease-in, margin-top 0.4s ease-out;
-        }
+        .accordion-card .accordion-content { max-height: 0; overflow: hidden; opacity: 0; margin-top: 0; padding-top: 0; transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), opacity 0.4s ease-out, margin-top 0.4s ease-out; }
+        .accordion-card.active .accordion-content { max-height: 800px; opacity: 1; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed #551111; transition: max-height 0.8s ease-in-out, opacity 0.5s ease-in, margin-top 0.4s ease-out; }
+
+        /* 사건사고 - 최상단 진심 빡친 사건 특수 스타일 */
+        .incident-fatal { border: 4px solid #da0037 !important; background: rgba(30, 0, 0, 0.8) !important; box-shadow: 0 0 25px rgba(218, 0, 55, 0.4) !important; animation: fatalPulse 2s infinite; }
+        @keyframes fatalPulse { 0% { box-shadow: 0 0 20px rgba(218, 0, 55, 0.4); } 50% { box-shadow: 0 0 40px rgba(218, 0, 55, 0.8); } 100% { box-shadow: 0 0 20px rgba(218, 0, 55, 0.4); } }
 
         /* 필터 및 명부 */
         .filter-menu { display: flex; justify-content: center; gap: 12px; margin-bottom: 3.5rem; flex-wrap: wrap; }
@@ -217,64 +188,87 @@
         @keyframes pulseLoading { from { opacity: 0.6; } to { opacity: 1; } }
         .recruit-success { display: none; text-align: center; animation: fadeIn 1s; }
 
-        /* 공통 모달창 레이아웃 */
+        /* 모달창 */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; transition: opacity 0.3s; }
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal-window { background: #0a0a0c; border: 1px solid #333; border-radius: 12px; width: 90%; max-width: 600px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 0 50px #000; transform: scale(0.95); opacity: 0; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transition: transform 0.3s; }
         @keyframes popIn { to { transform: scale(1); opacity: 1; } }
-
         .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: #050505; border-bottom: 1px solid #222; }
         .modal-header span { color: #fff; font-weight: bold; font-size: 0.8rem; letter-spacing: 2px; }
         .close-btn { color: #888; font-size: 1.8rem; transition: 0.3s; line-height: 1; cursor: pointer; }
         .close-btn:hover { color: #fff; }
-        
         .modal-body { padding: 2.5rem; overflow-y: auto; text-align: center; overscroll-behavior: contain; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 20px 20px; }
-        
         .img-perspective-wrap { perspective: 1000px; margin-bottom: 1.5rem; display: inline-block; }
         .prof-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 4px solid #333; box-shadow: 0 0 30px rgba(0,0,0,0.8); transition: transform 0.1s ease-out; }
-        
         .data-cascade { opacity: 0; animation: fadeUp 0.5s ease forwards; }
         .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; } .delay-3 { animation-delay: 0.3s; } .delay-4 { animation-delay: 0.4s; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
         .prof-name { font-size: 2.2rem; color: #fff; font-weight: 900; margin-bottom: 0.2rem; letter-spacing: 2px; }
         .prof-role { font-size: 1.1rem; color: #888; margin-bottom: 0.5rem; }
         .prof-meta { font-size: 0.9rem; color: var(--accent-blue); margin-bottom: 1rem; font-weight: bold; letter-spacing: 1px; }
         .prof-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 2rem; }
         .prof-tag { background: rgba(255,255,255,0.05); color: #ccc; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.1); }
         .prof-desc { text-align: left; color: #bbb; background: rgba(0,0,0,0.4); padding: 1.5rem; border-left: 3px solid var(--current-theme); margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.8; word-break: keep-all; min-height: 100px;}
-        
         .btn-scan { background: #111; color: var(--current-theme); border: 1px solid var(--current-theme); padding: 15px; width: 100%; transition: 0.3s; font-weight: bold; font-size: 1rem; cursor: pointer; letter-spacing: 1px; }
         .btn-scan:hover { background: var(--current-theme); color: #000; box-shadow: 0 0 15px var(--current-theme);}
-
         #viewAbility { display: none; text-align: left; }
         .abil-title { font-size: 1.6rem; color: #fff; margin-bottom: 1.5rem; border-bottom: 1px solid #333; padding-bottom: 10px; }
         .abil-text { background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 8px; color: #ddd; line-height: 2; white-space: pre-wrap; font-size: 1rem; border: 1px solid rgba(255,255,255,0.05); min-height: 100px;}
         .btn-return { background: transparent; color: #777; border: 1px solid #444; padding: 15px; width: 100%; margin-top: 1.5rem; transition: 0.3s; font-weight: bold; font-size: 1rem; cursor: pointer;}
         .btn-return:hover { color: #fff; border-color: #fff; }
 
-        /* 🔥 측정불가 글리치 텍스트 & 알 수 없음 오버레이 */
-        .glitch-text { display: inline-block; cursor: pointer; color: var(--accent-red); font-weight: bold; border-bottom: 1px dashed var(--accent-red); animation: smallGlitch 0.2s infinite; position: relative;}
-        @keyframes smallGlitch { 0% { transform: translate(0); opacity: 1; } 50% { transform: translate(-2px, 2px); opacity: 0.8; } 100% { transform: translate(2px, -2px); opacity: 1; } }
-        
-        #unknownOverlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.95); color: #da0037; font-size: clamp(4rem, 15vw, 10rem); font-weight: 900;
-            z-index: 99999; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-            letter-spacing: 10px; font-family: 'Noto Serif KR', serif; cursor: pointer;
-            animation: textShake 0.1s infinite; user-select: none;
+        /* 🔥 강화된 글리치 텍스트 */
+        .glitch-text { 
+            display: inline-block; cursor: crosshair; color: var(--accent-red); font-weight: 900; 
+            text-shadow: 2px 0 red, -2px 0 blue; animation: heavyGlitch 0.1s infinite; position: relative;
         }
-        @keyframes textShake { 0% { transform: translate(3px, 1px) rotate(0deg); } 50% { transform: translate(-1px, -3px) rotate(-1deg); } 100% { transform: translate(-3px, 0px) rotate(1deg); } }
+        @keyframes heavyGlitch {
+            0% { transform: translate(0) skew(0deg); }
+            20% { transform: translate(-4px, 4px) skew(-10deg); color: #fff; }
+            40% { transform: translate(4px, -4px) skew(10deg); text-shadow: -3px 0 red, 3px 0 blue; }
+            60% { transform: translate(-2px, -2px) skew(0deg); }
+            80% { transform: translate(2px, 2px) skew(5deg); color: #da0037; }
+            100% { transform: translate(0) skew(0deg); }
+        }
 
-        /* 시스템 경고 모달창 (광과민성) */
+        /* 💀 둠 모드 (코즈믹 호러 상태) */
+        body.doom-mode {
+            background-color: #030000 !important;
+            color: #da0037 !important;
+            font-family: '궁서', 'Noto Serif KR', serif !important;
+            animation: doomFlicker 0.15s infinite !important;
+        }
+        body.doom-mode * {
+            border-color: #500 !important;
+            text-shadow: 0 0 8px #da0037 !important;
+            background: rgba(15, 0, 0, 0.4) !important;
+            box-shadow: inset 0 0 10px #000 !important;
+            transition: none !important;
+        }
+        body.doom-mode img {
+            filter: grayscale(1) contrast(200%) invert(1) drop-shadow(0 0 15px red) !important;
+            mix-blend-mode: hard-light;
+        }
+        @keyframes doomFlicker {
+            0% { opacity: 1; filter: invert(0); transform: translateX(0) skewX(0); }
+            33% { opacity: 0.9; filter: hue-rotate(90deg); transform: translateX(-3px) skewX(2deg); }
+            66% { opacity: 1; filter: invert(0.1); transform: translateX(3px) skewX(-2deg); }
+            100% { opacity: 0.95; filter: contrast(150%); transform: translateX(0); }
+        }
+        
+        /* 둠 모드 전환용 침묵 오버레이 */
+        #silenceOverlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000; z-index: 999999;
+            flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        #silenceOverlay span {
+            color: #da0037; font-size: 2rem; letter-spacing: 20px; font-weight: 900;
+            animation: heavyGlitch 0.1s infinite;
+        }
+
         #warningModal .modal-window { border-color: var(--accent-red); box-shadow: 0 0 30px rgba(218,0,55,0.5); }
         #warningModal .modal-header { background: rgba(218,0,55,0.1); }
-
-        #glitchOverlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(123, 97, 255, 0.1); z-index: 20000; pointer-events: none; display: none; opacity: 0; }
-        .glitch-active #glitchOverlay { display: block; animation: glitchEffect 0.3s ease infinite, fadeInOut 0.6s ease forwards; }
-        @keyframes glitchEffect { 0% { transform: translate(0); } 20% { transform: translate(-5px, 5px); background-color: rgba(218,0,55,0.1); } 40% { transform: translate(5px, -5px); background-color: rgba(79,172,254,0.1); } 60% { transform: translate(-5px, -5px); } 80% { transform: translate(5px, 5px); background-color: rgba(212,175,55,0.1); } 100% { transform: translate(0); } }
-        @keyframes fadeInOut { 0% { opacity: 0; } 30% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; } }
-
         .pc-br { display: block; } .mobile-br { display: none; }
         @media (max-width: 768px) {
             .section-wrap { padding: 3rem 5%; }
@@ -302,17 +296,14 @@
 <body id="bodyEl">
     <div id="fixed-bg"></div>
     <div id="abyss-dust"></div>
-    
-    <div id="glitchOverlay"></div>
-    <div id="adminMessage">[ SYSTEM ALERT: ADMIN ACCESS GRANTED ]</div>
-
-    <div id="unknownOverlay" onclick="closeUnknownOverlay()">
-        알 수 없음
-        <div style="font-size: 1rem; font-weight: normal; margin-top: 2rem; letter-spacing: 2px; color: #888; animation: none;">[ 화면을 클릭하여 복구 ]</div>
-    </div>
 
     <audio id="bgmNormal" src="NORMAL.mp3" loop></audio>
     <audio id="bgmGod" src="GOD.mp3" loop></audio>
+    <audio id="bgmError" src="error.mp3" loop></audio>
+
+    <div id="silenceOverlay">
+        <span>...</span>
+    </div>
 
     <div id="introOverlay">
         <div id="introCompany">
@@ -415,6 +406,17 @@
                 </div>
                 <div class="lore-grid">
                     
+                    <div class="lore-card accordion-card incident-fatal" style="grid-column: 1 / -1; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3 style="color: #da0037; font-weight: 900; font-size: 1.6rem; text-shadow: 0 0 10px #da0037;" data-prank="[진짜 빡쳤던 날] 내 사탕 훔쳐간 놈">★ [전 직원 필독] 제0차 절대 금기 위반 사태 ★</h3>
+                            <span class="toggle-icon" style="color:#da0037;">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p style="font-weight: bold; color: #fff; font-size: 1.05rem;" data-prank="어떤 미친놈이 내 한정판 사탕 훔쳐 먹었길래, 그냥 걔가 태어난 우주 자체를 지워버렸어. 지금은 아무도 걔 기억 못할걸?">과거 한 상급 악마가 고드님의 전용 간식 창고에 무단 침입하여 최애 사탕을 훼손한 사건입니다. 고드님이 '진심으로' 분노한 유일한 사건이며, 분노의 여파로 해당 악마는 물리적 소멸을 넘어 <strong>'존재했던 인과율' 자체가 우주에서 완전히 삭제</strong>되었습니다. 현재 그 악마의 이름과 종족을 기억하는 자는 아무도 없으며, 세계의 타임라인이 재구축되었습니다.</p>
+                            <div class="lore-note" style="color: #ff4444; font-size: 1rem; position: relative; right: 0; bottom: 0; margin-top: 1rem;" data-prank="※ 내 거 건드리면 태어나기 전으로 돌려보낸다.">※ 최고 경고: 1짱의 간식은 우주의 존망과 직결됩니다. 절대 접근하지 마십시오.</div>
+                        </div>
+                    </div>
+
                     <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
                         <div class="accordion-header" onclick="toggleAccordion(this)">
                             <h3 style="color: #ff9800;" data-prank="1짱 등판! 1차 대청소">창조신 고드 강림 및 제1차 대청소 사태</h3>
@@ -422,7 +424,6 @@
                         </div>
                         <div class="accordion-content">
                             <p data-prank="아 천국 결재 서류 너무 많아서 빡쳐서 다 때려치고 내려온 날. 기분 안 좋아서 한숨 한 번 쉬었더니 밑에 있던 먼지(악령)들 싹 다 날아갔다며? 청소 안 해도 돼서 개꿀.">천만 년 전, 천계의 과도한 업무에 질린 고드님께서 서류를 집어던지고 저승으로 도망쳐 내려온 기념비적인 날입니다. 강림 당시 내뿜은 짜증 섞인 영압 방출로 인해, 그 순간 저승에 존재하던 모든 악령이 단 1초 만에 100% 소멸하는 전무후무한 기록을 세웠습니다.</p>
-                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 천국 일 진짜 극혐. 안 돌아감.">※ 이날을 기점으로 에테르나의 현 서열 체계가 강제 재편되었습니다.</div>
                         </div>
                     </div>
 
@@ -432,8 +433,7 @@
                             <span class="toggle-icon">▼</span>
                         </div>
                         <div class="accordion-content">
-                            <p data-prank="태어나자마자 뭐 그리 화가 났는지 다 부수고 가출함. 지금은 어디서 술 마시고 있겠지 뭐.">최상급 악령 <strong>레비아탄</strong>이 태어날 당시, 통제 불능의 마력 폭주로 심연이 범람하여 날뛰었던 대사건입니다. 이 여파로 저승의 하위 구역 3곳이 붕괴되었으며, 이후 레비아탄의 행적은 현재까지도 묘연한 상태입니다.</p>
-                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 찾지 마, 귀찮아.">※ 1급 수배령 발효 중이나 체포조 파견은 보류됨. - 릴리스</div>
+                            <p data-prank="태어나자마자 뭐 그리 화가 났는지 다 부수고 가출함. 지금은 어디서 술 마시고 있겠지 뭐.">최상급 악령 <strong>레비아탄</strong>이 태어날 당시, 통제 불능의 마력 폭주로 심연이 범람하여 날뛰었던 대사건입니다.</p>
                         </div>
                     </div>
 
@@ -443,8 +443,7 @@
                             <span class="toggle-icon">▼</span>
                         </div>
                         <div class="accordion-content">
-                            <p data-prank="사탕 안 사 오길래 화나서 며칠 누워있었더니 우주 멈춘다더라? 1짱 심기 건드리면 다 죽는겨. 사탄이 헐레벌떡 사탕 가져와서 살려줌.">창조신 <strong>고드</strong>님께서 일주일간 사탕을 공급받지 못하자, 우주의 엔트로피가 0에 가깝게 떨어지며 모든 차원이 정지하고 멸망 직전까지 갔던 최악의 재난입니다. 비서실장 사탄이 이승 전역의 디저트 카페를 털어 긴급 공수해 옴으로써 겨우 사태가 진정되었습니다.</p>
-                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 사탕 재고 100만 개 유지해라.">※ 사탄 비서실장 시말서 5만 장 제출 완료.</div>
+                            <p data-prank="사탕 안 사 오길래 화나서 며칠 누워있었더니 우주 멈춘다더라? 1짱 심기 건드리면 다 죽는겨. 사탄이 헐레벌떡 사탕 가져와서 살려줌.">창조신 <strong>고드</strong>님께서 일주일간 사탕을 공급받지 못하자, 우주의 엔트로피가 0에 가깝게 떨어지며 모든 차원이 정지하고 멸망 직전까지 갔던 최악의 재난입니다.</p>
                         </div>
                     </div>
 
@@ -455,73 +454,6 @@
                         </div>
                         <div class="accordion-content">
                             <p data-prank="천국에 있을 때 누가 자꾸 귀찮게 윙윙거리면서 긁길래 파리채로 쳤나? 하품했나? 암튼 날려버렸음. 이름이 뭐였지? 몰라, 기억하기도 귀찮아.">천계에 머물던 시절, 무소속 혼혈 <strong>루시퍼</strong>가 고드님 옆에서 지속적으로 신경을 긁으며 깐족거리다 분노를 산 사건입니다. 참다못한 고드님의 하품 한 번에 벼락을 맞고 기억을 잃은 채 저승으로 추방되었습니다.</p>
-                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 까불면 다 친다.">※ 해당 사건 이후 고드님 앞에서의 잡담은 일절 금지되었습니다.</div>
-                        </div>
-                    </div>
-
-                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <h3 style="color: #ff9800;" data-prank="내가 자는 동안 생긴 일">제3차 이승 멸망 위기 (종말의 씨앗)</h3>
-                            <span class="toggle-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <p data-prank="나 꿀잠 자고 일어났더니 밑에 동네 대륙 하나가 없어졌대. 릴리스가 땀 뻘뻘 흘리면서 보고하길래 걍 알았다고 하고 다시 잤음.">이승의 광신도 집단이 심연 가장 깊은 곳에 봉인된 '종말의 씨앗'을 발아시키려 한 극비 사건입니다. 당시 고드님이 깊은 낮잠에 빠져 깨어나지 않는 절체절명의 상황 속에서, 릴리스와 데스가 직접 이승에 현신하여 대륙 하나를 희생시키는 선에서 간신히 사태를 진압했습니다.</p>
-                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 잘 땐 깨우지 마라.">※ 이 사건으로 이승의 지도가 한 차례 수정되었습니다.</div>
-                        </div>
-                    </div>
-
-                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <h3 style="color: #ff9800;" data-prank="사탄 대머리 된 날">사탄의 결재 서류 위조 대폭발 사건</h3>
-                            <span class="toggle-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <p data-prank="사탄이 내 사인 베끼려다가 터져서 대머리 됨 ㅋㅋㅋ 아 진짜 개웃겼는데 사진 찍어둘걸.">사탄 비서실장이 부서 간식비를 타내기 위해 고드님의 결재 서명을 위조하려다 발생한 사고입니다. 펜끝에 깃든 창조신의 신성력을 일개 악마가 감당하지 못하여 결재판이 대폭발했고, 이 사고로 사탄은 한 달간 머리카락 없이 업무를 봐야 했습니다.</p>
-                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 내 이름 함부로 쓰면 터짐.">※ 이후 모든 예산 결재는 릴리스 회장 전결로 변경.</div>
-                        </div>
-                    </div>
-
-                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <h3 style="color: #ff9800;" data-prank="내 침대 돌려내">고드님 애착 침대 실종 소동</h3>
-                            <span class="toggle-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <p data-prank="내 침대 없어져서 다 부수려고 했는데, 알고 보니까 내가 사탕 껍질을 안 버려서 산처럼 쌓인 거 밑에 파묻혀 있었음 ㅋㅋ 꼬붕들 며칠 밤새면서 밖에서 찾던데 걍 모른척했음.">고드님의 전용 애착 침대가 사라져 전 저승에 1급 비상사태가 선포되었습니다. 범인을 찾기 위해 사탄과 데스가 이승까지 이잡듯 뒤졌으나, 3일 후 고드님의 방 구석 '사탕 껍질 산더미' 아래에서 온전한 상태로 발견되어 허무하게 종결되었습니다.</p>
-                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 껍질 좀 대신 치워주면 안 되냐.">※ 고드님 방 청소 전담 인력 3명 추가 배치됨.</div>
-                        </div>
-                    </div>
-
-                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <h3 style="color: #ff9800;" data-prank="내 사탕 압수당한 날">사탄의 불법 사탕 밀수 적발</h3>
-                            <span class="toggle-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <p data-prank="사탄이 나 주려고 이승에서 한정판 사탕 5천 트럭 훔쳐 오다가 릴리스한테 걸렸어. 릴리스 진짜 융통성 없게 굴어... 내 사탕 돌려내.">사탄 비서실장이 고드님께 바칠 목적으로 이승의 초고당도 한정판 사탕 5천 트럭을 무단 밀수하다가 국경 방역팀과 릴리스에게 현행범으로 적발된 사건입니다. 이 여파로 이승의 사탕 물가가 한동안 폭등했습니다.</p>
-                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 릴리스 몰래 좀 가져오지 눈치 없게.">※ 사탄 1개월 감봉 조치. 사탕 전량 폐기(고드님 몰래).</div>
-                        </div>
-                    </div>
-
-                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <h3 style="color: #ff9800;" data-prank="꼬붕 2호 수박 파티 사건">사신 무기(데스 낫) 무단 반출 위기</h3>
-                            <span class="toggle-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <p data-prank="루아가 해골 무기 몰래 훔쳐서 수박 썰다가 혼남 ㅋㅋ 나도 한 조각 먹었지롱.">차기 사신 <strong>루아</strong>가 데스 사장의 주력 무기인 낫을 몰래 이승으로 빼돌려 수박을 써는 용도로 사용하다 잃어버릴 뻔한 사건입니다. 이로 인해 3일간 이승에서 사망자가 단 한 명도 발생하지 않는 기현상이 일어났습니다.</p>
-                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 해골 뼈 부딪히는 소리 여기까지 들렸음.">※ 루아 사원 반성문 3000장 작성 완료. - 데스</div>
-                        </div>
-                    </div>
-
-                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <h3 style="color: #ff9800;" data-prank="우는 솜뭉치 3박 4일 테러">제1연구소 야간 소음 마비 사태</h3>
-                            <span class="toggle-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <p data-prank="아오 퇴근할 때 토끼한테 인사 좀 해줘라. 밤새 우니까 내가 시끄러워서 잘 수가 없잖아!">퇴근길 직원들이 연구 개체 <strong>미스 래빗</strong>에게 인사를 하지 않고 지나치자, 극심한 애정결핍에 시달린 래빗이 3박 4일 동안 슬픈 울음소리를 울려 퍼뜨린 사건입니다. 음파의 영향으로 저승의 모든 유리창이 깨지고 업무가 전면 마비되었습니다.</p>
-                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 인사 안 하는 놈은 내가 귤 형벌 내릴 거임.">※ 행동 수칙: 래빗 앞을 지날 땐 반드시 손을 흔들어 줄 것.</div>
                         </div>
                     </div>
 
@@ -598,7 +530,7 @@
                     </div>
                     <div class="staff-card" data-category="etc" onclick="openModal('lucifer')">
                         <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/v/1" alt="루시퍼"></div>
-                        <div class="staff-name" data-prank="누구더라?">루시퍼</div><div class="staff-role" data-prank="까먹음">무소속</div>
+                        <div class="staff-name" data-prank="파리채 맞은 애">루시퍼</div><div class="staff-role" data-prank="무소속">무소속</div>
                     </div>
                     <div class="staff-card" data-category="etc" onclick="openModal('rabbit')">
                         <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/k/1" alt="미스 래빗"></div>
@@ -616,67 +548,12 @@
                 </div>
                 <div class="recruit-container">
                     <form id="applyForm" onsubmit="submitForm(event)">
-                        
                         <div class="form-group">
                             <label data-prank="너 이름이 뭐야? 타이핑하기도 귀찮네.">지원자 이름 (또는 진명)</label>
-                            <input type="text" class="form-control" placeholder="예: 무명의 계약자" required autocomplete="off">
+                            <input type="text" class="form-control" required autocomplete="off">
                         </div>
-                        
-                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                            <div class="form-group" style="flex: 1; min-width: 200px;">
-                                <label data-prank="넌 어디서 굴러왔어?">출신 종족</label>
-                                <select class="form-control" required>
-                                    <option value="" disabled selected>선택하십시오</option>
-                                    <option value="human">인간 (사후 영체)</option>
-                                    <option value="demon">악마 (순혈/혼혈)</option>
-                                    <option value="spirit">정화된 악령</option>
-                                    <option value="etc">기타 특수 개체</option>
-                                </select>
-                            </div>
-                            <div class="form-group" style="flex: 1; min-width: 200px;">
-                                <label data-prank="얼마나 쎈지 대충 체크해.">마력 / 영력 등급</label>
-                                <select class="form-control" required>
-                                    <option value="" disabled selected>선택하십시오</option>
-                                    <option value="s">최상급 (재해급)</option>
-                                    <option value="a">상급 (광역 통제)</option>
-                                    <option value="b">중급 (실무진)</option>
-                                    <option value="c">하급 (서류직)</option>
-                                    <option value="f">최하급 (연구 개체)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label data-prank="어디서 노가다 할래?">희망 근무 부서</label>
-                            <select class="form-control" required>
-                                <option value="" disabled selected>선택하십시오</option>
-                                <option value="underworld">저승 차원 관리 및 심판 부서</option>
-                                <option value="human">이승 차원 이탈자 방역 부서</option>
-                                <option value="research">기밀 특수 개체 연구 부서</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label data-prank="나한테 무슨 간식을 바칠 건지 대충 적어봐.">업무에 활용 가능한 보유 능력</label>
-                            <textarea id="recruitAbility" class="form-control" placeholder="질서 유지 및 차원 관리에 도움 될 만한 능력을 상세히 기재하십시오." required></textarea>
-                            <div id="forbiddenWarning">※ 시스템 경고: 금기된 자의 이름을 함부로 거론하지 마십시오.</div>
-                        </div>
-                        
-                        <div class="form-group checkbox-group">
-                            <input type="checkbox" id="soulAgree" required>
-                            <label for="soulAgree" data-prank="평생 내 셔틀 할 거임? 체크 안 하면 천 년 연장.">
-                                본 서약을 에테르나 코퍼레이션에 전송함과 동시에, 지원자의 <strong>생사결정권 및 영혼 귀속권</strong>이 사측에 영구적으로 양도됨을 완전히 이해하고 동의합니다.
-                            </label>
-                        </div>
-
                         <button type="submit" id="submitBtn" class="btn-gold" data-prank="대충 도장 쾅... 🍬">피의 서약 송신</button>
                     </form>
-                    
-                    <div id="recruitSuccess" class="recruit-success">
-                        <img src="https://img.icons8.com/nolan/128/da0037/contract.png" alt="Contract" style="width:80px; margin-bottom:1rem; opacity:0.8; filter: grayscale(1) sepia(1) hue-rotate(340deg);">
-                        <h3 style="color: #d4af37; font-size: 1.8rem; margin-bottom: 1rem; letter-spacing: 2px;" data-prank="[ 장난감 등록 완료... 아 피곤해 ]">[ 서약 체결 완료 ]</h3>
-                        <p style="color: #bbb; line-height: 1.8;" data-prank="이제 넌 내 거야... 알아서 간식이나 사와...">지원서가 Aeterna 심연 데이터베이스에 각인되었습니다.<br>당신의 영혼은 이제 우리의 관리를 받습니다.<br><br>능력 검증 후 합격자에 한해, 곧 사자가 방문할 예정입니다.</p>
-                    </div>
                 </div>
             </div>
         </main>
@@ -688,10 +565,10 @@
                 <span style="color:var(--accent-red);">[ SYSTEM WARNING ]</span>
             </div>
             <div class="modal-body" style="padding: 3rem;">
-                <h3 style="color: var(--accent-red); margin-bottom: 1.5rem; font-size: 1.5rem; letter-spacing: 2px;">광과민성 증후군 주의</h3>
+                <h3 style="color: var(--accent-red); margin-bottom: 1.5rem; font-size: 1.5rem; letter-spacing: 2px;">절대 금기 데이터 경고</h3>
                 <p style="color: #bbb; margin-bottom: 2.5rem; font-size: 1rem; line-height: 1.8;">
-                    해당 데이터는 열람 시 시각적인 충격(글리치 효과, 화면 깜빡임)이 발생할 수 있습니다.<br>
-                    <strong>열람하시겠습니까?</strong>
+                    이후 발생하는 모든 시각, 청각, 영적 손상에 대해 에테르나는 책임지지 않습니다.<br>
+                    <strong>정말 열람하시겠습니까?</strong>
                 </p>
                 <div style="display: flex; gap: 15px;">
                     <button class="btn-scan" onclick="acceptWarning()" style="flex:1;">열람 수락</button>
@@ -719,7 +596,7 @@
                     <p id="profRole" class="prof-role data-cascade delay-2">직책</p>
                     
                     <div class="prof-meta data-cascade delay-2">
-                        <span id="profAge">나이</span> | <span id="profMbti">MBTI</span>
+                        <span id="profAge">나이</span> | <span id="profMbti" id="mbtiData">MBTI</span>
                     </div>
 
                     <div id="profTags" class="prof-tags data-cascade delay-3"></div>
@@ -740,12 +617,14 @@
         const header = document.getElementById('mainHeader');
         const bgmNormal = document.getElementById('bgmNormal');
         const bgmGod = document.getElementById('bgmGod');
+        const bgmError = document.getElementById('bgmError');
         
         let currentActiveTab = 'home';
         let isAdminMode = false;
         let isPrankMode = false;
         let eyeTrackingHandler = null;
-        let godWarningShown = false; // 광과민성 경고 변수
+        let godWarningShown = false; 
+        let isDoomed = false; // 🔥 파멸 상태 플래그
 
         function enterSite() {
             document.getElementById('introOverlay').classList.add('fade-out');
@@ -767,59 +646,49 @@
                 document.getElementById(id).classList.add('active');
                 const navId = 'nav-' + currentActiveTab;
                 if(document.getElementById(navId)) document.getElementById(navId).classList.add('active');
-                
-                if(!isAdminMode && !isPrankMode) {
-                    if(id === 'page-home') { header.style.borderColor = 'rgba(123, 97, 255, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #7b61ff'; document.documentElement.style.setProperty('--current-theme', '#7b61ff');}
-                    else if(id === 'page-lore') { header.style.borderColor = 'rgba(218, 0, 55, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #da0037'; document.documentElement.style.setProperty('--current-theme', '#da0037');}
-                    else if(id === 'page-incidents') { header.style.borderColor = 'rgba(255, 152, 0, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #ff9800'; document.documentElement.style.setProperty('--current-theme', '#ff9800');}
-                    else if(id === 'page-staff') { header.style.borderColor = 'rgba(79, 172, 254, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #4facfe'; document.documentElement.style.setProperty('--current-theme', '#4facfe');}
-                    else if(id === 'page-recruit') { header.style.borderColor = 'rgba(212, 175, 55, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #d4af37'; document.documentElement.style.setProperty('--current-theme', '#d4af37');}
-                }
             }, 100);
             window.scrollTo(0,0);
         }
 
-        // 아코디언 토글 스크립트
         function toggleAccordion(el) {
             const card = el.closest('.accordion-card');
             card.classList.toggle('active');
         }
 
-        // 데이터 베이스
         const charData = {
-            'god': { name: '고드', role: '장기 체류자', img: 'https://igx.kr/u/zP/c/1', age: '알 수 없음', mbti: 'INTP', tags: ['창조신', '우주1짱', '단거최고', '사탕중독', '관찰자'], desc: '귀차니즘이 매우 심하고 단 것을 매우 좋아합니다. 본인이 우주 서열 1위라는 사실을 아주 잘 알고 있으나, 굳이 증명하는 것조차 귀찮아합니다. 최근에는 인간계의 <strong>사탕</strong>에 빠져 있으며, 설탕 코팅의 두께에 따라 그날 우주의 운명이 결정된다는 소문이 있습니다. 자다가 기침 한 번으로 유성을 떨어뜨려 릴리스를 고생시키기도 합니다.', ability: '【 인과율 초월 및 우주적 재창조 (Genesis & Oblivion) 】\n\n물리 법칙, 시간, 공간의 제약을 무시하고 의지만으로 우주를 소멸시키거나 재구축합니다. 현재는 단순한 \'관찰자\' 역할을 수행 중입니다.\n\n<span style="color:#da0037; font-size:0.8em;">(※ 관측 불가 수준의 영력. 접근 금지 등급. 무슨 일이 있어도 그녀의 심기를 건드리지 마십시오.)</span>' },
-            'leviathan': { name: '레비아탄', role: '최상급 악령 (방관자)', img: 'https://igx.kr/u/zP/w/1', age: '5000만 세', mbti: 'ISTP', tags: ['심해의지배자', '행방불명', '술집단골', '방관자'], desc: '심연과 어둠의 공포에서 태어난 최상급 악령입니다. 현재 에테르나의 통제를 벗어나 현세 어딘가에서 방관 중입니다. 정확한 행방은 알 수 없으나, 항간의 소문에 의하면 어느 허름한 인간계 술집에 머물고 있다고 합니다.', ability: '【 심해의 압박 & 심연의 공포 】\n주변 공간의 영적 밀도를 무한히 높여 모든 존재를 압착시킵니다. 대상에게 심연을 보여주어 트라우마를 생성합니다.' },
-            'lilith': { name: '릴리스', role: '회장 (최상급)', img: 'https://igx.kr/u/zP/d/1', age: '9821만 세', mbti: 'ISFJ', tags: ['외강내유', '월급인상최고', '테라리움', '맛집공유'], desc: '차가운 외모와 달리 직원들에게 매주 금요일 맛집 쿠폰을 쏘는 따뜻한 회장님입니다. 집무실에서 키우는 작은 <strong>테라리움</strong>은 사실 실제 행성 하나와 연결되어 있습니다. 벌레를 극도로 무서워하며, 일을 미루지 않고 직접 처리하는 완벽주의자입니다.', ability: '【 영혼의 계약 & 영혼 사슬 】\n영혼을 구속하는 강력한 계약을 맺습니다. 영혼을 직접적으로 타격하고 속박할 수 있는 붉은 사슬을 사용합니다.' },
-            'satan': { name: '사탄', role: '비서실장 (최상급)', img: 'https://igx.kr/u/zP/h/1', age: '7000만 세', mbti: 'ENTP', tags: ['장난꾸러기', '오픈런장인', '간식셔틀', '존댓말'], desc: '활발하고 남 놀리기를 좋아하는 악마입니다. 사내 장난 금지 대상 1호지만 정작 본인이 규정을 만듭니다. 고드의 간식을 챙기기 위해 인간계 유명 디저트 카페 <strong>오픈런</strong>을 수만 번 뛰는 경력이 있습니다.', ability: '【 칠흑의 업화 】\n모든 것을 태워버리는 검은 불꽃을 자유자재로 다룹니다.' },
-            'death': { name: '데스', role: '운영 총괄 사장 (사신)', img: 'https://igx.kr/u/zP/g/1', age: '210억 세', mbti: 'ISTJ', tags: ['워커홀릭', '분재다듬기', '야근요정', '과묵함'], desc: '에테르나의 공동 창업자입니다. 요즘 취미는 <strong>분재 다듬기</strong>지만 손을 대는 식물마다 영원한 안식(고사)에 들어 고민입니다. 야근하는 직원 책상에 조용히 에너지 드링크를 두고 사라지는 츤데레 사장님입니다.', ability: '【 영혼 회수 & 영혼 절단 】\n수명을 다한 영혼을 거두어들이거나, 부정한 영혼을 베어버립니다.' },
-            'lua': { name: '루아', role: '운영팀 사원 (사신 후계자)', img: 'https://igx.kr/u/zP/j/1', age: '100만 세', mbti: 'ENFP', tags: ['덜렁이', '재능천재', '활발함'], desc: '차기 죽음의 신입니다. 실수를 너무 많이 하여 데스의 추가 업무를 만듭니다. 데스의 낫을 몰래 가져가다 걸려 반성문을 쓴 전적이 있습니다.', ability: '【 영혼 회수 & 영혼 절단 】\n기본적인 사신의 능력을 지녔으며 잠재력은 데스 이상입니다.' },
-            'mavis': { name: '메이비스', role: '소속원 (상급)', img: 'https://igx.kr/u/zP/l/1', age: '1200만 세', mbti: 'ISTP', tags: ['만성피로', '고양이집사', '퇴사불가', '커피중독'], desc: '업무의 핵심 인력입니다. 월급의 대부분을 <strong>고양이 간식</strong>에 씁니다. "메이비스가 퇴사하는 날이 회사가 망하는 날"이라는 평판이 돌 만큼 유능합니다.', ability: '【 무제한 포탈 생성 】\n크기 제한이 없는 포탈을 엽니다. 단, 크기가 커질수록 마력 소모가 극심해집니다.' },
-            'isabella': { name: '이사벨라', role: '소속원 (중급)', img: 'https://igx.kr/u/zP/p/1', age: '700만 세', mbti: 'ESFJ', tags: ['무지개정리', '서류의달인', '감수성폭발', '인싸'], desc: '모든 서류를 <strong>무지개색 순서</strong>대로 정리해야 직성이 풀립니다. 가끔 망자의 기억을 시각화하다가 너무 감동적인 로맨스를 보면 업무를 중단하고 펑펑 울기도 하는 감수성 풍부한 지각생입니다.', ability: '【 기억 및 문서 시각화 】\n망자의 생전 기억이나 복잡한 서류 속 내용을 허공에 시각화하여 띄웁니다.' },
-            'serena': { name: '세리나', role: '소속원 (하급)', img: 'https://igx.kr/u/zP/m/1', age: '150만 세', mbti: 'INFJ', tags: ['영혼판독기', '냄새판별', '독설가', '통찰력'], desc: '눈을 감고도 <strong>영혼의 냄새</strong>만으로 카르마를 맞힙니다. 나쁜 영혼은 썩은 청국장 냄새가 난다고 합니다. 평소 조용하지만 판결을 번복하려는 악령에게는 무시무시한 독설을 내뱉는 팩폭기입니다.', ability: '【 죄악 판독 】\n영혼이 품고 있는 죄의 무게와 질을 꿰뚫어 봅니다.' },
-            'eris': { name: '에리스', role: '이승 담당 (인간)', img: 'https://igx.kr/u/zP/n/1', age: '1500 세', mbti: 'ESFP', tags: ['맛집지도', '인싸', '피지컬천재', '쌍둥이첫째'], desc: '에리나의 쌍둥이 첫째입니다. <strong>맛집 지도</strong>를 업데이트하는 것이 취미입니다. 마력은 없지만 동생을 건드리는 악령은 순수 피지컬로 소멸시켜버리는 강력한 요원입니다.', ability: '【 능력 없음 】\n타고난 특수 능력은 없으나 친화력과 열정으로 업무를 완수합니다.' },
-            'erina': { name: '에리나', role: '이승 담당 (인간)', img: 'https://igx.kr/u/zP/t/1', age: '1500 세', mbti: 'INFP', tags: ['영혼터치', '혈육바라기', '비밀일기', '아싸'], desc: '에리스의 쌍둥이 동생입니다. 영혼을 만지는 능력 때문에 가끔 길 가던 영혼이 등을 밀어달라고 부탁해 곤혹스러워합니다. 비밀 일기장은 첫째 에리스에 대한 <strong>찬양글</strong>로 가득 차 있습니다.', ability: '【 영체 간섭 】\n순수 인간임에도 영혼을 육안으로 보고 물리적으로 만질 수 있습니다.' },
-            'baal': { name: '바알', role: '이승 담당 (상급)', img: 'https://igx.kr/u/zP/r/1', age: '5800만 세', mbti: 'INTJ', tags: ['손재주장인', '시간엄수', '다정한업어주기', '반전매력'], desc: '날개와 뿔, 꼬리가 없는 돌연변이 콤플렉스를 숨기고 있습니다. 무뚝뚝하고 차가운 인상과 달리, 남몰래 <strong>귀여운 동물 인형</strong>을 뜨개질하는 취미가 있으며 길 잃은 어린 영혼에게 슬쩍 쥐여주곤 합니다.', ability: '【 그림자 직조 (Shadow Weaving) 】\n그림자를 실처럼 자아내어 절대 끊어지지 않는 결계를 치거나 상대를 포박합니다. 필요할 땐 영혼들을 위한 푹신한 쿠션으로 만들 수도 있습니다.' },
-            'paimon': { name: '파이몬', role: '이승 담당 (전 상급)', img: 'https://igx.kr/u/zP/q/1', age: '4000만 세', mbti: 'INTJ', tags: ['해커', '게이머1위', '플랜Z', '보석좋아'], desc: '인간계 CCTV 해커입니다. 틈날 때마다 게임 서버를 해킹해 <strong>랭킹 1위</strong>를 차지하는 것이 낙입니다. 천년전 최상급 악령을 상대하다 뿔을 잃고 대부분의 마력을 잃었습니다. 루아의 돌발 행동에 대비해 언제나 플랜 Z까지 세워두는 철저한 전략가입니다.', ability: '【 환술 & 시간 정지 】\n광범위한 지역에 거대한 환술을 걸거나, 일시적으로 시간을 멈출 수 있습니다.' },
-            'lucifer': { name: '루시퍼', role: '무소속 (혼혈)', img: 'https://igx.kr/u/zP/v/1', age: '2000만 세', mbti: 'ESTP', tags: ['기억상실', '종이비행기', '추방자'], desc: '천계 시절 고드님 옆에서 지속적으로 신경을 긁으며 깐족거리다 분노를 사 추방당한 혼혈입니다. 추방의 충격으로 기억을 모두 잃었으며, 현재는 종이비행기를 접는 취미만 남았습니다.', ability: '【 빛과 어둠의 검 】\n신성력, 마력 모두 사용 가능합니다.' },
-            'rabbit': { name: '미스 래빗', role: '연구 개체 (최하급)', img: 'https://igx.kr/u/zP/k/1', age: '20 세', mbti: 'ISFP', tags: ['관종', '애정결핍', '꽃다발', '울보토끼'], desc: '사랑받지 못한 토끼들의 슬픔이 모인 존재입니다. 어째선지 숙소 근처 꽃밭에 장미를 기르고 그 장미로 꽃다발을 만들어 들고 다닙니다. 퇴근하는 직원들이 인사해 주지 않으면 밤새 연구소 전체에 슬픈 울음소리를 울려 퍼뜨립니다.', ability: '【 귀여운 분열 】\n작은 모습 여러 개로 분열할 수 있으며 이때 크기가 작아지고 매우 귀여워지며 힘도 약해집니다.' }
+            'god': { name: '고드', role: '장기 체류자', img: 'https://igx.kr/u/zP/c/1', age: '알 수 없음', mbti: 'INTP', tags: ['창조신', '우주1짱', '단거최고', '사탕중독'], desc: '귀차니즘이 매우 심하고 단 것을 좋아합니다. 본인이 우주 서열 1위라는 사실을 아주 잘 알고 있으나 증명하는 것조차 귀찮아합니다.', ability: '【 인과율 초월 및 우주적 재창조 】\n\n물리 법칙, 시간, 공간의 제약을 무시하고 의지만으로 우주를 소멸시키거나 재구축합니다.\n\n<span style="color:#da0037; font-size:0.8em;">(※ 접근 금지 등급. 그녀의 심기를 건드리지 마십시오.)</span>' },
+            'leviathan': { name: '레비아탄', role: '최상급 악령 (방관자)', img: 'https://igx.kr/u/zP/w/1', age: '5000만 세', mbti: 'ISTP', tags: ['심해의지배자', '행방불명'], desc: '심연과 어둠의 공포에서 태어난 최상급 악령입니다. 현재 에테르나의 통제를 벗어나 현세 어딘가에서 방관 중입니다.', ability: '【 심해의 압박 & 심연의 공포 】\n주변 공간의 영적 밀도를 높여 존재를 압착시킵니다.' },
+            'lilith': { name: '릴리스', role: '회장 (최상급)', img: 'https://igx.kr/u/zP/d/1', age: '9821만 세', mbti: 'ISFJ', tags: ['외강내유', '월급인상최고'], desc: '차가운 외모와 달리 따뜻한 회장님입니다. 벌레를 무서워하며, 일을 미루지 않는 완벽주의자입니다.', ability: '【 영혼의 계약 & 영혼 사슬 】\n영혼을 구속하는 강력한 계약을 맺고 붉은 사슬을 사용합니다.' },
+            'satan': { name: '사탄', role: '비서실장 (최상급)', img: 'https://igx.kr/u/zP/h/1', age: '7000만 세', mbti: 'ENTP', tags: ['장난꾸러기', '오픈런장인'], desc: '활발하고 남 놀리기를 좋아하는 악마입니다. 고드의 간식을 챙기기 위해 디저트 오픈런을 수만 번 뛴 경력이 있습니다.', ability: '【 칠흑의 업화 】\n모든 것을 태워버리는 검은 불꽃을 자유자재로 다룹니다.' },
+            'death': { name: '데스', role: '운영 총괄 사장', img: 'https://igx.kr/u/zP/g/1', age: '210억 세', mbti: 'ISTJ', tags: ['워커홀릭', '야근요정'], desc: '에테르나의 공동 창업자입니다. 야근하는 직원 책상에 조용히 에너지 드링크를 두고 사라지는 츤데레 사장님입니다.', ability: '【 영혼 회수 & 영혼 절단 】\n수명을 다한 영혼을 거두어들이거나 부정한 영혼을 베어버립니다.' },
+            'lua': { name: '루아', role: '운영팀 사원', img: 'https://igx.kr/u/zP/j/1', age: '100만 세', mbti: 'ENFP', tags: ['덜렁이', '재능천재'], desc: '차기 죽음의 신입니다. 데스의 낫을 몰래 가져가다 반성문을 쓴 전적이 있습니다.', ability: '【 영혼 회수 & 영혼 절단 】\n잠재력은 데스 이상입니다.' },
+            'mavis': { name: '메이비스', role: '소속원 (상급)', img: 'https://igx.kr/u/zP/l/1', age: '1200만 세', mbti: 'ISTP', tags: ['만성피로', '고양이집사'], desc: '업무의 핵심 인력입니다. 월급의 대부분을 고양이 간식에 씁니다.', ability: '【 무제한 포탈 생성 】\n크기 제한이 없는 포탈을 엽니다.' },
+            'isabella': { name: '이사벨라', role: '소속원 (중급)', img: 'https://igx.kr/u/zP/p/1', age: '700만 세', mbti: 'ESFJ', tags: ['무지개정리', '서류의달인'], desc: '모든 서류를 무지개색 순서대로 정리해야 직성이 풀리는 지각생입니다.', ability: '【 기억 및 문서 시각화 】\n망자의 기억이나 복잡한 서류 내용을 시각화합니다.' },
+            'serena': { name: '세리나', role: '소속원 (하급)', img: 'https://igx.kr/u/zP/m/1', age: '150만 세', mbti: 'INFJ', tags: ['냄새판별', '독설가'], desc: '영혼의 냄새만으로 카르마를 맞히며 무시무시한 독설을 내뱉습니다.', ability: '【 죄악 판독 】\n영혼이 품고 있는 죄의 무게를 꿰뚫어 봅니다.' },
+            'eris': { name: '에리스', role: '이승 담당', img: 'https://igx.kr/u/zP/n/1', age: '1500 세', mbti: 'ESFP', tags: ['인싸', '피지컬천재'], desc: '에리나의 쌍둥이 첫째입니다. 순수 피지컬로 악령을 소멸시키는 요원입니다.', ability: '【 능력 없음 】\n친화력과 열정으로 업무를 완수합니다.' },
+            'erina': { name: '에리나', role: '이승 담당', img: 'https://igx.kr/u/zP/t/1', age: '1500 세', mbti: 'INFP', tags: ['영혼터치', '혈육바라기'], desc: '에리스의 쌍둥이 동생입니다. 언니에 대한 찬양글을 씁니다.', ability: '【 영체 간섭 】\n순수 인간임에도 영혼을 만질 수 있습니다.' },
+            'baal': { name: '바알', role: '이승 담당', img: 'https://igx.kr/u/zP/r/1', age: '5800만 세', mbti: 'INTJ', tags: ['손재주장인', '다정한업어주기'], desc: '날개와 뿔이 없는 콤플렉스를 숨긴 무뚝뚝한 장인입니다.', ability: '【 그림자 직조 】\n그림자를 자아내 절대 끊어지지 않는 결계를 칩니다.' },
+            'paimon': { name: '파이몬', role: '이승 담당', img: 'https://igx.kr/u/zP/q/1', age: '4000만 세', mbti: 'INTJ', tags: ['해커', '게이머1위'], desc: '인간계 CCTV 해커이자 게이머입니다. 철저한 전략가입니다.', ability: '【 환술 & 시간 정지 】\n환술을 걸거나 시간을 멈출 수 있습니다.' },
+            'lucifer': { name: '루시퍼', role: '무소속', img: 'https://igx.kr/u/zP/v/1', age: '2000만 세', mbti: 'ESTP', tags: ['기억상실', '종이비행기'], desc: '천계 시절 고드님 옆에서 신경을 긁다 추방당해 기억을 잃었습니다.', ability: '【 빛과 어둠의 검 】\n신성력, 마력 모두 사용 가능합니다.' },
+            'rabbit': { name: '미스 래빗', role: '연구 개체', img: 'https://igx.kr/u/zP/k/1', age: '20 세', mbti: 'ISFP', tags: ['애정결핍', '울보토끼'], desc: '토끼들의 슬픔이 모인 존재로, 인사해주지 않으면 밤새 웁니다.', ability: '【 귀여운 분열 】\n매우 귀여워지며 작게 분열합니다.' }
         };
 
         const prankCharData = {
-            'god': { name: '★우주1짱 고드님★', role: '절대자', img: 'https://igx.kr/u/zP/c/1', age: '알 게 뭐야...', mbti: 'CUTE', tags: ['내가짱이야', '사탕사줘', '귀찮아', '절대자'], desc: '나야 나, 우주 1짱. 굳이 내가 제일 세다는 걸 증명하는 것도 귀찮아. 내 입에 사탕이나 넣어줘. 진짜 움직이는 거 너무 싫으니까 알아서들 내 밑에서 기어라...', ability: '【 우주 대충 바꾸기 】\n우주? 아 몰라, 귀찮아서 안 바꿀래. 그냥 솜사탕이나 줘. 내가 맘만 먹으면 다 날아가니까 조심하고.' },
-            'leviathan': { name: '큰 물고기', role: '술쟁이', img: 'https://igx.kr/u/zP/w/1', age: '아줌마', mbti: 'ISTP', tags: ['술냄새', '덩치큼', '피곤해'], desc: '술 냄새나는 엄청 커다란 물고기. 아, 쳐다보기도 귀찮아. 내 사탕 건드리면 진짜 국물도 없어.', ability: '【 대충 납작 쿵! 】\n귀찮으니까 그냥 한 번에 싹 다 납작하게 누름. 사탕 부서지면 화냄.' },
-            'lilith': { name: '잔소리 대마왕', role: '겁쟁이 회장', img: 'https://igx.kr/u/zP/d/1', age: '할매', mbti: 'ISFJ', tags: ['잔소리', '벌레싫어', '겁쟁이'], desc: '아... 맨날 일하라고 잔소리해. 피곤하게 진짜. 벌레 하나 던져주고 난 가서 자야지.', ability: '【 귀찮은 빨간 끈 】\n빨간 끈으로 꽁꽁 묶음. 묶는 것도 사실 귀찮을걸?' },
-            'satan': { name: '간식 셔틀', role: '내 꼬붕 1호', img: 'https://igx.kr/u/zP/h/1', age: '몰라', mbti: 'ENTP', tags: ['셔틀', '존댓말', '오픈런'], desc: '내 간식 셔틀 1호. 사탕 사오라고 시키고 난 누워 있어야지. 아, 씹어 먹는 것도 귀찮네.', ability: '【 까만 불꽃 】\n까만 불로 마시멜로 굽기. 빨리 좀 구워라 현기증 나니까.' },
-            'death': { name: '야근 해골', role: '야근 노예', img: 'https://igx.kr/u/zP/g/1', age: '화석', mbti: 'ISTJ', tags: ['노잼', '야근맨', '분재파괴자'], desc: '맨날 사무실에서 야근만 하는 불쌍한 해골 사장... 보기만 해도 내가 다 피곤해. 난 일 절대 안 해.', ability: '【 대충 싹둑싹둑 】\n엄청 큰 낫으로 대충 다 자름. 무거운데 저걸 굳이 왜 들고 다니지?' },
-            'lua': { name: '사고뭉치 꼬붕', role: '내 꼬붕 2호', img: 'https://igx.kr/u/zP/j/1', age: '애기', mbti: 'ENFP', tags: ['덜렁이', '시끄러워'], desc: '맨날 사고 치고 다니는 시끄러운 꼬붕... 수습하는 건 어차피 릴리스가 하겠지 뭐. 난 잘래.', ability: '【 싹둑 얍! 】\n해골 따라 하는데 허접해. 쳐다보는 것도 귀찮다.' },
-            'mavis': { name: '고양이 바보', role: '일개미', img: 'https://igx.kr/u/zP/l/1', age: '몰라', mbti: 'ISTP', tags: ['집사', '커피중독', '피곤해'], desc: '맨날 다크서클 달고 다니는 피곤해 보이는 일개미... 쳐다보면 나도 피곤해지네. 츄르나 던져주고 피해야지.', ability: '【 구멍 뚫기 】\n아무 데나 구멍 뚫어서 순간이동. 걷기 귀찮을 땐 저게 최고야.' },
-            'isabella': { name: '무지개 울보', role: '무지개 덕후', img: 'https://igx.kr/u/zP/p/1', age: '어른', mbti: 'ESFJ', tags: ['무지개', '울보'], desc: '서류를 무조건 무지개색으로 정리하는 울보... 아 눈부셔, 피곤해. 그냥 대충 다 검은색으로 통일하지.', ability: '【 허공에 그림 그리기 】\n기억 같은 거 공중에 둥둥 띄움. 누워서 영화 볼 땐 좀 편하겠네.' },
-            'serena': { name: '냄새 예민보스', role: '팩폭기', img: 'https://igx.kr/u/zP/m/1', age: '어른', mbti: 'INFJ', tags: ['개코', '팩폭'], desc: '코가 엄청 예민해... 내 방에서 단내 난다고 뭐라 할 듯. 아 귀찮아 피해 다녀야지.', ability: '【 찌릿찌릿 스캔 】\n냄새만 맡고 다 알아냄. 진짜 피곤하게 산다.' },
-            'eris': { name: '힘쎈 인간', role: '인간 요원', img: 'https://igx.kr/u/zP/n/1', age: '인간', mbti: 'ESFP', tags: ['근육', '맛집내놔'], desc: '에리나 쌍둥이 첫째. 힘 무식하게 쎄... 나 대신 악령들 좀 다 패주면 좋겠다. 난 손가락 까딱하기도 싫어.', ability: '【 주먹 쾅! 】\n그냥 때림. 맞는 애가 알아서 날아갔으면.' },
-            'erina': { name: '껌딱지 쫄보', role: '인간 요원', img: 'https://igx.kr/u/zP/t/1', age: '인간', mbti: 'INFP', tags: ['소심이', '혈육덕후'], desc: '첫째한테 맨날 착 달라붙어 있는 쫄보 동생... 떨어지질 않네. 보는 내가 다 덥고 귀찮다.', ability: '【 만지작 만지작 】\n인간인데 우리 만질 수 있음. 귀찮게 왜 자꾸 만져.' },
-            'baal': { name: '무뚝뚝 수공예가', role: '수공예 달인', img: 'https://igx.kr/u/zP/r/1', age: '화석', mbti: 'INTJ', tags: ['뜨개질', '다정함', '반전매력'], desc: '악만데 뿔도 없고 날개도 없는 무뚝뚝한 장인. 맨날 구석에서 꼬물꼬물 인형 만들고 있던데, 나도 푹신한 베개 하나 만들어달라고 하려다 귀찮아서 말았음.', ability: '【 까만 실뭉치 】\n그림자로 털실 뭉치 같은 걸 만듦. 푹신해서 베개로 쓰기 딱 좋아. 나 잘 때 하나만 던져주고 가라.' },
-            'paimon': { name: '겜창 해커', role: '해커', img: 'https://igx.kr/u/zP/q/1', age: '어른', mbti: 'ENTJ', tags: ['게임', '보석충'], desc: '맨날 컴퓨터만 하는 겜창 해커. 마우스 딸깍거리는 것도 안 귀찮나? 체력 진짜 대단하네.', ability: '【 얼음 땡! 】\n시간 멈추거나 환상 보여줌. 오, 시간 멈추고 낮잠 자면 개꿀이겠다.' },
-            'lucifer': { name: '파리채 맞은 애', role: '무소속', img: 'https://igx.kr/u/zP/v/1', age: '몰라', mbti: 'ESTP', tags: ['종이비행기'], desc: '천국에서 날파리처럼 자꾸 윙윙거리면서 긁길래 하품하면서 날려버렸는데 누구더라... 아예 기억에서 지워버림. 대충 종이비행기나 접고 놀아라.', ability: '【 반짝반짝 검 】\n반짝이는 칼 씀. 아 눈부셔... 저리 가.' },
-            'rabbit': { name: '우는 솜뭉치', role: '연구 대상', img: 'https://igx.kr/u/zP/k/1', age: '애기', mbti: 'ISFP', tags: ['관종', '울보'], desc: '아... 맨날 엉엉 우는 시끄러운 토끼. 우는 것도 다 체력인데 안 지치나. 귀 막고 자야겠다.', ability: '【 쪼꼬미 변신 】\n작게 나눠짐. 쪼끄만 게 돌아다니니까 밟을까 봐 귀찮네.' }
+            'god': { name: '★우주1짱 고드님★', role: '절대자', img: 'https://igx.kr/u/zP/c/1', age: '알 게 뭐야...', mbti: 'CUTE', tags: ['내가짱이야', '사탕사줘', '귀찮아'], desc: '나야 나, 우주 1짱. 굳이 내가 제일 세다는 걸 증명하는 것도 귀찮아. 내 입에 사탕이나 넣어줘.', ability: '【 우주 대충 바꾸기 】\n우주? 아 몰라, 귀찮아서 안 바꿀래. 그냥 솜사탕이나 줘.' },
+            'leviathan': { name: '큰 물고기', role: '술쟁이', img: 'https://igx.kr/u/zP/w/1', age: '아줌마', mbti: 'ISTP', tags: ['술냄새', '덩치큼', '피곤해'], desc: '술 냄새나는 엄청 커다란 물고기. 아, 쳐다보기도 귀찮아.', ability: '【 대충 납작 쿵! 】\n귀찮으니까 그냥 한 번에 싹 다 납작하게 누름.' },
+            'lilith': { name: '잔소리 대마왕', role: '겁쟁이 회장', img: 'https://igx.kr/u/zP/d/1', age: '할매', mbti: 'ISFJ', tags: ['잔소리', '벌레싫어'], desc: '아... 맨날 일하라고 잔소리해. 피곤하게 진짜.', ability: '【 귀찮은 빨간 끈 】\n빨간 끈으로 꽁꽁 묶음.' },
+            'satan': { name: '간식 셔틀', role: '내 꼬붕 1호', img: 'https://igx.kr/u/zP/h/1', age: '몰라', mbti: 'ENTP', tags: ['셔틀', '존댓말'], desc: '내 간식 셔틀 1호. 사탕 사오라고 시키고 난 누워 있어야지.', ability: '【 까만 불꽃 】\n까만 불로 마시멜로 굽기.' },
+            'death': { name: '야근 해골', role: '야근 노예', img: 'https://igx.kr/u/zP/g/1', age: '화석', mbti: 'ISTJ', tags: ['노잼', '야근맨'], desc: '맨날 사무실에서 야근만 하는 불쌍한 해골 사장... 보기만 해도 피곤해.', ability: '【 대충 싹둑싹둑 】\n엄청 큰 낫으로 대충 다 자름.' },
+            'lua': { name: '사고뭉치 꼬붕', role: '내 꼬붕 2호', img: 'https://igx.kr/u/zP/j/1', age: '애기', mbti: 'ENFP', tags: ['덜렁이', '시끄러워'], desc: '맨날 사고 치고 다니는 시끄러운 꼬붕...', ability: '【 싹둑 얍! 】\n해골 따라 하는데 허접해.' },
+            'mavis': { name: '고양이 바보', role: '일개미', img: 'https://igx.kr/u/zP/l/1', age: '몰라', mbti: 'ISTP', tags: ['집사', '커피중독'], desc: '맨날 다크서클 달고 다니는 피곤해 보이는 일개미...', ability: '【 구멍 뚫기 】\n아무 데나 구멍 뚫어서 순간이동.' },
+            'isabella': { name: '무지개 울보', role: '무지개 덕후', img: 'https://igx.kr/u/zP/p/1', age: '어른', mbti: 'ESFJ', tags: ['무지개', '울보'], desc: '서류를 무조건 무지개색으로 정리하는 울보... 아 눈부셔.', ability: '【 허공에 그림 그리기 】\n기억 같은 거 공중에 둥둥 띄움.' },
+            'serena': { name: '냄새 예민보스', role: '팩폭기', img: 'https://igx.kr/u/zP/m/1', age: '어른', mbti: 'INFJ', tags: ['개코', '팩폭'], desc: '코가 엄청 예민해... 내 방에서 단내 난다고 뭐라 할 듯.', ability: '【 찌릿찌릿 스캔 】\n냄새만 맡고 다 알아냄.' },
+            'eris': { name: '힘쎈 인간', role: '인간 요원', img: 'https://igx.kr/u/zP/n/1', age: '인간', mbti: 'ESFP', tags: ['근육', '맛집내놔'], desc: '에리나 쌍둥이 첫째. 힘 무식하게 쎄... 나 대신 악령들 좀 다 패주면 좋겠다.', ability: '【 주먹 쾅! 】\n그냥 때림.' },
+            'erina': { name: '껌딱지 쫄보', role: '인간 요원', img: 'https://igx.kr/u/zP/t/1', age: '인간', mbti: 'INFP', tags: ['소심이', '혈육덕후'], desc: '첫째한테 맨날 착 달라붙어 있는 쫄보 동생...', ability: '【 만지작 만지작 】\n인간인데 우리 만질 수 있음.' },
+            'baal': { name: '무뚝뚝 수공예가', role: '수공예 달인', img: 'https://igx.kr/u/zP/r/1', age: '화석', mbti: 'INTJ', tags: ['뜨개질', '반전매력'], desc: '악만데 뿔도 없고 날개도 없는 무뚝뚝한 장인.', ability: '【 까만 실뭉치 】\n그림자로 털실 뭉치 같은 걸 만듦.' },
+            'paimon': { name: '겜창 해커', role: '해커', img: 'https://igx.kr/u/zP/q/1', age: '어른', mbti: 'ENTJ', tags: ['게임', '보석충'], desc: '맨날 컴퓨터만 하는 겜창 해커.', ability: '【 얼음 땡! 】\n시간 멈추거나 환상 보여줌.' },
+            'lucifer': { name: '파리채 맞은 애', role: '무소속', img: 'https://igx.kr/u/zP/v/1', age: '몰라', mbti: 'ESTP', tags: ['종이비행기'], desc: '천국에서 날파리처럼 자꾸 윙윙거리면서 긁길래 하품하면서 날려버렸음.', ability: '【 반짝반짝 검 】\n반짝이는 칼 씀.' },
+            'rabbit': { name: '우는 솜뭉치', role: '연구 대상', img: 'https://igx.kr/u/zP/k/1', age: '애기', mbti: 'ISFP', tags: ['관종', '울보'], desc: '아... 맨날 엉엉 우는 시끄러운 토끼.', ability: '【 쪼꼬미 변신 】\n작게 나눠짐.' }
         };
 
         function resetCascadeAnimations() {
@@ -830,9 +699,7 @@
             });
         }
 
-        let currentProfileId = null;
-
-        // 경고 모달 제어 함수
+        // 경고 모달 수락
         function acceptWarning() {
             document.getElementById('warningModal').style.display = 'none';
             godWarningShown = true;
@@ -843,16 +710,87 @@
             document.getElementById('warningModal').style.display = 'none';
         }
 
-        function showUnknown() {
-            document.getElementById('unknownOverlay').style.display = 'flex';
-        }
-        
-        function closeUnknownOverlay() {
-            document.getElementById('unknownOverlay').style.display = 'none';
+        // 🔥 코즈믹 호러 (돌이킬 수 없는 둠 모드) 발동
+        function triggerDoomMode() {
+            if(isDoomed) return;
+            isDoomed = true;
+
+            // 1. 모달 닫기
+            document.getElementById('unifiedModal').classList.remove('active');
+
+            // 2. 모든 브금 중지 및 정적(침묵) 연출
+            bgmNormal.pause();
+            bgmGod.pause();
+            document.getElementById('silenceOverlay').style.display = 'flex';
+
+            // 3. 2초 뒤 침묵 깨고 오류 사운드와 함께 세계 멸망
+            setTimeout(() => {
+                document.getElementById('silenceOverlay').style.display = 'none';
+                
+                // 에러 브금 재생
+                bgmError.volume = 0.8;
+                bgmError.play().catch(()=>{});
+
+                // 사이트 전체 둠 모드
+                document.body.classList.add('doom-mode');
+                document.body.classList.remove('god-prank-mode');
+                isPrankMode = false; // 장난 모드 강제 종료
+
+                // 고드 찬양 문구 세팅
+                const praiseTexts = [
+                    "오직 고드님뿐", "우리는 먼지입니다", "영원히 찬양하라", "살려주세요",
+                    "모든 것이 무의미하다", "1짱 고드님", "숨을 쉴 수 없어", "도망쳐", 
+                    "도망칠 곳은 없다", "절대자 고드", "빛이자 어둠", "파멸", "끝", "1짱"
+                ];
+
+                // 사이트 내 텍스트 랜덤하게 고드 찬양으로 교체
+                document.querySelectorAll('h1, h2, h3, p, a, button, label, span:not(.close-btn)').forEach(el => {
+                    // 약간의 확률로 남겨두거나 완전히 바꿔버림
+                    if(Math.random() > 0.1) {
+                        el.innerText = praiseTexts[Math.floor(Math.random() * praiseTexts.length)];
+                    }
+                });
+
+                // 모든 이미지를 고드로 변경
+                document.querySelectorAll('img').forEach(img => {
+                    img.src = charData['god'].img;
+                });
+
+                // 모든 데이터를 고드로 덮어쓰기 (모달 클릭시 고드만 나옴)
+                for(let key in charData) {
+                    charData[key] = { ...charData['god'] };
+                    charData[key].desc = "오직 고드님뿐. 다른 자는 존재하지 않는다. 모두 삭제되었다.";
+                    charData[key].ability = "【 절대적인 죽음과 공포 】\n\n숨을 쉬는 것조차 허락되지 않습니다.";
+                }
+                for(let key in prankCharData) {
+                    prankCharData[key] = charData['god'];
+                }
+
+                // 둠 모드 전용 오버레이 추가 (무한 글리치 필터)
+                let doomOverlay = document.createElement('div');
+                doomOverlay.style.position = 'fixed';
+                doomOverlay.style.top = '0';
+                doomOverlay.style.left = '0';
+                doomOverlay.style.width = '100vw';
+                doomOverlay.style.height = '100vh';
+                doomOverlay.style.pointerEvents = 'none';
+                doomOverlay.style.zIndex = '9999999';
+                doomOverlay.style.background = 'url("https://www.transparenttextures.com/patterns/tv-noise.png")';
+                doomOverlay.style.opacity = '0.4';
+                doomOverlay.style.animation = 'heavyGlitch 0.2s infinite';
+                document.body.appendChild(doomOverlay);
+
+                // 화면 스크롤 금지
+                document.body.style.overflow = 'hidden';
+
+            }, 2000); // 2초 정적
         }
 
         function openModal(id) {
-            if (id === 'god' && !godWarningShown) {
+            // 둠 모드 상태에서는 카드를 누르면 즉시 고드로 강제 설정됨
+            if(isDoomed) id = 'god';
+
+            if (id === 'god' && !godWarningShown && !isDoomed) {
                 document.getElementById('warningModal').style.display = 'flex';
                 return;
             }
@@ -866,8 +804,13 @@
             document.getElementById('profName').innerHTML = data.name;
             document.getElementById('profRole').innerHTML = data.role;
             
+            // 나이 누르면 파멸 (둠 모드가 아닐 때만 글리치 텍스트 표시)
             if (id === 'god') {
-                document.getElementById('profAge').innerHTML = `<span class="glitch-text" onclick="showUnknown()">측정불가 (지직...)</span>`;
+                if(!isDoomed) {
+                    document.getElementById('profAge').innerHTML = `<span class="glitch-text" onclick="triggerDoomMode()">측정불가 (클릭 금지)</span>`;
+                } else {
+                    document.getElementById('profAge').innerHTML = `<span style="color:red;">끝</span>`;
+                }
             } else {
                 document.getElementById('profAge').innerHTML = data.age;
             }
@@ -880,7 +823,7 @@
             data.tags.forEach(t => tags.innerHTML += `<span class="prof-tag">#${t}</span>`);
 
             const prankBtn = document.getElementById('godPrankBtn');
-            if(id === 'god') {
+            if(id === 'god' && !isDoomed) {
                 prankBtn.style.display = 'inline-block';
                 prankBtn.innerText = isPrankMode ? '🍬 장난 끄기 귀찮다...' : '🍬 대충 만든 장난 버튼...';
 
@@ -894,25 +837,30 @@
                 document.addEventListener('mousemove', eyeTrackingHandler);
             } else {
                 prankBtn.style.display = 'none';
-                bgmGod.pause(); bgmNormal.play().catch(() => {});
+                if(!isDoomed) {
+                    bgmGod.pause(); bgmNormal.play().catch(() => {});
+                }
             }
 
             showProfile();
             document.getElementById('unifiedModal').classList.add('active');
-            document.body.style.overflow = 'hidden'; 
+            
+            // 둠 모드가 아닐 때만 스크롤 제어
+            if(!isDoomed) document.body.style.overflow = 'hidden'; 
+            
             resetCascadeAnimations();
         }
 
         function togglePrankMode() {
+            if(isDoomed) return; // 둠 모드에선 장난 버튼 안 먹힘
+
             isPrankMode = !isPrankMode;
-            
             if (isPrankMode) {
                 document.body.classList.add('god-prank-mode');
                 document.querySelectorAll('[data-prank]').forEach(el => {
                     if (!el.hasAttribute('data-original')) el.setAttribute('data-original', el.innerHTML);
                     el.innerHTML = el.getAttribute('data-prank');
                 });
-                
                 document.getElementById('modalHeaderTitle').innerText = '[ 귀찮은 다이어리... 💖 ]';
                 document.getElementById('btnScan').innerText = '[ 대충 캔디 스캔... ]';
                 document.getElementById('btnReturn').innerText = '◀ 아... 돌아가기';
@@ -921,12 +869,10 @@
                 document.querySelectorAll('[data-original]').forEach(el => {
                     el.innerHTML = el.getAttribute('data-original');
                 });
-                
                 document.getElementById('modalHeaderTitle').innerText = '[ CONFIDENTIAL DATA ]';
                 document.getElementById('btnScan').innerText = '[ 영적 능력 데이터 스캔 ]';
                 document.getElementById('btnReturn').innerText = '◀ 프로필 데이터로 복귀';
             }
-            
             if (currentProfileId) { openModal(currentProfileId); }
         }
 
@@ -940,8 +886,11 @@
             }
 
             document.getElementById('unifiedModal').classList.remove('active');
-            document.body.style.overflow = ''; 
-            bgmGod.pause(); bgmNormal.play().catch(() => {});
+            
+            if(!isDoomed) {
+                document.body.style.overflow = ''; 
+                bgmGod.pause(); bgmNormal.play().catch(() => {});
+            }
         }
 
         function showAbility() {
@@ -958,29 +907,8 @@
             resetCascadeAnimations();
         }
 
-        let slideIdx = 0;
-        function nextSlide() { moveSlide(1); }
-        function prevSlide() { moveSlide(-1); }
-        function moveSlide(n) {
-            const slides = document.querySelectorAll('.ppt-slide');
-            slides[slideIdx].classList.remove('active');
-            slideIdx = (slideIdx + n + slides.length) % slides.length;
-            slides[slideIdx].classList.add('active');
-            updateDots();
-        }
-        function setSlide(n) {
-            const slides = document.querySelectorAll('.ppt-slide');
-            slides[slideIdx].classList.remove('active');
-            slideIdx = n;
-            slides[slideIdx].classList.add('active');
-            updateDots();
-        }
-        function updateDots() {
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, i) => dot.classList.toggle('active', i === slideIdx));
-        }
-
         function filterCategory(event, cat) {
+            if(isDoomed) return;
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.currentTarget.classList.add('active');
             document.querySelectorAll('.staff-card').forEach(card => {
@@ -988,28 +916,9 @@
             });
         }
 
-        const abilityInput = document.getElementById('recruitAbility');
-        const warningMsg = document.getElementById('forbiddenWarning');
-        const forbiddenWords = ['고드', '릴리스', '데스'];
-
-        abilityInput.addEventListener('input', (e) => {
-            if(isPrankMode) return; 
-            const val = e.target.value;
-            let hasForbidden = false;
-            for(let word of forbiddenWords) { if(val.includes(word)) hasForbidden = true; }
-            if(hasForbidden) {
-                abilityInput.style.borderColor = '#ff0000';
-                abilityInput.style.boxShadow = '0 0 15px rgba(255,0,0,0.5)';
-                warningMsg.style.display = 'block';
-            } else {
-                abilityInput.style.borderColor = '';
-                abilityInput.style.boxShadow = '';
-                warningMsg.style.display = 'none';
-            }
-        });
-
         function submitForm(event) {
             event.preventDefault(); 
+            if(isDoomed) return;
             const btn = document.getElementById('submitBtn');
             btn.innerHTML = isPrankMode ? '대충 계약 도장 찍는 중...💖' : '영혼 서명 각인 중... (Processing)';
             btn.classList.add('loading');
@@ -1019,37 +928,6 @@
                 document.getElementById('recruitSuccess').style.display = 'block';
                 document.querySelector('.recruit-container').scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 1500);
-        }
-
-        let logoClickCount = 0;
-        let logoClickTimer = null;
-        const logoBtn = document.getElementById('logoBtn');
-
-        logoBtn.addEventListener('click', () => {
-            if(isPrankMode) return; 
-            logoClickCount++;
-            clearTimeout(logoClickTimer);
-            logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 1000);
-
-            if (logoClickCount === 7) {
-                logoClickCount = 0;
-                toggleAdminMode();
-            }
-        });
-
-        function toggleAdminMode() {
-            isAdminMode = !isAdminMode;
-            body.classList.add('glitch-active');
-
-            setTimeout(() => {
-                body.classList.remove('glitch-active');
-                if (isAdminMode) { 
-                    document.documentElement.style.setProperty('--current-theme', '#da0037'); 
-                    header.style.borderColor = 'rgba(218,0,55,0.3)';
-                } else { 
-                    navigate('page-' + currentActiveTab); 
-                }
-            }, 1000);
         }
     </script>
 </body>

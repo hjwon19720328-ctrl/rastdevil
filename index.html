@@ -50,6 +50,11 @@
         body.god-prank-mode .lore-card h3 { color: var(--accent-red); }
         body.god-prank-mode .lore-card p { color: var(--text-main); font-weight: bold; }
         body.god-prank-mode .lore-note { color: var(--accent-blue); font-size: 0.9rem; font-family: sans-serif; }
+        
+        /* 사건사고 아코디언 장난모드 */
+        body.god-prank-mode .accordion-card { border-color: var(--accent-orange) !important; }
+        body.god-prank-mode .accordion-card h3 { color: var(--accent-orange) !important; }
+        body.god-prank-mode .accordion-card .accordion-content { border-top: 2px dashed var(--accent-gold); }
 
         body.god-prank-mode .staff-card { background: #fff; border: 3px dashed var(--accent-red); box-shadow: 8px 8px 0px rgba(255, 107, 139, 0.2); }
         body.god-prank-mode .staff-card:hover { background: #ffe8ee; transform: translateY(-10px) rotate(3deg); border-color: var(--accent-gold); box-shadow: 15px 15px 0px rgba(255, 215, 0, 0.4);}
@@ -135,6 +140,36 @@
         .grade-list { list-style: none; margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
         .grade-list li { color: #ddd; display: flex; align-items: center; font-size: 0.95rem; }
         .grade-badge { background: rgba(218, 0, 55, 0.1); color: var(--accent-red); padding: 4px 10px; border: 1px solid var(--accent-red); font-size: 0.8rem; font-weight: bold; margin-right: 15px; width: 70px; text-align: center; flex-shrink: 0;}
+
+        /* 🔥 사건사고 전용 아코디언 스타일 */
+        .accordion-card .accordion-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #551111;
+        }
+        .accordion-card h3 { margin-bottom: 0 !important; border-bottom: none !important; padding-bottom: 0 !important; transition: 0.3s; }
+        .accordion-card .toggle-icon { color: var(--accent-orange); font-size: 1.2rem; transition: transform 0.4s ease; font-family: sans-serif; }
+        .accordion-card.active .accordion-header { border-bottom: none; }
+        .accordion-card.active .toggle-icon { transform: rotate(180deg); }
+        .accordion-card .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            margin-top: 0;
+            padding-top: 0;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), opacity 0.4s ease-out, margin-top 0.4s ease-out;
+        }
+        .accordion-card.active .accordion-content {
+            max-height: 800px; /* 텍스트가 잘리지 않도록 넉넉하게 */
+            opacity: 1;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed #551111;
+            transition: max-height 0.8s ease-in-out, opacity 0.5s ease-in, margin-top 0.4s ease-out;
+        }
 
         /* 필터 및 명부 */
         .filter-menu { display: flex; justify-content: center; gap: 12px; margin-bottom: 3.5rem; flex-wrap: wrap; }
@@ -239,10 +274,6 @@
         .glitch-active #glitchOverlay { display: block; animation: glitchEffect 0.3s ease infinite, fadeInOut 0.6s ease forwards; }
         @keyframes glitchEffect { 0% { transform: translate(0); } 20% { transform: translate(-5px, 5px); background-color: rgba(218,0,55,0.1); } 40% { transform: translate(5px, -5px); background-color: rgba(79,172,254,0.1); } 60% { transform: translate(-5px, -5px); } 80% { transform: translate(5px, 5px); background-color: rgba(212,175,55,0.1); } 100% { transform: translate(0); } }
         @keyframes fadeInOut { 0% { opacity: 0; } 30% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; } }
-
-        #adminMessage { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); border: 2px solid var(--accent-red); color: var(--accent-red); padding: 20px 40px; font-family: monospace; font-size: 1.2rem; font-weight: bold; letter-spacing: 2px; z-index: 20001; pointer-events: none; display: none; box-shadow: 0 0 30px rgba(218,0,55,0.5); }
-        .glitch-active #adminMessage { display: block; animation: fadeInOut 1s ease forwards, textPulse 0.2s ease infinite; }
-        @keyframes textPulse { from { opacity: 0.8; } to { opacity: 1; } }
 
         .pc-br { display: block; } .mobile-br { display: none; }
         @media (max-width: 768px) {
@@ -380,49 +411,120 @@
             <div class="section-wrap">
                 <div class="page-header">
                     <h2 data-prank="내가 기억나는 귀찮은 일들...">에테르나 기밀 보관소: 중대 사건 사고</h2>
-                    <p data-prank="아 대충 옛날에 터졌던 일들이야. 수습하느라 피곤했지.">심연의 역사를 뒤흔든 주요 사건들의 열람 기록입니다.<br>인가된 상위 직급자 외에는 발설을 금합니다.</p>
+                    <p data-prank="아 대충 옛날에 터졌던 일들이야. 수습하느라 쟤네가 피곤했지.">심연의 역사를 뒤흔든 주요 사건들의 열람 기록입니다.<br>제목을 클릭하여 상세 기밀을 확인하십시오.</p>
                 </div>
                 <div class="lore-grid">
-                    <div class="lore-card" style="border-color: #ff9800;">
-                        <h3 style="color: #ff9800;" data-prank="물고기 가출 사건">제1차 심연 범람 사태</h3>
-                        <p data-prank="태어나자마자 뭐 그리 화가 났는지 다 부수고 가출함. 지금은 어디서 술 마시고 있겠지 뭐.">최상급 악령 <strong>레비아탄</strong>이 태어날 당시, 통제 불능의 마력 폭주로 심연이 범람하여 날뛰었던 대사건입니다. 이 여파로 저승의 하위 구역 3곳이 붕괴되었으며, 이후 레비아탄의 행적은 현재까지도 묘연한 상태입니다.</p>
-                        <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 찾지 마, 귀찮아.">※ 1급 수배령 발효 중이나 체포조 파견은 보류됨. - 릴리스</div>
+                    
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3 style="color: #ff9800;" data-prank="1짱 등판! 1차 대청소">창조신 고드 강림 및 제1차 대청소 사태</h3>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-prank="아 천국 결재 서류 너무 많아서 빡쳐서 다 때려치고 내려온 날. 기분 안 좋아서 한숨 한 번 쉬었더니 밑에 있던 먼지(악령)들 싹 다 날아갔다며? 청소 안 해도 돼서 개꿀.">천만 년 전, 천계의 과도한 업무에 질린 고드님께서 서류를 집어던지고 저승으로 도망쳐 내려온 기념비적인 날입니다. 강림 당시 내뿜은 짜증 섞인 영압 방출로 인해, 그 순간 저승에 존재하던 모든 악령이 단 1초 만에 100% 소멸하는 전무후무한 기록을 세웠습니다.</p>
+                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 천국 일 진짜 극혐. 안 돌아감.">※ 이날을 기점으로 에테르나의 현 서열 체계가 강제 재편되었습니다.</div>
+                        </div>
                     </div>
-                    <div class="lore-card" style="border-color: #ff9800;">
-                        <h3 style="color: #ff9800;" data-prank="1짱 당 떨어져서 우주 멸망할 뻔한 날">우주 열역학 제2법칙 일시 정지 사태</h3>
-                        <p data-prank="사탕 안 사 오길래 화나서 며칠 누워있었더니 우주 멈춘다더라? 1짱 심기 건드리면 다 죽는겨. 사탄이 헐레벌떡 사탕 가져와서 살려줌.">창조신 <strong>고드</strong>님께서 일주일간 사탕을 공급받지 못하자, 우주의 엔트로피가 0에 가깝게 떨어지며 모든 차원이 정지하고 멸망 직전까지 갔던 최악의 재난입니다. 비서실장 사탄이 이승 전역의 디저트 카페를 털어 긴급 공수해 옴으로써 겨우 사태가 진정되었습니다.</p>
-                        <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 사탕 재고 100만 개 유지해라.">※ 사탄 비서실장 시말서 5만 장 제출 완료.</div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3 style="color: #ff9800;" data-prank="큰 물고기 가출 사건">제1차 심연 범람 사태</h3>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-prank="태어나자마자 뭐 그리 화가 났는지 다 부수고 가출함. 지금은 어디서 술 마시고 있겠지 뭐.">최상급 악령 <strong>레비아탄</strong>이 태어날 당시, 통제 불능의 마력 폭주로 심연이 범람하여 날뛰었던 대사건입니다. 이 여파로 저승의 하위 구역 3곳이 붕괴되었으며, 이후 레비아탄의 행적은 현재까지도 묘연한 상태입니다.</p>
+                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 찾지 마, 귀찮아.">※ 1급 수배령 발효 중이나 체포조 파견은 보류됨. - 릴리스</div>
+                        </div>
                     </div>
-                    <div class="lore-card" style="border-color: #ff9800;">
-                        <h3 style="color: #ff9800;" data-prank="먼지 폭발 사태">제2차 차원 대균열 사태</h3>
-                        <p data-prank="어디 구멍 뚫려서 먼지들이 와다다 쏟아져 나옴. 해골이 밤새면서 다 쓸어 담더라. 피곤하게들 살아.">인간계와 저승을 구분하는 장막이 찢어지며 악귀와 악령 10만 마리가 이승으로 쏟아져 내려가려던 절체절명의 위기였습니다. 데스 사장이 홀로 차원의 틈새를 막아서서 단 하루 만에 전원을 참수하여 억제했습니다.</p>
-                        <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 해골 골다공증 오겠음.">※ 데스 사장님 3주 연속 철야로 인한 특별 휴가 반려됨. - 릴리스</div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3 style="color: #ff9800;" data-prank="1짱 당 떨어져서 우주 멸망할 뻔한 날">우주 열역학 제2법칙 일시 정지 사태</h3>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-prank="사탕 안 사 오길래 화나서 며칠 누워있었더니 우주 멈춘다더라? 1짱 심기 건드리면 다 죽는겨. 사탄이 헐레벌떡 사탕 가져와서 살려줌.">창조신 <strong>고드</strong>님께서 일주일간 사탕을 공급받지 못하자, 우주의 엔트로피가 0에 가깝게 떨어지며 모든 차원이 정지하고 멸망 직전까지 갔던 최악의 재난입니다. 비서실장 사탄이 이승 전역의 디저트 카페를 털어 긴급 공수해 옴으로써 겨우 사태가 진정되었습니다.</p>
+                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 사탕 재고 100만 개 유지해라.">※ 사탄 비서실장 시말서 5만 장 제출 완료.</div>
+                        </div>
                     </div>
-                    <div class="lore-card" style="border-color: #ff9800;">
-                        <h3 style="color: #ff9800;" data-prank="종이비행기 찌질이의 반항">루시퍼 반역 미수 사건</h3>
-                        <p data-prank="누구더라 걔가 나한테 깝치길래 하품 한 번 크게 했더니 날아가서 기억상실증 걸렸대. 1짱한테 덤빈 최후지.">무소속 혼혈 <strong>루시퍼</strong>가 자신의 힘을 과신하여 에테르나의 서열 체계를 전복하려 반란을 일으켰으나, 수면 중이던 고드의 하품으로 인해 발생한 뇌전 단 한 방에 완전히 제압당하고 기억을 잃은 채 추방된 기밀 사건입니다.</p>
-                        <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 까불면 다 친다.">※ 해당 사건 이후 반역 시도는 통계상 0건으로 수렴.</div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3 style="color: #ff9800;" data-prank="파리채 컷 당한 애">천계 진상 루시퍼 추방 사건</h3>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-prank="천국에 있을 때 누가 자꾸 귀찮게 윙윙거리면서 긁길래 파리채로 쳤나? 하품했나? 암튼 날려버렸음. 이름이 뭐였지? 몰라, 기억하기도 귀찮아.">천계에 머물던 시절, 무소속 혼혈 <strong>루시퍼</strong>가 고드님 옆에서 지속적으로 신경을 긁으며 깐족거리다 분노를 산 사건입니다. 참다못한 고드님의 하품 한 번에 벼락을 맞고 기억을 잃은 채 저승으로 추방되었습니다.</p>
+                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 까불면 다 친다.">※ 해당 사건 이후 고드님 앞에서의 잡담은 일절 금지되었습니다.</div>
+                        </div>
                     </div>
-                    <div class="lore-card" style="border-color: #ff9800;">
-                        <h3 style="color: #ff9800;" data-prank="내 탕후루 압수당한 날">사탄의 탕후루 밀수 적발</h3>
-                        <p data-prank="사탄이 나 주려고 이승에서 탕후루 트럭 훔쳐 오다가 릴리스한테 걸렸어. 릴리스 진짜 융통성 없게 굴어... 내 간식 돌려내.">사탄 비서실장이 고드님께 바칠 목적으로 금지 품목인 이승의 초고당도 탕후루 5천 트럭을 무단 밀수하다가 국경 방역팀과 릴리스에게 현행범으로 적발된 사건입니다. 이 여파로 탕후루 물가가 폭등했습니다.</p>
-                        <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 릴리스 몰래 좀 가져오지 눈치 없게.">※ 사탄 1개월 감봉 조치. 탕후루 전량 폐기(고드님 몰래).</div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3 style="color: #ff9800;" data-prank="내가 자는 동안 생긴 일">제3차 이승 멸망 위기 (종말의 씨앗)</h3>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-prank="나 꿀잠 자고 일어났더니 밑에 동네 대륙 하나가 없어졌대. 릴리스가 땀 뻘뻘 흘리면서 보고하길래 걍 알았다고 하고 다시 잤음.">이승의 광신도 집단이 심연 가장 깊은 곳에 봉인된 '종말의 씨앗'을 발아시키려 한 극비 사건입니다. 당시 고드님이 깊은 낮잠에 빠져 깨어나지 않는 절체절명의 상황 속에서, 릴리스와 데스가 직접 이승에 현신하여 대륙 하나를 희생시키는 선에서 간신히 사태를 진압했습니다.</p>
+                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 잘 땐 깨우지 마라.">※ 이 사건으로 이승의 지도가 한 차례 수정되었습니다.</div>
+                        </div>
                     </div>
-                    <div class="lore-card" style="border-color: #ff9800;">
-                        <h3 style="color: #ff9800;" data-prank="냥냥이 파업 사태">메이비스 결근으로 인한 포탈 대마비</h3>
-                        <p data-prank="일개미 걔가 고양이 꾹꾹이 받느라 하루 쉬었더니 저승길 다 막혔다며? 다들 뚜벅초 돼서 걸어 다니는 꼴 완전 코미디였음.">핵심 이동망 담당자인 <strong>메이비스</strong>가 본인이 키우는 고양이의 간식을 사러 간다며 돌연 하루 결근을 통보한 사건입니다. 이로 인해 에테르나 내 모든 포탈이 마비되어 직원들이 저승 끝부터 끝까지 도보로 이동하는 대참사가 벌어졌습니다.</p>
-                        <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 걸어 다녀라, 운동도 되고 좋지.">※ 메이비스 전용 특별 고양이 간식 수당 신설 결재 완료. - 릴리스</div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3 style="color: #ff9800;" data-prank="사탄 대머리 된 날">사탄의 결재 서류 위조 대폭발 사건</h3>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-prank="사탄이 내 사인 베끼려다가 터져서 대머리 됨 ㅋㅋㅋ 아 진짜 개웃겼는데 사진 찍어둘걸.">사탄 비서실장이 부서 간식비를 타내기 위해 고드님의 결재 서명을 위조하려다 발생한 사고입니다. 펜끝에 깃든 창조신의 신성력을 일개 악마가 감당하지 못하여 결재판이 대폭발했고, 이 사고로 사탄은 한 달간 머리카락 없이 업무를 봐야 했습니다.</p>
+                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 내 이름 함부로 쓰면 터짐.">※ 이후 모든 예산 결재는 릴리스 회장 전결로 변경.</div>
+                        </div>
                     </div>
-                    <div class="lore-card" style="border-color: #ff9800;">
-                        <h3 style="color: #ff9800;" data-prank="꼬붕 2호 수박 파티 사건">사신 무기(데스 낫) 무단 반출 및 분실 위기</h3>
-                        <p data-prank="루아가 해골 무기 몰래 훔쳐서 수박 썰다가 혼남 ㅋㅋ 나도 한 조각 먹었지롱.">차기 사신 <strong>루아</strong>가 데스 사장의 주력 무기인 낫을 몰래 이승으로 빼돌려 수박을 써는 용도로 사용하다 잃어버릴 뻔한 사건입니다. 이로 인해 3일간 이승에서 사망자가 단 한 명도 발생하지 않는 기현상이 일어났습니다.</p>
-                        <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 해골 뼈 부딪히는 소리 여기까지 들렸음.">※ 루아 사원 반성문 3000장 작성 완료. - 데스</div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3 style="color: #ff9800;" data-prank="내 침대 돌려내">고드님 애착 침대 실종 소동</h3>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-prank="내 침대 없어져서 다 부수려고 했는데, 알고 보니까 내가 사탕 껍질을 안 버려서 산처럼 쌓인 거 밑에 파묻혀 있었음 ㅋㅋ 꼬붕들 며칠 밤새면서 밖에서 찾던데 걍 모른척했음.">고드님의 전용 애착 침대가 사라져 전 저승에 1급 비상사태가 선포되었습니다. 범인을 찾기 위해 사탄과 데스가 이승까지 이잡듯 뒤졌으나, 3일 후 고드님의 방 구석 '사탕 껍질 산더미' 아래에서 온전한 상태로 발견되어 허무하게 종결되었습니다.</p>
+                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 껍질 좀 대신 치워주면 안 되냐.">※ 고드님 방 청소 전담 인력 3명 추가 배치됨.</div>
+                        </div>
                     </div>
-                    <div class="lore-card" style="border-color: #ff9800;">
-                        <h3 style="color: #ff9800;" data-prank="우는 솜뭉치 3박 4일 소음 테러">제1연구소 야간 소음 마비 사태</h3>
-                        <p data-prank="아오 퇴근할 때 토끼한테 인사 좀 해줘라. 밤새 우니까 내가 시끄러워서 잘 수가 없잖아!">퇴근길 직원들이 연구 개체 <strong>미스 래빗</strong>에게 인사를 하지 않고 지나치자, 극심한 애정결핍에 시달린 래빗이 3박 4일 동안 슬픈 울음소리를 울려 퍼뜨린 사건입니다. 음파의 영향으로 저승의 모든 유리창이 깨지고 업무가 전면 마비되었습니다.</p>
-                        <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 인사 안 하는 놈은 내가 귤 형벌 내릴 거임.">※ 행동 수칙: 래빗 앞을 지날 땐 반드시 손을 흔들어 줄 것.</div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3 style="color: #ff9800;" data-prank="내 사탕 압수당한 날">사탄의 불법 사탕 밀수 적발</h3>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-prank="사탄이 나 주려고 이승에서 한정판 사탕 5천 트럭 훔쳐 오다가 릴리스한테 걸렸어. 릴리스 진짜 융통성 없게 굴어... 내 사탕 돌려내.">사탄 비서실장이 고드님께 바칠 목적으로 이승의 초고당도 한정판 사탕 5천 트럭을 무단 밀수하다가 국경 방역팀과 릴리스에게 현행범으로 적발된 사건입니다. 이 여파로 이승의 사탕 물가가 한동안 폭등했습니다.</p>
+                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 릴리스 몰래 좀 가져오지 눈치 없게.">※ 사탄 1개월 감봉 조치. 사탕 전량 폐기(고드님 몰래).</div>
+                        </div>
                     </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3 style="color: #ff9800;" data-prank="꼬붕 2호 수박 파티 사건">사신 무기(데스 낫) 무단 반출 위기</h3>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-prank="루아가 해골 무기 몰래 훔쳐서 수박 썰다가 혼남 ㅋㅋ 나도 한 조각 먹었지롱.">차기 사신 <strong>루아</strong>가 데스 사장의 주력 무기인 낫을 몰래 이승으로 빼돌려 수박을 써는 용도로 사용하다 잃어버릴 뻔한 사건입니다. 이로 인해 3일간 이승에서 사망자가 단 한 명도 발생하지 않는 기현상이 일어났습니다.</p>
+                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 해골 뼈 부딪히는 소리 여기까지 들렸음.">※ 루아 사원 반성문 3000장 작성 완료. - 데스</div>
+                        </div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <h3 style="color: #ff9800;" data-prank="우는 솜뭉치 3박 4일 테러">제1연구소 야간 소음 마비 사태</h3>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p data-prank="아오 퇴근할 때 토끼한테 인사 좀 해줘라. 밤새 우니까 내가 시끄러워서 잘 수가 없잖아!">퇴근길 직원들이 연구 개체 <strong>미스 래빗</strong>에게 인사를 하지 않고 지나치자, 극심한 애정결핍에 시달린 래빗이 3박 4일 동안 슬픈 울음소리를 울려 퍼뜨린 사건입니다. 음파의 영향으로 저승의 모든 유리창이 깨지고 업무가 전면 마비되었습니다.</p>
+                            <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 인사 안 하는 놈은 내가 귤 형벌 내릴 거임.">※ 행동 수칙: 래빗 앞을 지날 땐 반드시 손을 흔들어 줄 것.</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </main>
@@ -677,7 +779,13 @@
             window.scrollTo(0,0);
         }
 
-        // 언니 호칭 제거 및 고드 1짱 어필 반영
+        // 아코디언 토글 스크립트
+        function toggleAccordion(el) {
+            const card = el.closest('.accordion-card');
+            card.classList.toggle('active');
+        }
+
+        // 데이터 베이스
         const charData = {
             'god': { name: '고드', role: '장기 체류자', img: 'https://igx.kr/u/zP/c/1', age: '알 수 없음', mbti: 'INTP', tags: ['창조신', '우주1짱', '단거최고', '사탕중독', '관찰자'], desc: '귀차니즘이 매우 심하고 단 것을 매우 좋아합니다. 본인이 우주 서열 1위라는 사실을 아주 잘 알고 있으나, 굳이 증명하는 것조차 귀찮아합니다. 최근에는 인간계의 <strong>사탕</strong>에 빠져 있으며, 설탕 코팅의 두께에 따라 그날 우주의 운명이 결정된다는 소문이 있습니다. 자다가 기침 한 번으로 유성을 떨어뜨려 릴리스를 고생시키기도 합니다.', ability: '【 인과율 초월 및 우주적 재창조 (Genesis & Oblivion) 】\n\n물리 법칙, 시간, 공간의 제약을 무시하고 의지만으로 우주를 소멸시키거나 재구축합니다. 현재는 단순한 \'관찰자\' 역할을 수행 중입니다.\n\n<span style="color:#da0037; font-size:0.8em;">(※ 관측 불가 수준의 영력. 접근 금지 등급. 무슨 일이 있어도 그녀의 심기를 건드리지 마십시오.)</span>' },
             'leviathan': { name: '레비아탄', role: '최상급 악령 (방관자)', img: 'https://igx.kr/u/zP/w/1', age: '5000만 세', mbti: 'ISTP', tags: ['심해의지배자', '행방불명', '술집단골', '방관자'], desc: '심연과 어둠의 공포에서 태어난 최상급 악령입니다. 현재 에테르나의 통제를 벗어나 현세 어딘가에서 방관 중입니다. 정확한 행방은 알 수 없으나, 항간의 소문에 의하면 어느 허름한 인간계 술집에 머물고 있다고 합니다.', ability: '【 심해의 압박 & 심연의 공포 】\n주변 공간의 영적 밀도를 무한히 높여 모든 존재를 압착시킵니다. 대상에게 심연을 보여주어 트라우마를 생성합니다.' },
@@ -692,7 +800,7 @@
             'erina': { name: '에리나', role: '이승 담당 (인간)', img: 'https://igx.kr/u/zP/t/1', age: '1500 세', mbti: 'INFP', tags: ['영혼터치', '혈육바라기', '비밀일기', '아싸'], desc: '에리스의 쌍둥이 동생입니다. 영혼을 만지는 능력 때문에 가끔 길 가던 영혼이 등을 밀어달라고 부탁해 곤혹스러워합니다. 비밀 일기장은 첫째 에리스에 대한 <strong>찬양글</strong>로 가득 차 있습니다.', ability: '【 영체 간섭 】\n순수 인간임에도 영혼을 육안으로 보고 물리적으로 만질 수 있습니다.' },
             'baal': { name: '바알', role: '이승 담당 (상급)', img: 'https://igx.kr/u/zP/r/1', age: '5800만 세', mbti: 'INTJ', tags: ['손재주장인', '시간엄수', '다정한업어주기', '반전매력'], desc: '날개와 뿔, 꼬리가 없는 돌연변이 콤플렉스를 숨기고 있습니다. 무뚝뚝하고 차가운 인상과 달리, 남몰래 <strong>귀여운 동물 인형</strong>을 뜨개질하는 취미가 있으며 길 잃은 어린 영혼에게 슬쩍 쥐여주곤 합니다.', ability: '【 그림자 직조 (Shadow Weaving) 】\n그림자를 실처럼 자아내어 절대 끊어지지 않는 결계를 치거나 상대를 포박합니다. 필요할 땐 영혼들을 위한 푹신한 쿠션으로 만들 수도 있습니다.' },
             'paimon': { name: '파이몬', role: '이승 담당 (전 상급)', img: 'https://igx.kr/u/zP/q/1', age: '4000만 세', mbti: 'INTJ', tags: ['해커', '게이머1위', '플랜Z', '보석좋아'], desc: '인간계 CCTV 해커입니다. 틈날 때마다 게임 서버를 해킹해 <strong>랭킹 1위</strong>를 차지하는 것이 낙입니다. 천년전 최상급 악령을 상대하다 뿔을 잃고 대부분의 마력을 잃었습니다. 루아의 돌발 행동에 대비해 언제나 플랜 Z까지 세워두는 철저한 전략가입니다.', ability: '【 환술 & 시간 정지 】\n광범위한 지역에 거대한 환술을 걸거나, 일시적으로 시간을 멈출 수 있습니다.' },
-            'lucifer': { name: '루시퍼', role: '무소속 (혼혈)', img: 'https://igx.kr/u/zP/v/1', age: '2000만 세', mbti: 'ESTP', tags: ['복직신청', '종이비행기', '추방자'], desc: '고드에게 까불다 추방된 혼혈입니다. 고드는 까먹은 듯합니다. 종이비행기를 접는 취미가 있습니다.', ability: '【 빛과 어둠의 검 】\n신성력, 마력 모두 사용 가능합니다.' },
+            'lucifer': { name: '루시퍼', role: '무소속 (혼혈)', img: 'https://igx.kr/u/zP/v/1', age: '2000만 세', mbti: 'ESTP', tags: ['기억상실', '종이비행기', '추방자'], desc: '천계 시절 고드님 옆에서 지속적으로 신경을 긁으며 깐족거리다 분노를 사 추방당한 혼혈입니다. 추방의 충격으로 기억을 모두 잃었으며, 현재는 종이비행기를 접는 취미만 남았습니다.', ability: '【 빛과 어둠의 검 】\n신성력, 마력 모두 사용 가능합니다.' },
             'rabbit': { name: '미스 래빗', role: '연구 개체 (최하급)', img: 'https://igx.kr/u/zP/k/1', age: '20 세', mbti: 'ISFP', tags: ['관종', '애정결핍', '꽃다발', '울보토끼'], desc: '사랑받지 못한 토끼들의 슬픔이 모인 존재입니다. 어째선지 숙소 근처 꽃밭에 장미를 기르고 그 장미로 꽃다발을 만들어 들고 다닙니다. 퇴근하는 직원들이 인사해 주지 않으면 밤새 연구소 전체에 슬픈 울음소리를 울려 퍼뜨립니다.', ability: '【 귀여운 분열 】\n작은 모습 여러 개로 분열할 수 있으며 이때 크기가 작아지고 매우 귀여워지며 힘도 약해집니다.' }
         };
 
@@ -710,7 +818,7 @@
             'erina': { name: '껌딱지 쫄보', role: '인간 요원', img: 'https://igx.kr/u/zP/t/1', age: '인간', mbti: 'INFP', tags: ['소심이', '혈육덕후'], desc: '첫째한테 맨날 착 달라붙어 있는 쫄보 동생... 떨어지질 않네. 보는 내가 다 덥고 귀찮다.', ability: '【 만지작 만지작 】\n인간인데 우리 만질 수 있음. 귀찮게 왜 자꾸 만져.' },
             'baal': { name: '무뚝뚝 수공예가', role: '수공예 달인', img: 'https://igx.kr/u/zP/r/1', age: '화석', mbti: 'INTJ', tags: ['뜨개질', '다정함', '반전매력'], desc: '악만데 뿔도 없고 날개도 없는 무뚝뚝한 장인. 맨날 구석에서 꼬물꼬물 인형 만들고 있던데, 나도 푹신한 베개 하나 만들어달라고 하려다 귀찮아서 말았음.', ability: '【 까만 실뭉치 】\n그림자로 털실 뭉치 같은 걸 만듦. 푹신해서 베개로 쓰기 딱 좋아. 나 잘 때 하나만 던져주고 가라.' },
             'paimon': { name: '겜창 해커', role: '해커', img: 'https://igx.kr/u/zP/q/1', age: '어른', mbti: 'ENTJ', tags: ['게임', '보석충'], desc: '맨날 컴퓨터만 하는 겜창 해커. 마우스 딸깍거리는 것도 안 귀찮나? 체력 진짜 대단하네.', ability: '【 얼음 땡! 】\n시간 멈추거나 환상 보여줌. 오, 시간 멈추고 낮잠 자면 개꿀이겠다.' },
-            'lucifer': { name: '누구더라?', role: '무소속', img: 'https://igx.kr/u/zP/v/1', age: '몰라', mbti: 'ESTP', tags: ['종이비행기'], desc: '누구더라... 나한테 까불었던 거 같긴 한데 기억해 내기도 귀찮다. 그냥 투명인간 취급해야지.', ability: '【 반짝반짝 검 】\n반짝이는 칼 씀. 아 눈부셔... 저리 가.' },
+            'lucifer': { name: '파리채 맞은 애', role: '무소속', img: 'https://igx.kr/u/zP/v/1', age: '몰라', mbti: 'ESTP', tags: ['종이비행기'], desc: '천국에서 날파리처럼 자꾸 윙윙거리면서 긁길래 하품하면서 날려버렸는데 누구더라... 아예 기억에서 지워버림. 대충 종이비행기나 접고 놀아라.', ability: '【 반짝반짝 검 】\n반짝이는 칼 씀. 아 눈부셔... 저리 가.' },
             'rabbit': { name: '우는 솜뭉치', role: '연구 대상', img: 'https://igx.kr/u/zP/k/1', age: '애기', mbti: 'ISFP', tags: ['관종', '울보'], desc: '아... 맨날 엉엉 우는 시끄러운 토끼. 우는 것도 다 체력인데 안 지치나. 귀 막고 자야겠다.', ability: '【 쪼꼬미 변신 】\n작게 나눠짐. 쪼끄만 게 돌아다니니까 밟을까 봐 귀찮네.' }
         };
 
@@ -744,7 +852,6 @@
         }
 
         function openModal(id) {
-            // 고드 첫 클릭 시 광과민성 경고 출력
             if (id === 'god' && !godWarningShown) {
                 document.getElementById('warningModal').style.display = 'flex';
                 return;
@@ -759,7 +866,6 @@
             document.getElementById('profName').innerHTML = data.name;
             document.getElementById('profRole').innerHTML = data.role;
             
-            // 🔥 나이 부분 로직 분기 (고드일 경우 글리치 텍스트 적용)
             if (id === 'god') {
                 document.getElementById('profAge').innerHTML = `<span class="glitch-text" onclick="showUnknown()">측정불가 (지직...)</span>`;
             } else {

@@ -14,6 +14,7 @@
             --accent-blue: #4facfe;
             --accent-red: #da0037;
             --accent-gold: #d4af37;
+            --accent-orange: #ff9800; /* 사건사고 탭 테마 컬러 추가 */
             --current-theme: var(--accent-purple); 
         }
 
@@ -27,6 +28,7 @@
             --accent-blue: #5bc0eb; 
             --accent-red: #ff6b8b; 
             --accent-gold: #ffd700; 
+            --accent-orange: #ffb347;
             text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
         }
         
@@ -124,13 +126,14 @@
         .dot { width: 10px; height: 10px; background: rgba(255,255,255,0.2); border-radius: 50%; cursor: pointer; transition: 0.3s;}
         .dot.active { background: var(--current-theme); box-shadow: 0 0 10px var(--current-theme); transform: scale(1.2);}
 
-        /* 세계관 & 수기 메모 */
+        /* 세계관, 사건사고 카드 공통 */
         .lore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .lore-card { background: #070202; border: 1px solid #331111; border-left: 4px solid var(--accent-red); padding: 2.5rem; transition: 0.4s; position: relative; overflow: hidden; }
-        .lore-card:hover { border-color: #da0037; box-shadow: 10px 10px 0 rgba(218, 0, 55, 0.1); }
-        .lore-card h3 { font-size: 1.4rem; color: var(--accent-red); margin-bottom: 1.5rem; border-bottom: 1px dashed #551111; padding-bottom: 10px; }
+        .lore-card { background: #070202; border: 1px solid #331111; border-left: 4px solid var(--current-theme); padding: 2.5rem; transition: 0.4s; position: relative; overflow: hidden; }
+        .lore-card:hover { border-color: var(--current-theme); box-shadow: 10px 10px 0 rgba(255, 255, 255, 0.05); }
+        .lore-card h3 { font-size: 1.4rem; color: var(--current-theme); margin-bottom: 1.5rem; border-bottom: 1px dashed #551111; padding-bottom: 10px; }
         .lore-card p { color: #bbb; line-height: 1.8; }
-        .lore-note { position: absolute; bottom: 15px; right: 15px; font-size: 0.8rem; color: rgba(218, 0, 55, 0.5); font-style: italic; transform: rotate(-3deg); pointer-events: none; user-select: none; font-weight: bold; letter-spacing: -0.5px; }
+        .lore-note { position: absolute; bottom: 15px; right: 15px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.4); font-style: italic; transform: rotate(-3deg); pointer-events: none; user-select: none; font-weight: bold; letter-spacing: -0.5px; }
+        
         .grade-list { list-style: none; margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
         .grade-list li { color: #ddd; display: flex; align-items: center; font-size: 0.95rem; }
         .grade-badge { background: rgba(218, 0, 55, 0.1); color: var(--accent-red); padding: 4px 10px; border: 1px solid var(--accent-red); font-size: 0.8rem; font-weight: bold; margin-right: 15px; width: 70px; text-align: center; flex-shrink: 0;}
@@ -290,6 +293,7 @@
             <ul class="nav-links">
                 <li><a id="nav-home" class="active" onclick="navigate('page-home')" data-prank="귀찮은 놀이터">홈 (The Void)</a></li>
                 <li><a id="nav-lore" onclick="navigate('page-lore')" data-prank="대충 만든 규칙">세계관 (Blood)</a></li>
+                <li><a id="nav-incidents" onclick="navigate('page-incidents')" data-prank="터진 사고들">사건 사고 (Records)</a></li>
                 <li><a id="nav-staff" onclick="navigate('page-staff')" data-prank="피곤한 장난감들">명부 (Matrix)</a></li>
                 <li><a id="nav-recruit" onclick="navigate('page-recruit')" data-prank="노예 구함 (급함)">지원 (Pact)</a></li>
             </ul>
@@ -360,6 +364,37 @@
                             <li><span class="grade-badge">최하급</span> <span data-prank="숨 쉬면 날아가는 먼지.">미약한 영체, 지능이나 능력이 희미함</span></li>
                         </ul>
                         <div class="lore-note" style="bottom: 25px;" data-prank="※ 내 사탕 건드리면 등급 상관없이 멸망이야...">※ 고드님 간식비는 예외 등급(S+)으로 처리할 것. - 비서실</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <main id="page-incidents" class="page-view">
+            <div class="section-wrap">
+                <div class="page-header">
+                    <h2 data-prank="내가 기억나는 귀찮은 일들...">에테르나 기밀 보관소: 중대 사건 사고</h2>
+                    <p data-prank="아 대충 옛날에 터졌던 일들이야. 수습하느라 피곤했지.">심연의 역사를 뒤흔든 주요 사건들의 열람 기록입니다.<br>인가된 상위 직급자 외에는 발설을 금합니다.</p>
+                </div>
+                <div class="lore-grid">
+                    <div class="lore-card" style="border-color: #ff9800;">
+                        <h3 style="color: #ff9800;" data-prank="물고기 언니 가출 사건">제1차 심연 범람 사태</h3>
+                        <p data-prank="태어나자마자 뭐 그리 화가 났는지 다 부수고 가출함. 지금은 어디서 술 마시고 있겠지 뭐.">최상급 악령 <strong>레비아탄</strong>이 태어날 당시, 통제 불능의 마력 폭주로 심연이 범람하여 날뛰었던 대사건입니다. 이 여파로 저승의 하위 구역 3곳이 붕괴되었으며, 이후 레비아탄의 행적은 현재까지도 묘연한 상태입니다.</p>
+                        <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 찾지 마, 귀찮아.">※ 1급 수배령 발효 중이나 체포조 파견은 보류됨. - 릴리스</div>
+                    </div>
+                    <div class="lore-card" style="border-color: #ff9800;">
+                        <h3 style="color: #ff9800;" data-prank="당 떨어져서 우주 멸망할 뻔한 날">우주 열역학 제2법칙 일시 정지 사태</h3>
+                        <p data-prank="사탕 안 사 오길래 화나서 며칠 누워있었더니 우주 멈춘다더라? 사탄이 헐레벌떡 사탕 가져와서 살려줌.">창조신 <strong>고드</strong>님께서 일주일간 사탕을 공급받지 못하자, 우주의 엔트로피가 0에 가깝게 떨어지며 모든 차원이 정지하고 멸망 직전까지 갔던 최악의 재난입니다. 비서실장 사탄이 이승 전역의 디저트 카페를 털어 긴급 공수해 옴으로써 겨우 사태가 진정되었습니다.</p>
+                        <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 사탕 재고 100만 개 유지해라.">※ 사탄 비서실장 시말서 5만 장 제출 완료.</div>
+                    </div>
+                    <div class="lore-card" style="border-color: #ff9800;">
+                        <h3 style="color: #ff9800;" data-prank="꼬붕 2호 수박 파티 사건">사신 무기(데스 낫) 무단 반출 및 분실 위기</h3>
+                        <p data-prank="루아가 해골 언니 낫 몰래 훔쳐서 수박 썰다가 혼남 ㅋㅋ 나도 한 조각 먹었지롱.">차기 사신 <strong>루아</strong>가 데스 사장의 주력 무기인 낫을 몰래 이승으로 빼돌려 수박을 써는 용도로 사용하다 잃어버릴 뻔한 사건입니다. 이로 인해 3일간 이승에서 사망자가 단 한 명도 발생하지 않는 기현상이 일어났습니다.</p>
+                        <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 해골 언니 뼈 부딪히는 소리 여기까지 들렸음.">※ 루아 사원 반성문 3000장 작성 완료. - 데스</div>
+                    </div>
+                    <div class="lore-card" style="border-color: #ff9800;">
+                        <h3 style="color: #ff9800;" data-prank="우는 솜뭉치 3박 4일 소음 테러">제1연구소 야간 소음 마비 사태</h3>
+                        <p data-prank="아오 퇴근할 때 토끼한테 인사 좀 해줘라. 밤새 우니까 내가 시끄러워서 잘 수가 없잖아!">퇴근길 직원들이 연구 개체 <strong>미스 래빗</strong>에게 인사를 하지 않고 지나치자, 극심한 애정결핍에 시달린 래빗이 3박 4일 동안 슬픈 울음소리를 울려 퍼뜨린 사건입니다. 음파의 영향으로 저승의 모든 유리창이 깨지고 업무가 전면 마비되었습니다.</p>
+                        <div class="lore-note" style="color: rgba(255,152,0,0.6);" data-prank="※ 인사 안 하는 놈은 내가 귤 형벌 내릴 거임.">※ 행동 수칙: 래빗 앞을 지날 땐 반드시 손을 흔들어 줄 것.</div>
                     </div>
                 </div>
             </div>
@@ -587,6 +622,7 @@
                 if(!isAdminMode && !isPrankMode) {
                     if(id === 'page-home') { header.style.borderColor = 'rgba(123, 97, 255, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #7b61ff'; document.documentElement.style.setProperty('--current-theme', '#7b61ff');}
                     else if(id === 'page-lore') { header.style.borderColor = 'rgba(218, 0, 55, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #da0037'; document.documentElement.style.setProperty('--current-theme', '#da0037');}
+                    else if(id === 'page-incidents') { header.style.borderColor = 'rgba(255, 152, 0, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #ff9800'; document.documentElement.style.setProperty('--current-theme', '#ff9800');}
                     else if(id === 'page-staff') { header.style.borderColor = 'rgba(79, 172, 254, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #4facfe'; document.documentElement.style.setProperty('--current-theme', '#4facfe');}
                     else if(id === 'page-recruit') { header.style.borderColor = 'rgba(212, 175, 55, 0.3)'; document.querySelector('.logo-text').style.textShadow = '0 0 10px #d4af37'; document.documentElement.style.setProperty('--current-theme', '#d4af37');}
                 }
@@ -594,12 +630,12 @@
             window.scrollTo(0,0);
         }
 
-        // 🔥 PC 전용: 바알 설정 수공예 장인으로 변경 완료!
+        // 🔥 레비아탄(5000만 세), 사탄(7000만 세) 나이 수정됨
         const charData = {
             'god': { name: '고드', role: '장기 체류자', img: 'https://igx.kr/u/zP/c/1', age: '380억 세 (측정불가)', mbti: 'INTP', tags: ['창조신', '단거최고', '사탕중독', '관찰자'], desc: '귀차니즘이 매우 심하고 단 것을 매우 좋아합니다. 최근에는 인간계의 <strong>사탕</strong>에 빠져 있으며, 설탕 코팅의 두께에 따라 그날 우주의 운명이 결정된다는 소문이 있습니다. 자다가 기침 한 번으로 유성을 떨어뜨려 릴리스를 고생시키기도 합니다.', ability: '【 인과율 초월 및 우주적 재창조 (Genesis & Oblivion) 】\n\n물리 법칙, 시간, 공간의 제약을 무시하고 의지만으로 우주를 소멸시키거나 재구축합니다. 현재는 단순한 \'관찰자\' 역할을 수행 중입니다.\n\n<span style="color:#da0037; font-size:0.8em;">(※ 관측 불가 수준의 영력. 접근 금지 등급. 무슨 일이 있어도 그녀의 신경을 건드리지 마십시오.)</span>' },
-            'leviathan': { name: '레비아탄', role: '최상급 악령 (방관자)', img: 'https://igx.kr/u/zP/w/1', age: '측정불가', mbti: 'ISTP', tags: ['심해의지배자', '행방불명', '술집단골', '방관자'], desc: '심연과 어둠의 공포에서 태어난 최상급 악령입니다. 현재 에테르나의 통제를 벗어나 현세 어딘가에서 방관 중입니다. 정확한 행방은 알 수 없으나, 항간의 소문에 의하면 어느 허름한 인간계 술집에 머물고 있다고 합니다.', ability: '【 심해의 압박 & 심연의 공포 】\n주변 공간의 영적 밀도를 무한히 높여 모든 존재를 압착시킵니다. 대상에게 심연을 보여주어 트라우마를 생성합니다.' },
+            'leviathan': { name: '레비아탄', role: '최상급 악령 (방관자)', img: 'https://igx.kr/u/zP/w/1', age: '5000만 세', mbti: 'ISTP', tags: ['심해의지배자', '행방불명', '술집단골', '방관자'], desc: '심연과 어둠의 공포에서 태어난 최상급 악령입니다. 현재 에테르나의 통제를 벗어나 현세 어딘가에서 방관 중입니다. 정확한 행방은 알 수 없으나, 항간의 소문에 의하면 어느 허름한 인간계 술집에 머물고 있다고 합니다.', ability: '【 심해의 압박 & 심연의 공포 】\n주변 공간의 영적 밀도를 무한히 높여 모든 존재를 압착시킵니다. 대상에게 심연을 보여주어 트라우마를 생성합니다.' },
             'lilith': { name: '릴리스', role: '회장 (최상급)', img: 'https://igx.kr/u/zP/d/1', age: '9821만 세', mbti: 'ISFJ', tags: ['외강내유', '월급인상최고', '테라리움', '맛집공유'], desc: '차가운 외모와 달리 직원들에게 매주 금요일 맛집 쿠폰을 쏘는 따뜻한 회장님입니다. 집무실에서 키우는 작은 <strong>테라리움</strong>은 사실 실제 행성 하나와 연결되어 있습니다. 벌레를 극도로 무서워하며, 일을 미루지 않고 직접 처리하는 완벽주의자입니다.', ability: '【 영혼의 계약 & 영혼 사슬 】\n영혼을 구속하는 강력한 계약을 맺습니다. 영혼을 직접적으로 타격하고 속박할 수 있는 붉은 사슬을 사용합니다.' },
-            'satan': { name: '사탄', role: '비서실장 (최상급)', img: 'https://igx.kr/u/zP/h/1', age: '4534만 세', mbti: 'ENTP', tags: ['장난꾸러기', '오픈런장인', '간식셔틀', '존댓말'], desc: '활발하고 남 놀리기를 좋아하는 악마입니다. 사내 장난 금지 대상 1호지만 정작 본인이 규정을 만듭니다. 고드의 간식을 챙기기 위해 인간계 유명 디저트 카페 <strong>오픈런</strong>을 수만 번 뛰는 경력이 있습니다.', ability: '【 칠흑의 업화 】\n모든 것을 태워버리는 검은 불꽃을 자유자재로 다룹니다.' },
+            'satan': { name: '사탄', role: '비서실장 (최상급)', img: 'https://igx.kr/u/zP/h/1', age: '7000만 세', mbti: 'ENTP', tags: ['장난꾸러기', '오픈런장인', '간식셔틀', '존댓말'], desc: '활발하고 남 놀리기를 좋아하는 악마입니다. 사내 장난 금지 대상 1호지만 정작 본인이 규정을 만듭니다. 고드의 간식을 챙기기 위해 인간계 유명 디저트 카페 <strong>오픈런</strong>을 수만 번 뛰는 경력이 있습니다.', ability: '【 칠흑의 업화 】\n모든 것을 태워버리는 검은 불꽃을 자유자재로 다룹니다.' },
             'death': { name: '데스', role: '운영 총괄 사장 (사신)', img: 'https://igx.kr/u/zP/g/1', age: '210억 세', mbti: 'ISTJ', tags: ['츤데레', '분재다듬기', '야근요정', '과묵함'], desc: '에테르나의 공동 창업자입니다. 요즘 취미는 <strong>분재 다듬기</strong>지만 손을 대는 식물마다 영원한 안식(고사)에 들어 고민입니다. 야근하는 직원 책상에 조용히 에너지 드링크를 두고 사라지는 츤데레의 정석입니다.', ability: '【 영혼 회수 & 영혼 절단 】\n수명을 다한 영혼을 거두어들이거나, 부정한 영혼을 베어버립니다.' },
             'lua': { name: '루아', role: '운영팀 사원 (사신 후계자)', img: 'https://igx.kr/u/zP/j/1', age: '100만 세', mbti: 'ENFP', tags: ['덜렁이', '재능천재', '활발함'], desc: '차기 죽음의 신입니다. 실수를 너무 많이 하여 데스의 추가 업무를 만듭니다. 데스의 낫을 몰래 가져가다 걸려 반성문을 쓴 전적이 있습니다.', ability: '【 영혼 회수 & 영혼 절단 】\n기본적인 사신의 능력을 지녔으며 잠재력은 데스 이상입니다.' },
             'mavis': { name: '메이비스', role: '소속원 (상급)', img: 'https://igx.kr/u/zP/l/1', age: '1200만 세', mbti: 'ISTP', tags: ['만성피로', '고양이집사', '퇴사불가', '커피중독'], desc: '업무의 핵심 인력입니다. 월급의 대부분을 <strong>고양이 간식</strong>에 씁니다. "메이비스가 퇴사하는 날이 회사가 망하는 날"이라는 평판이 돌 만큼 유능합니다.', ability: '【 무제한 포탈 생성 】\n크기 제한이 없는 포탈을 엽니다. 단, 크기가 커질수록 마력 소모가 극심해집니다.' },

@@ -145,20 +145,14 @@
         /* 필터 및 명부 */
         .filter-menu { display: flex; justify-content: center; gap: 12px; margin-bottom: 3.5rem; flex-wrap: wrap; }
         .filter-btn { background: transparent; padding: 10px 25px; border-radius: 30px; transition: 0.4s; font-size: 0.9rem; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); color: var(--text-dim); cursor: pointer;}
-        @keyframes pulseRed { 0% { box-shadow: 0 0 0px var(--accent-red); } 50% { box-shadow: 0 0 15px var(--accent-red); } 100% { box-shadow: 0 0 0px var(--accent-red); } }
-        @keyframes pulseBlue { 0% { box-shadow: 0 0 0px var(--accent-blue); } 50% { box-shadow: 0 0 15px var(--accent-blue); } 100% { box-shadow: 0 0 0px var(--accent-blue); } }
-        @keyframes pulseGold { 0% { box-shadow: 0 0 0px var(--accent-gold); } 50% { box-shadow: 0 0 15px var(--accent-gold); } 100% { box-shadow: 0 0 0px var(--accent-gold); } }
         .btn-all.active { border-color: var(--current-theme); color: #fff; background: rgba(255,255,255,0.05); }
-        .btn-under.active { border-color: var(--accent-red); color: #fff; animation: pulseRed 3s infinite; }
-        .btn-human.active { border-color: var(--accent-blue); color: #fff; animation: pulseBlue 3s infinite; }
-        .btn-etc.active { border-color: var(--accent-gold); color: #fff; animation: pulseGold 3s infinite; }
+        .btn-under.active { border-color: var(--accent-red); color: #fff; box-shadow: 0 0 10px var(--accent-red); }
+        .btn-human.active { border-color: var(--accent-blue); color: #fff; box-shadow: 0 0 10px var(--accent-blue); }
+        .btn-etc.active { border-color: var(--accent-gold); color: #fff; box-shadow: 0 0 10px var(--accent-gold); }
 
         .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
         .staff-card { background: rgba(1, 8, 18, 0.6); border: 1px solid rgba(255,255,255,0.05); text-align: center; padding: 2.5rem 1rem; border-radius: 15px; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); cursor: pointer; }
         .staff-card:hover { transform: translateY(-12px); border-color: rgba(255,255,255,0.3); background: rgba(10, 20, 35, 0.9); }
-        .staff-card[data-category="underworld"]:hover { box-shadow: 0 15px 30px rgba(218, 0, 55, 0.15); }
-        .staff-card[data-category="human"]:hover { box-shadow: 0 15px 30px rgba(79, 172, 254, 0.15); }
-        .staff-card[data-category="etc"]:hover { box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15); }
         .staff-img-wrap { width: 100px; height: 100px; margin: 0 auto 1.5rem; border-radius: 50%; padding: 3px; background: rgba(255,255,255,0.1); transition: 0.4s; }
         .staff-card:hover .staff-img-wrap { transform: scale(1.05); background: rgba(255,255,255,0.4); }
         .staff-img-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid #010812; }
@@ -179,13 +173,11 @@
         .checkbox-group input[type="checkbox"] { appearance: none; min-width: 22px; height: 22px; border: 1px solid #da0037; background: #000; cursor: pointer; position: relative; transition: 0.3s; margin-top: 3px; }
         .checkbox-group input[type="checkbox"]:checked { background: #da0037; box-shadow: 0 0 10px #da0037; }
         .checkbox-group input[type="checkbox"]:checked::after { content: '✔'; position: absolute; color: #fff; font-size: 14px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        #forbiddenWarning { display: none; color: #ff0000; font-size: 0.85rem; margin-top: 8px; font-weight: bold; animation: pulseRed 1s infinite; text-align: right; }
+        #forbiddenWarning { display: none; color: #ff0000; font-size: 0.85rem; margin-top: 8px; font-weight: bold; text-align: right; }
         .btn-gold { background: transparent; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 18px; width: 100%; font-size: 1.1rem; font-weight: bold; transition: 0.3s; letter-spacing: 2px; cursor: pointer; position: relative; overflow: hidden; }
         .btn-gold::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent); transition: 0.5s; }
         .btn-gold:hover::before { left: 100%; }
         .btn-gold:hover { background: var(--accent-gold); color: #000; box-shadow: 0 0 25px rgba(212, 175, 55, 0.5); }
-        .btn-gold.loading { background: #333; color: #888; border-color: #555; pointer-events: none; box-shadow: none; animation: pulseLoading 1s infinite alternate; }
-        @keyframes pulseLoading { from { opacity: 0.6; } to { opacity: 1; } }
         .recruit-success { display: none; text-align: center; animation: fadeIn 1s; }
 
         /* 공통 모달창 레이아웃 */
@@ -217,7 +209,7 @@
         .btn-return { background: transparent; color: #777; border: 1px solid #444; padding: 15px; width: 100%; margin-top: 1.5rem; transition: 0.3s; font-weight: bold; font-size: 1rem; cursor: pointer;}
         .btn-return:hover { color: #fff; border-color: #fff; }
 
-        /* 🔥 더욱 강화된 글리치 텍스트 (위협적인 붉은색) */
+        /* 🔥 강화된 글리치 텍스트 (위협적인 붉은색) */
         .glitch-text { 
             display: inline-block; cursor: crosshair; color: #ff0000; font-weight: 900; font-size: 1.1rem;
             text-shadow: 2px 0 red, -2px 0 blue; animation: heavyGlitch 0.1s infinite; position: relative;
@@ -239,12 +231,17 @@
             font-family: '궁서', 'Noto Serif KR', serif !important;
             animation: doomFlicker 0.15s infinite !important;
         }
-        body.doom-mode * {
+        
+        /* 둠 모드에서 특정 요소들만 어둡게, 레이아웃 파괴 방지 */
+        body.doom-mode .modal-window, body.doom-mode .staff-card, body.doom-mode .lore-card, body.doom-mode .recruit-container, body.doom-mode .ppt-wrapper {
             border-color: #500 !important;
-            text-shadow: 0 0 8px #da0037 !important;
-            background: rgba(15, 0, 0, 0.4) !important;
-            box-shadow: inset 0 0 10px #000 !important;
+            background: rgba(15, 0, 0, 0.8) !important;
+            box-shadow: inset 0 0 20px #000 !important;
             transition: none !important;
+        }
+        body.doom-mode h1, body.doom-mode h2, body.doom-mode h3, body.doom-mode p, body.doom-mode span:not(.close-btn), body.doom-mode a, body.doom-mode label, body.doom-mode div {
+            color: #da0037 !important;
+            text-shadow: 0 0 5px #da0037 !important;
         }
         body.doom-mode img {
             filter: grayscale(1) contrast(200%) invert(1) drop-shadow(0 0 15px red) !important;
@@ -268,8 +265,9 @@
             animation: heavyGlitch 0.1s infinite;
         }
 
-        #warningModal .modal-window { border-color: var(--accent-red); box-shadow: 0 0 30px rgba(218,0,55,0.5); }
-        #warningModal .modal-header { background: rgba(218,0,55,0.1); }
+        #warningModal1 .modal-window, #warningModal2 .modal-window { border-color: var(--accent-red); box-shadow: 0 0 30px rgba(218,0,55,0.5); }
+        #warningModal1 .modal-header, #warningModal2 .modal-header { background: rgba(218,0,55,0.1); }
+        
         .pc-br { display: block; } .mobile-br { display: none; }
         @media (max-width: 768px) {
             .section-wrap { padding: 3rem 5%; }
@@ -291,7 +289,6 @@
             .pc-br { display: none; } .mobile-br { display: block; }
         }
         @media (min-width: 769px) { .mobile-br { display: none; } }
-        @media (hover: none) and (pointer: coarse) { body, a, button, .staff-card, .lore-card, .close-btn { cursor: auto; } }
     </style>
 </head>
 <body id="bodyEl">
@@ -372,17 +369,14 @@
                     <div class="lore-card">
                         <h3 data-prank="장난감 1호 (Demons)">악마 (Demons)</h3>
                         <p data-prank="일은 잘하는데 너무 진지해서 피곤한 애들. 그래도 내 간식 셔틀이니까 봐줌...">단순히 저승 환경에서 태어난 '태생적 종족명'입니다. 인간들의 편견 때문에 고생을 하지만, 실제로는 철저한 계약과 규율을 따르는 우수한 실무진들입니다.</p>
-                        <div class="lore-note" data-prank="※ 뿔 달렸다고 다 무서운 거 아님. 피곤할 뿐.">※ 수정: 최근 이승 방역팀 예산 삭감됨 - 사탄</div>
                     </div>
                     <div class="lore-card">
                         <h3 data-prank="우주 먼지 (Evil Spirits)">악귀 및 악령 (Evil Spirits)</h3>
                         <p data-prank="그냥 돌아다니는 먼지 같은 애들. 청소기 돌리기도 귀찮아... 대충 밟아.">극심한 공포가 뭉쳐져 스폰되는 파생 개체들입니다. 발견 즉시 정화 및 소멸 절차를 밟아야 하며, 일부 특수 개체는 상층부의 허가 없이 접근을 금지합니다.</p>
-                        <div class="lore-note" data-prank="※ 먼지 좀 치워줘... 쿨럭.">※ 경고: 래빗은 회장님 허가 없이 포획 금지 - 릴리스</div>
                     </div>
                     <div class="lore-card">
                         <h3 data-prank="천년의 눈치게임">사후 1000년의 진로 선택</h3>
                         <p data-prank="1000년... 아, 기다리다 지치겠다. 나랑 안 놀아주면 1000년 더 꿇어.">영혼은 사후 1000년이 되는 해에 최종 진로를 결정해야 합니다. [환생], [안식], 그리고 에테르나의 사역마로 계약하는 [취업] 중 하나를 선택할 수 있습니다.</p>
-                        <div class="lore-note" data-prank="※ 취업 안 할 거면 귤이나 까놔.">※ 취업 사기 적발 시 영혼 소멸형 - 인사팀</div>
                     </div>
                     <div class="lore-card" style="grid-column: 1 / -1;">
                         <h3 data-prank="대충 나눈 우주 서열표">공통 위협 등급 체계</h3>
@@ -394,7 +388,6 @@
                             <li><span class="grade-badge">하급</span> <span data-prank="누구세요... 이름 외우기도 귀찮아.">일반적인 서류 및 기본 현장직</span></li>
                             <li><span class="grade-badge">최하급</span> <span data-prank="숨 쉬면 날아가는 먼지.">미약한 영체, 지능이나 능력이 희미함</span></li>
                         </ul>
-                        <div class="lore-note" style="bottom: 25px;" data-prank="※ 내 사탕 건드리면 서열이고 뭐고 그냥 다 멸망이야...">※ 고드님 간식비는 예외 등급(S+)으로 처리할 것. - 비서실</div>
                     </div>
                 </div>
             </div>
@@ -415,48 +408,97 @@
                         </div>
                         <div class="accordion-content">
                             <p style="font-weight: bold; color: #fff; font-size: 1.05rem;" data-prank="어떤 미친놈이 내 한정판 사탕 훔쳐 먹었길래, 그냥 걔가 태어난 우주 자체를 지워버렸어. 지금은 아무도 걔 기억 못할걸?">과거 한 상급 악마가 고드님의 전용 간식 창고에 무단 침입하여 최애 사탕을 훼손한 사건입니다. 고드님이 '진심으로' 분노한 유일한 사건이며, 분노의 여파로 해당 악마는 물리적 소멸을 넘어 <strong>'존재했던 인과율' 자체가 우주에서 완전히 삭제</strong>되었습니다. 현재 그 악마의 이름과 종족을 기억하는 자는 아무도 없으며, 세계의 타임라인이 재구축되었습니다.</p>
-                            <div class="lore-note" style="color: #ff4444; font-size: 1rem; position: relative; right: 0; bottom: 0; margin-top: 1rem;" data-prank="※ 내 거 건드리면 태어나기 전으로 돌려보낸다.">※ 최고 경고: 1짱의 간식은 우주의 존망과 직결됩니다. 절대 접근하지 마십시오.</div>
                         </div>
                     </div>
 
                     <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <h3 style="color: #ff9800;" data-prank="1짱 등판! 1차 대청소">창조신 고드 강림 및 제1차 대청소 사태</h3>
-                            <span class="toggle-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <p data-prank="아 천국 결재 서류 너무 많아서 빡쳐서 다 때려치고 내려온 날. 기분 안 좋아서 한숨 한 번 쉬었더니 밑에 있던 먼지(악령)들 싹 다 날아갔다며? 청소 안 해도 돼서 개꿀.">천만 년 전, 천계의 과도한 업무에 질린 고드님께서 서류를 집어던지고 저승으로 도망쳐 내려온 기념비적인 날입니다. 강림 당시 내뿜은 짜증 섞인 영압 방출로 인해, 그 순간 저승에 존재하던 모든 악령이 단 1초 만에 100% 소멸하는 전무후무한 기록을 세웠습니다.</p>
-                        </div>
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="1짱 등판! 1차 대청소">창조신 고드 강림 및 제1차 대청소 사태</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="아 천국 결재 서류 너무 많아서 빡쳐서 다 때려치고 내려온 날. 기분 안 좋아서 한숨 한 번 쉬었더니 밑에 있던 먼지(악령)들 싹 다 날아갔다며? 청소 안 해도 돼서 개꿀.">천만 년 전, 천계의 과도한 업무에 질린 고드님께서 서류를 집어던지고 저승으로 도망쳐 내려온 기념비적인 날입니다. 강림 당시 내뿜은 짜증 섞인 영압 방출로 인해, 그 순간 저승에 존재하던 모든 악령이 단 1초 만에 100% 소멸하는 전무후무한 기록을 세웠습니다.</p></div>
                     </div>
 
                     <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <h3 style="color: #ff9800;" data-prank="큰 물고기 가출 사건">제1차 심연 범람 사태</h3>
-                            <span class="toggle-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <p data-prank="태어나자마자 뭐 그리 화가 났는지 다 부수고 가출함. 지금은 어디서 술 마시고 있겠지 뭐.">최상급 악령 <strong>레비아탄</strong>이 태어날 당시, 통제 불능의 마력 폭주로 심연이 범람하여 날뛰었던 대사건입니다.</p>
-                        </div>
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="큰 물고기 가출 사건">제1차 심연 범람 사태</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="태어나자마자 뭐 그리 화가 났는지 다 부수고 가출함. 지금은 어디서 술 마시고 있겠지 뭐.">최상급 악령 <strong>레비아탄</strong>이 태어날 당시, 통제 불능의 마력 폭주로 심연이 범람하여 날뛰었던 대사건입니다.</p></div>
                     </div>
 
                     <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <h3 style="color: #ff9800;" data-prank="1짱 당 떨어져서 우주 멸망할 뻔한 날">우주 열역학 제2법칙 일시 정지 사태</h3>
-                            <span class="toggle-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <p data-prank="사탕 안 사 오길래 화나서 며칠 누워있었더니 우주 멈춘다더라? 1짱 심기 건드리면 다 죽는겨. 사탄이 헐레벌떡 사탕 가져와서 살려줌.">창조신 <strong>고드</strong>님께서 일주일간 사탕을 공급받지 못하자, 우주의 엔트로피가 0에 가깝게 떨어지며 모든 차원이 정지하고 멸망 직전까지 갔던 최악의 재난입니다.</p>
-                        </div>
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="1짱 당 떨어져서 우주 멸망할 뻔한 날">우주 열역학 제2법칙 일시 정지 사태</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="사탕 안 사 오길래 화나서 며칠 누워있었더니 우주 멈춘다더라? 1짱 심기 건드리면 다 죽는겨. 사탄이 헐레벌떡 사탕 가져와서 살려줌.">창조신 <strong>고드</strong>님께서 일주일간 사탕을 공급받지 못하자, 우주의 엔트로피가 0에 가깝게 떨어지며 모든 차원이 정지하고 멸망 직전까지 갔던 최악의 재난입니다.</p></div>
                     </div>
 
                     <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
-                            <h3 style="color: #ff9800;" data-prank="파리채 컷 당한 애">천계 진상 루시퍼 추방 사건</h3>
-                            <span class="toggle-icon">▼</span>
-                        </div>
-                        <div class="accordion-content">
-                            <p data-prank="천국에 있을 때 누가 자꾸 귀찮게 윙윙거리면서 긁길래 파리채로 쳤나? 하품했나? 암튼 날려버렸음. 이름이 뭐였지? 몰라, 기억하기도 귀찮아.">천계에 머물던 시절, 무소속 혼혈 <strong>루시퍼</strong>가 고드님 옆에서 지속적으로 신경을 긁으며 깐족거리다 분노를 산 사건입니다. 참다못한 고드님의 하품 한 번에 벼락을 맞고 기억을 잃은 채 저승으로 추방되었습니다.</p>
-                        </div>
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="파리채 컷 당한 애">천계 진상 루시퍼 추방 사건</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="천국에 있을 때 누가 자꾸 귀찮게 윙윙거리면서 긁길래 파리채로 쳤나? 하품했나? 암튼 날려버렸음. 이름이 뭐였지? 몰라, 기억하기도 귀찮아.">천계에 머물던 시절, 무소속 혼혈 <strong>루시퍼</strong>가 고드님 옆에서 지속적으로 신경을 긁으며 깐족거리다 분노를 산 사건입니다. 참다못한 고드님의 하품 한 번에 벼락을 맞고 기억을 잃은 채 저승으로 추방되었습니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="내가 자는 동안 생긴 일">제3차 이승 멸망 위기 (종말의 씨앗)</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="나 꿀잠 자고 일어났더니 밑에 동네 대륙 하나가 없어졌대. 릴리스가 땀 뻘뻘 흘리면서 보고하길래 걍 알았다고 하고 다시 잤음.">이승의 광신도 집단이 심연 깊은 곳에 봉인된 '종말의 씨앗'을 발아시키려 한 극비 사건입니다. 데스와 릴리스가 이승에 현신하여 대륙 하나를 통째로 절단하여 사태를 진압했습니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="사탄 대머리 된 날">사탄의 결재 서류 위조 대폭발 사건</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="사탄이 내 사인 베끼려다가 터져서 대머리 됨 ㅋㅋㅋ 아 진짜 개웃겼는데 사진 찍어둘걸.">사탄 비서실장이 간식비를 타내기 위해 고드님의 서명을 위조하려다 발생한 사고입니다. 펜끝에 깃든 신성력을 감당하지 못해 대폭발이 일어났고, 사탄은 한 달간 머리카락 없이 업무를 봤습니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="잔소리꾼 취한 날">릴리스 회장 만취 해고 소동</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="회식 때 릴리스 취해서 '너네 다 해고야!!' 소리치고 다녀서 애들 진짜 다 짐 쌌잖아 ㅋㅋ">연말 회식에서 과음한 릴리스 회장이 "전 직원 계약 해지!"를 선포하며 영혼 사슬을 마구 휘두른 대소동입니다. 다음날 릴리스는 사비로 전원에게 한우 세트를 돌려야 했습니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="해골 철야 작업의 전설">데스의 72시간 릴레이 참수 사태</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="좀비 군대 만들었다며? 해골이 3일 동안 한숨도 안 자고 다 썰고 왔대. 진짜 피곤하게 산다.">이승의 네크로맨서가 불사의 군대를 창설하려 하자, 데스 사장이 홀로 출격해 72시간 쉬지 않고 백만 언데드 부대를 썰어버린 사건입니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="내 침대 돌려내">고드님 애착 침대 실종 소동</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="침대 없어져서 다 부수려고 했는데, 내가 사탕 껍질을 안 버려서 산처럼 쌓인 거 밑에 파묻혀 있었음 ㅋㅋ">애착 침대가 사라져 1급 비상사태가 선포되었으나, 3일 뒤 고드님 방의 거대한 사탕 껍질 산더미 아래에서 온전히 발견되었습니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="내 사탕 압수당한 날">사탄의 불법 사탕 밀수 적발</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="사탄이 이승에서 한정판 사탕 5천 트럭 훔쳐 오다가 릴리스한테 걸렸어... 내 사탕 돌려내.">고드님께 바칠 한정판 사탕 5천 대 분량을 무단 밀수하다 국경 방역팀에 적발된 사건입니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="겜창 해커의 최후">파이몬의 천계 서버 디도스 맞대응</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="파이몬이 천국 서버 해킹해서 게임하다가 털려서 회사 인터넷 다 터짐 ㅋㅋ 유튜브 못 봐서 화냈잖아.">이승 담당 파이몬이 게임 핑을 줄이려 천계 홀리망(Holy Network)을 무단 해킹하다가, 대천사들의 디도스 공격을 받아 사내망이 12시간 다운되었습니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="꼬붕 2호 수박 파티 사건">사신 무기(데스 낫) 무단 반출 위기</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="루아가 해골 무기 몰래 훔쳐서 수박 썰다가 혼남 ㅋㅋ 나도 한 조각 먹었지롱.">차기 사신 루아가 데스의 낫으로 이승에서 수박을 썰다 적발된 사건입니다. 3일간 이승 사망률이 0%를 기록했습니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="우는 솜뭉치 3박 4일 테러">제1연구소 야간 소음 마비 사태</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="아오 인사 좀 해줘라. 밤새 우니까 시끄러워서 잘 수가 없잖아!">미스 래빗이 퇴근길 인사를 받지 못해 애정결핍으로 3박 4일 울어대어 저승의 모든 유리창이 박살 난 사건입니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="인형 언니의 분노">바알의 저주받은 인형 폭주 사태</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="바알이 뜬금없이 거대 곰인형 만들어서 이승 돌아다니게 함. 나름 귀엽던데?">바알이 스트레스로 직조해낸 거대 그림자 인형들이 이승의 유원지를 무단 점거하여, 현장 요원 에리스가 물리력으로 철거한 사태입니다.</p></div>
+                    </div>
+                    
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="인간계 종말 해프닝">인간계 종말 오보 해프닝</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="이승에서 뭐 세상 끝난다고 난리 치길래 팝콘 가져왔더니 아무 일도 안 일어남. 노잼.">이승의 천문학자들이 단순 영적 파동을 소행성 충돌로 오인해 전 세계가 종말 대비를 하였으나, 원인은 메이비스가 실수로 연 대형 싱크홀 포탈이었습니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="저승문 꽉 막힌 날">저승 입구 환생 파업 병목</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="먼지들이 안 들어오고 문 앞에서 시위하길래 하품 한 번 크게 해줌. 다들 후다닥 들어오더라.">환생을 거부하는 영혼들이 저승 입구에서 연좌농성을 벌여 병목이 발생했으나, 고드님의 헛기침 한 번에 공포를 느껴 자진 입소했습니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="불 꺼진 날">Aeterna 본사 대규모 정전 사태</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="갑자기 깜깜해져서 그냥 잤음. 꿀잠.">심연의 핵 코어에 일시적인 과부하가 발생해 본사가 12시간 정전되었으며, 전 직원이 데스의 야광 해골에 의존해 업무를 봤습니다.</p></div>
+                    </div>
+
+                    <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
+                        <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="맛집 투어 횡령건">에리스 맛집 투어 결제 누락 사건</h3><span class="toggle-icon">▼</span></div>
+                        <div class="accordion-content"><p data-prank="인간계 맛집 다 털어먹고 법인카드로 긁다가 릴리스한테 욕먹음 ㅋㅋ">에리스와 에리나 자매가 이승 방역을 핑계로 이승의 유명 맛집 100곳을 돌며 법인카드를 초과 사용하여 사탄에게 징계를 받았습니다.</p></div>
                     </div>
 
                 </div>
@@ -546,7 +588,7 @@
             <div class="section-wrap">
                 <div class="page-header">
                     <h2 data-prank="고드님의 간식 셔틀 모집 (안 쓰면 후회함)">신규 사역마 영구 계약서</h2>
-                    <p data-prank="대충 적어 내면 무를 수 없어... 도망 못 감.">저승의 질서를 함께 관리할 영체 및 계약자를 모집합니다.<br><span style="color:#da0037; font-size:0.85rem;">(※ 경고: 서류는 단 1회만 제출 가능하며, 전송 후 절대 파기가 불가합니다.)</span></p>
+                    <p data-prank="대충 적어 내면 무를 수 없어... 도망 못 감.">저승의 질서를 함께 관리할 영체 및 계약자를 모집합니다.</p>
                 </div>
                 <div class="recruit-container">
                     <form id="applyForm" onsubmit="submitForm(event)">
@@ -561,20 +603,41 @@
         </main>
     </div>
 
-    <div id="warningModal" class="modal-overlay">
+    <div id="warningModal1" class="modal-overlay">
         <div class="modal-window" style="max-width: 450px; text-align: center; border-color: var(--accent-red); box-shadow: 0 0 30px rgba(218,0,55,0.5);">
             <div class="modal-header" style="background: rgba(218,0,55,0.1);">
                 <span style="color:var(--accent-red);">[ SYSTEM WARNING ]</span>
             </div>
             <div class="modal-body" style="padding: 3rem;">
-                <h3 style="color: var(--accent-red); margin-bottom: 1.5rem; font-size: 1.5rem; letter-spacing: 2px;">절대 금기 데이터 경고</h3>
+                <h3 style="color: var(--accent-red); margin-bottom: 1.5rem; font-size: 1.5rem; letter-spacing: 2px;">광과민성 증후군 및 열람 주의</h3>
                 <p style="color: #bbb; margin-bottom: 2.5rem; font-size: 1rem; line-height: 1.8;">
-                    이후 발생하는 모든 시각, 청각, 영적 손상에 대해 에테르나는 책임지지 않습니다.<br>
-                    <strong>정말 열람하시겠습니까?</strong>
+                    본 데이터에는 강한 시각적 깜빡임과 기괴한 연출이 포함되어 있습니다.<br>
+                    노약자, 임산부, 심약자 및 광과민성 증후군이 있는 분은 열람을 삼가시기 바랍니다.<br>
+                    <strong>열람하시겠습니까?</strong>
                 </p>
                 <div style="display: flex; gap: 15px;">
-                    <button class="btn-scan" onclick="acceptWarning()" style="flex:1;">열람 수락</button>
-                    <button class="btn-return" onclick="closeWarning()" style="flex:1; margin-top:0;">열람 취소</button>
+                    <button class="btn-scan" onclick="acceptWarning1()" style="flex:1;">다음</button>
+                    <button class="btn-return" onclick="closeWarning()" style="flex:1; margin-top:0;">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="warningModal2" class="modal-overlay">
+        <div class="modal-window" style="max-width: 450px; text-align: center; border-color: var(--accent-red); box-shadow: 0 0 30px rgba(218,0,55,0.8);">
+            <div class="modal-header" style="background: rgba(218,0,55,0.2);">
+                <span style="color:var(--accent-red);">[ FINAL WARNING ]</span>
+            </div>
+            <div class="modal-body" style="padding: 3rem;">
+                <h3 style="color: var(--accent-red); margin-bottom: 1.5rem; font-size: 1.5rem; letter-spacing: 2px;">최종 경고</h3>
+                <p style="color: #bbb; margin-bottom: 2.5rem; font-size: 1rem; line-height: 1.8;">
+                    이 조작은 사이트의 정상적인 이용을 방해하며, 새로고침 전까지 되돌릴 수 없습니다.<br>
+                    화면 표시에 심각한 오류가 발생합니다.<br>
+                    <strong>계속하시겠습니까?</strong>
+                </p>
+                <div style="display: flex; gap: 15px;">
+                    <button class="btn-scan" onclick="acceptWarning2()" style="flex:1; background: #da0037; color: #fff;">열람 (되돌릴 수 없음)</button>
+                    <button class="btn-return" onclick="closeWarning()" style="flex:1; margin-top:0;">취소</button>
                 </div>
             </div>
         </div>
@@ -624,10 +687,9 @@
         let isAdminMode = false;
         let isPrankMode = false;
         let eyeTrackingHandler = null;
-        let godWarningShown = false; 
         let isDoomed = false; // 🔥 파멸 상태 플래그
 
-        // 🔥 YouTube IFrame API를 통한 고드 노래 설정 (45:02 ~ 49:25 반복)
+        // 🔥 YouTube IFrame API를 통한 고드 노래 설정
         let ytPlayerGod;
         const bgmGod = {
             play: function() {
@@ -643,25 +705,19 @@
             },
             set currentTime(val) {
                 if (ytPlayerGod && typeof ytPlayerGod.seekTo === 'function') {
-                    ytPlayerGod.seekTo(2702); // 45분 02초
+                    ytPlayerGod.seekTo(2702); 
                 }
             }
         };
 
         function onYouTubeIframeAPIReady() {
             ytPlayerGod = new YT.Player('yt-player-god', {
-                height: '1',
-                width: '1',
+                height: '100',
+                width: '100',
                 videoId: 'fDxYULCo3T0',
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'start': 2702,  // 45:02
-                    'end': 2965     // 49:25
-                },
+                playerVars: { 'autoplay': 0, 'controls': 0, 'start': 2702, 'end': 2965 },
                 events: {
                     'onStateChange': function(event) {
-                        // 지정된 end 시간에 도달하여 멈추면 다시 start로 돌려서 재생
                         if (event.data === YT.PlayerState.ENDED) {
                             ytPlayerGod.seekTo(2702);
                             ytPlayerGod.playVideo();
@@ -671,12 +727,10 @@
             });
         }
 
-        // 동적으로 YouTube API 스크립트 로드
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         const firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
 
         function enterSite() {
             document.getElementById('introOverlay').classList.add('fade-out');
@@ -751,24 +805,25 @@
             });
         }
 
-        // 나이 클릭 시 경고창 띄우기
+        // 나이 클릭 시 첫번째 경고창 띄우기
         function handleAgeClick() {
-            if(!godWarningShown) {
-                document.getElementById('warningModal').style.display = 'flex';
-            } else {
-                triggerDoomMode();
-            }
+            document.getElementById('warningModal1').style.display = 'flex';
         }
 
-        // 경고 모달 수락
-        function acceptWarning() {
-            document.getElementById('warningModal').style.display = 'none';
-            godWarningShown = true;
+        // 경고 모달 수락 절차
+        function acceptWarning1() {
+            document.getElementById('warningModal1').style.display = 'none';
+            document.getElementById('warningModal2').style.display = 'flex';
+        }
+        
+        function acceptWarning2() {
+            document.getElementById('warningModal2').style.display = 'none';
             triggerDoomMode();
         }
 
         function closeWarning() {
-            document.getElementById('warningModal').style.display = 'none';
+            document.getElementById('warningModal1').style.display = 'none';
+            document.getElementById('warningModal2').style.display = 'none';
         }
 
         // 🔥 코즈믹 호러 (돌이킬 수 없는 둠 모드) 발동
@@ -788,7 +843,7 @@
             setTimeout(() => {
                 document.getElementById('silenceOverlay').style.display = 'none';
                 
-                // 에러 브금 재생
+                // 에러 브금 재생 (침묵 끝난 후 재생)
                 bgmError.volume = 0.8;
                 bgmError.play().catch(()=>{});
 
@@ -816,7 +871,7 @@
                     img.src = charData['god'].img;
                 });
 
-                // 모든 데이터를 고드로 덮어쓰기
+                // 모든 데이터를 고드로 덮어쓰기 (컨셉 및 설명 모두 광신적 찬양으로 강제)
                 for(let key in charData) {
                     charData[key].name = "고드";
                     charData[key].img = charData['god'].img;

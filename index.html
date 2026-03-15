@@ -70,7 +70,7 @@
         /* 기본 레이아웃 */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Serif KR', serif; outline: none !important; -webkit-tap-highlight-color: transparent; }
         html { scroll-behavior: smooth; }
-        body { background-color: var(--bg-base); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100vw; cursor: crosshair; transition: background 0.8s ease; word-break: keep-all; }
+        body { background-color: var(--bg-base); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100vw; transition: background 0.8s ease; word-break: keep-all; }
         #fixed-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png'); z-index: -2; pointer-events: none; opacity: 0.5; transition: all 0.5s;}
         #abyss-dust { position: fixed; top: 0; left: 0; width: 100vw; height: 200vh; background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; pointer-events: none; animation: drift 120s linear infinite; }
         @keyframes drift { from { transform: translateY(0); } to { transform: translateY(-50%); } }
@@ -188,7 +188,7 @@
         @keyframes pulseLoading { from { opacity: 0.6; } to { opacity: 1; } }
         .recruit-success { display: none; text-align: center; animation: fadeIn 1s; }
 
-        /* 모달창 */
+        /* 공통 모달창 레이아웃 */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; transition: opacity 0.3s; }
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal-window { background: #0a0a0c; border: 1px solid #333; border-radius: 12px; width: 90%; max-width: 600px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 0 50px #000; transform: scale(0.95); opacity: 0; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transition: transform 0.3s; }
@@ -217,17 +217,18 @@
         .btn-return { background: transparent; color: #777; border: 1px solid #444; padding: 15px; width: 100%; margin-top: 1.5rem; transition: 0.3s; font-weight: bold; font-size: 1rem; cursor: pointer;}
         .btn-return:hover { color: #fff; border-color: #fff; }
 
-        /* 🔥 강화된 글리치 텍스트 */
+        /* 🔥 더욱 강화된 글리치 텍스트 (위협적인 붉은색) */
         .glitch-text { 
-            display: inline-block; cursor: crosshair; color: var(--accent-red); font-weight: 900; 
+            display: inline-block; cursor: crosshair; color: #ff0000; font-weight: 900; font-size: 1.1rem;
             text-shadow: 2px 0 red, -2px 0 blue; animation: heavyGlitch 0.1s infinite; position: relative;
+            border-bottom: 2px solid #ff0000;
         }
         @keyframes heavyGlitch {
             0% { transform: translate(0) skew(0deg); }
-            20% { transform: translate(-4px, 4px) skew(-10deg); color: #fff; }
-            40% { transform: translate(4px, -4px) skew(10deg); text-shadow: -3px 0 red, 3px 0 blue; }
-            60% { transform: translate(-2px, -2px) skew(0deg); }
-            80% { transform: translate(2px, 2px) skew(5deg); color: #da0037; }
+            20% { transform: translate(-5px, 5px) skew(-15deg); color: #fff; }
+            40% { transform: translate(5px, -5px) skew(15deg); text-shadow: -4px 0 red, 4px 0 blue; }
+            60% { transform: translate(-3px, -3px) skew(0deg); }
+            80% { transform: translate(3px, 3px) skew(10deg); color: #da0037; }
             100% { transform: translate(0) skew(0deg); }
         }
 
@@ -251,8 +252,8 @@
         }
         @keyframes doomFlicker {
             0% { opacity: 1; filter: invert(0); transform: translateX(0) skewX(0); }
-            33% { opacity: 0.9; filter: hue-rotate(90deg); transform: translateX(-3px) skewX(2deg); }
-            66% { opacity: 1; filter: invert(0.1); transform: translateX(3px) skewX(-2deg); }
+            33% { opacity: 0.9; filter: hue-rotate(90deg); transform: translateX(-4px) skewX(3deg); }
+            66% { opacity: 1; filter: invert(0.1); transform: translateX(4px) skewX(-3deg); }
             100% { opacity: 0.95; filter: contrast(150%); transform: translateX(0); }
         }
         
@@ -298,8 +299,9 @@
     <div id="abyss-dust"></div>
 
     <audio id="bgmNormal" src="NORMAL.mp3" loop></audio>
-    <audio id="bgmGod" src="GOD.mp3" loop></audio>
     <audio id="bgmError" src="error.mp3" loop></audio>
+    
+    <div id="yt-player-god" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px;"></div>
 
     <div id="silenceOverlay">
         <span>...</span>
@@ -616,7 +618,6 @@
         const body = document.getElementById('bodyEl');
         const header = document.getElementById('mainHeader');
         const bgmNormal = document.getElementById('bgmNormal');
-        const bgmGod = document.getElementById('bgmGod');
         const bgmError = document.getElementById('bgmError');
         
         let currentActiveTab = 'home';
@@ -625,6 +626,57 @@
         let eyeTrackingHandler = null;
         let godWarningShown = false; 
         let isDoomed = false; // 🔥 파멸 상태 플래그
+
+        // 🔥 YouTube IFrame API를 통한 고드 노래 설정 (45:02 ~ 49:25 반복)
+        let ytPlayerGod;
+        const bgmGod = {
+            play: function() {
+                if (ytPlayerGod && typeof ytPlayerGod.playVideo === 'function') {
+                    ytPlayerGod.playVideo();
+                }
+                return Promise.resolve();
+            },
+            pause: function() {
+                if (ytPlayerGod && typeof ytPlayerGod.pauseVideo === 'function') {
+                    ytPlayerGod.pauseVideo();
+                }
+            },
+            set currentTime(val) {
+                if (ytPlayerGod && typeof ytPlayerGod.seekTo === 'function') {
+                    ytPlayerGod.seekTo(2702); // 45분 02초
+                }
+            }
+        };
+
+        function onYouTubeIframeAPIReady() {
+            ytPlayerGod = new YT.Player('yt-player-god', {
+                height: '1',
+                width: '1',
+                videoId: 'fDxYULCo3T0',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'start': 2702,  // 45:02
+                    'end': 2965     // 49:25
+                },
+                events: {
+                    'onStateChange': function(event) {
+                        // 지정된 end 시간에 도달하여 멈추면 다시 start로 돌려서 재생
+                        if (event.data === YT.PlayerState.ENDED) {
+                            ytPlayerGod.seekTo(2702);
+                            ytPlayerGod.playVideo();
+                        }
+                    }
+                }
+            });
+        }
+
+        // 동적으로 YouTube API 스크립트 로드
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
 
         function enterSite() {
             document.getElementById('introOverlay').classList.add('fade-out');
@@ -656,7 +708,7 @@
         }
 
         const charData = {
-            'god': { name: '고드', role: '장기 체류자', img: 'https://igx.kr/u/zP/c/1', age: '알 수 없음', mbti: 'INTP', tags: ['창조신', '우주1짱', '단거최고', '사탕중독'], desc: '귀차니즘이 매우 심하고 단 것을 좋아합니다. 본인이 우주 서열 1위라는 사실을 아주 잘 알고 있으나 증명하는 것조차 귀찮아합니다.', ability: '【 인과율 초월 및 우주적 재창조 】\n\n물리 법칙, 시간, 공간의 제약을 무시하고 의지만으로 우주를 소멸시키거나 재구축합니다.\n\n<span style="color:#da0037; font-size:0.8em;">(※ 접근 금지 등급. 그녀의 심기를 건드리지 마십시오.)</span>' },
+            'god': { name: '고드', role: '장기 체류자', img: 'https://igx.kr/u/zP/c/1', age: '알 수 없음', mbti: 'INTP', tags: ['창조신', '우주1짱', '단거최고', '사탕중독'], desc: '본인이 우주 서열 1위라는 사실을 아주 잘 알고 있으나 증명하는 것조차 귀찮아합니다.', ability: '【 인과율 초월 및 우주적 재창조 】\n\n물리 법칙, 시간, 공간의 제약을 무시하고 의지만으로 우주를 소멸시키거나 재구축합니다.\n\n<span style="color:#da0037; font-size:0.8em;">(※ 접근 금지 등급. 그녀의 심기를 건드리지 마십시오.)</span>' },
             'leviathan': { name: '레비아탄', role: '최상급 악령 (방관자)', img: 'https://igx.kr/u/zP/w/1', age: '5000만 세', mbti: 'ISTP', tags: ['심해의지배자', '행방불명'], desc: '심연과 어둠의 공포에서 태어난 최상급 악령입니다. 현재 에테르나의 통제를 벗어나 현세 어딘가에서 방관 중입니다.', ability: '【 심해의 압박 & 심연의 공포 】\n주변 공간의 영적 밀도를 높여 존재를 압착시킵니다.' },
             'lilith': { name: '릴리스', role: '회장 (최상급)', img: 'https://igx.kr/u/zP/d/1', age: '9821만 세', mbti: 'ISFJ', tags: ['외강내유', '월급인상최고'], desc: '차가운 외모와 달리 따뜻한 회장님입니다. 벌레를 무서워하며, 일을 미루지 않는 완벽주의자입니다.', ability: '【 영혼의 계약 & 영혼 사슬 】\n영혼을 구속하는 강력한 계약을 맺고 붉은 사슬을 사용합니다.' },
             'satan': { name: '사탄', role: '비서실장 (최상급)', img: 'https://igx.kr/u/zP/h/1', age: '7000만 세', mbti: 'ENTP', tags: ['장난꾸러기', '오픈런장인'], desc: '활발하고 남 놀리기를 좋아하는 악마입니다. 고드의 간식을 챙기기 위해 디저트 오픈런을 수만 번 뛴 경력이 있습니다.', ability: '【 칠흑의 업화 】\n모든 것을 태워버리는 검은 불꽃을 자유자재로 다룹니다.' },
@@ -699,11 +751,20 @@
             });
         }
 
+        // 나이 클릭 시 경고창 띄우기
+        function handleAgeClick() {
+            if(!godWarningShown) {
+                document.getElementById('warningModal').style.display = 'flex';
+            } else {
+                triggerDoomMode();
+            }
+        }
+
         // 경고 모달 수락
         function acceptWarning() {
             document.getElementById('warningModal').style.display = 'none';
             godWarningShown = true;
-            openModal('god');
+            triggerDoomMode();
         }
 
         function closeWarning() {
@@ -731,21 +792,20 @@
                 bgmError.volume = 0.8;
                 bgmError.play().catch(()=>{});
 
-                // 사이트 전체 둠 모드
+                // 사이트 전체 둠 모드 (스크롤/드래그는 가능하도록 overflow 제어 안함)
                 document.body.classList.add('doom-mode');
                 document.body.classList.remove('god-prank-mode');
-                isPrankMode = false; // 장난 모드 강제 종료
+                isPrankMode = false; 
 
                 // 고드 찬양 문구 세팅
                 const praiseTexts = [
                     "오직 고드님뿐", "우리는 먼지입니다", "영원히 찬양하라", "살려주세요",
-                    "모든 것이 무의미하다", "1짱 고드님", "숨을 쉴 수 없어", "도망쳐", 
-                    "도망칠 곳은 없다", "절대자 고드", "빛이자 어둠", "파멸", "끝", "1짱"
+                    "모든 것이 무의미하다", "그는 신이야", "위대하신 고드님", "도망쳐", 
+                    "오직 그만이 유일한 진리다", "절대자 고드", "빛이자 어둠", "파멸", "끝", "1짱"
                 ];
 
                 // 사이트 내 텍스트 랜덤하게 고드 찬양으로 교체
                 document.querySelectorAll('h1, h2, h3, p, a, button, label, span:not(.close-btn)').forEach(el => {
-                    // 약간의 확률로 남겨두거나 완전히 바꿔버림
                     if(Math.random() > 0.1) {
                         el.innerText = praiseTexts[Math.floor(Math.random() * praiseTexts.length)];
                     }
@@ -756,15 +816,20 @@
                     img.src = charData['god'].img;
                 });
 
-                // 모든 데이터를 고드로 덮어쓰기 (모달 클릭시 고드만 나옴)
+                // 모든 데이터를 고드로 덮어쓰기
                 for(let key in charData) {
-                    charData[key] = { ...charData['god'] };
-                    charData[key].desc = "오직 고드님뿐. 다른 자는 존재하지 않는다. 모두 삭제되었다.";
-                    charData[key].ability = "【 절대적인 죽음과 공포 】\n\n숨을 쉬는 것조차 허락되지 않습니다.";
+                    charData[key].name = "고드";
+                    charData[key].img = charData['god'].img;
+                    charData[key].desc = "그는 신이야. 오직 그만이 유일한 진리이며, 우리는 그저 먼지에 불과하다. 숨을 죽이고 찬양하라.";
+                    charData[key].ability = "【 절대적인 권능 】\n\n모든 것을 창조하고 파멸시킬 수 있는 유일한 존재.";
+                    charData[key].tags = ["신", "유일신", "절대자"];
                 }
                 for(let key in prankCharData) {
                     prankCharData[key] = charData['god'];
                 }
+
+                // 외부 명부 카드 텍스트도 고드로 변경
+                document.querySelectorAll('.staff-name').forEach(el => el.innerText = '고드');
 
                 // 둠 모드 전용 오버레이 추가 (무한 글리치 필터)
                 let doomOverlay = document.createElement('div');
@@ -780,20 +845,12 @@
                 doomOverlay.style.animation = 'heavyGlitch 0.2s infinite';
                 document.body.appendChild(doomOverlay);
 
-                // 화면 스크롤 금지
-                document.body.style.overflow = 'hidden';
-
             }, 2000); // 2초 정적
         }
 
         function openModal(id) {
             // 둠 모드 상태에서는 카드를 누르면 즉시 고드로 강제 설정됨
             if(isDoomed) id = 'god';
-
-            if (id === 'god' && !godWarningShown && !isDoomed) {
-                document.getElementById('warningModal').style.display = 'flex';
-                return;
-            }
 
             const data = isPrankMode ? prankCharData[id] : charData[id];
             if(!data) return;
@@ -804,10 +861,10 @@
             document.getElementById('profName').innerHTML = data.name;
             document.getElementById('profRole').innerHTML = data.role;
             
-            // 나이 누르면 파멸 (둠 모드가 아닐 때만 글리치 텍스트 표시)
+            // 나이 텍스트 설정
             if (id === 'god') {
                 if(!isDoomed) {
-                    document.getElementById('profAge').innerHTML = `<span class="glitch-text" onclick="triggerDoomMode()">측정불가 (클릭 금지)</span>`;
+                    document.getElementById('profAge').innerHTML = `<span class="glitch-text" onclick="handleAgeClick()">측정불가 (클릭 금지)</span>`;
                 } else {
                     document.getElementById('profAge').innerHTML = `<span style="color:red;">끝</span>`;
                 }
@@ -827,7 +884,7 @@
                 prankBtn.style.display = 'inline-block';
                 prankBtn.innerText = isPrankMode ? '🍬 장난 끄기 귀찮다...' : '🍬 대충 만든 장난 버튼...';
 
-                bgmNormal.pause(); bgmGod.currentTime = 0; bgmGod.play().catch(() => {});
+                bgmNormal.pause(); bgmGod.play().catch(() => {});
                 
                 eyeTrackingHandler = (e) => {
                     const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
@@ -845,14 +902,11 @@
             showProfile();
             document.getElementById('unifiedModal').classList.add('active');
             
-            // 둠 모드가 아닐 때만 스크롤 제어
-            if(!isDoomed) document.body.style.overflow = 'hidden'; 
-            
             resetCascadeAnimations();
         }
 
         function togglePrankMode() {
-            if(isDoomed) return; // 둠 모드에선 장난 버튼 안 먹힘
+            if(isDoomed) return; 
 
             isPrankMode = !isPrankMode;
             if (isPrankMode) {
@@ -888,7 +942,6 @@
             document.getElementById('unifiedModal').classList.remove('active');
             
             if(!isDoomed) {
-                document.body.style.overflow = ''; 
                 bgmGod.pause(); bgmNormal.play().catch(() => {});
             }
         }

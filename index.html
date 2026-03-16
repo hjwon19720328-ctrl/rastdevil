@@ -71,6 +71,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Serif KR', serif; outline: none !important; -webkit-tap-highlight-color: transparent; }
         html { scroll-behavior: smooth; }
         body { background-color: var(--bg-base); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100vw; transition: background 0.8s ease; word-break: keep-all; }
+        
+        /* 🔥 제목 잘림 방지 (반응형 텍스트 줄바꿈) */
+        h1, h2, h3, h4, h5 { word-break: keep-all; overflow-wrap: break-word; }
+        
         #fixed-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png'); z-index: -2; pointer-events: none; opacity: 0.5; transition: all 0.5s;}
         #abyss-dust { position: fixed; top: 0; left: 0; width: 100vw; height: 200vh; background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; pointer-events: none; animation: drift 120s linear infinite; }
         @keyframes drift { from { transform: translateY(0); } to { transform: translateY(-50%); } }
@@ -102,7 +106,7 @@
         .page-view.active { display: block; opacity: 1; }
         .section-wrap { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
         .page-header { text-align: center; margin-bottom: 3.5rem; }
-        .page-header h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .page-header h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 1rem; }
 
         /* 슬라이드 */
         .ppt-wrapper { position: relative; width: 100%; max-width: 900px; margin: 0 auto; background: rgba(15, 10, 25, 0.6); border: 1px solid rgba(123, 97, 255, 0.15); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px); transition: border-color 0.5s; }
@@ -145,13 +149,10 @@
         /* 필터 및 명부 */
         .filter-menu { display: flex; justify-content: center; gap: 12px; margin-bottom: 3.5rem; flex-wrap: wrap; }
         .filter-btn { background: transparent; padding: 10px 25px; border-radius: 30px; transition: 0.4s; font-size: 0.9rem; font-weight: bold; border: 1px solid rgba(255,255,255,0.1); color: var(--text-dim); cursor: pointer;}
-        @keyframes pulseRed { 0% { box-shadow: 0 0 0px var(--accent-red); } 50% { box-shadow: 0 0 15px var(--accent-red); } 100% { box-shadow: 0 0 0px var(--accent-red); } }
-        @keyframes pulseBlue { 0% { box-shadow: 0 0 0px var(--accent-blue); } 50% { box-shadow: 0 0 15px var(--accent-blue); } 100% { box-shadow: 0 0 0px var(--accent-blue); } }
-        @keyframes pulseGold { 0% { box-shadow: 0 0 0px var(--accent-gold); } 50% { box-shadow: 0 0 15px var(--accent-gold); } 100% { box-shadow: 0 0 0px var(--accent-gold); } }
         .btn-all.active { border-color: var(--current-theme); color: #fff; background: rgba(255,255,255,0.05); }
-        .btn-under.active { border-color: var(--accent-red); color: #fff; animation: pulseRed 3s infinite; }
-        .btn-human.active { border-color: var(--accent-blue); color: #fff; animation: pulseBlue 3s infinite; }
-        .btn-etc.active { border-color: var(--accent-gold); color: #fff; animation: pulseGold 3s infinite; }
+        .btn-under.active { border-color: var(--accent-red); color: #fff; box-shadow: 0 0 10px var(--accent-red); }
+        .btn-human.active { border-color: var(--accent-blue); color: #fff; box-shadow: 0 0 10px var(--accent-blue); }
+        .btn-etc.active { border-color: var(--accent-gold); color: #fff; box-shadow: 0 0 10px var(--accent-gold); }
 
         .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
         .staff-card { background: rgba(1, 8, 18, 0.6); border: 1px solid rgba(255,255,255,0.05); text-align: center; padding: 2.5rem 1rem; border-radius: 15px; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); cursor: pointer; }
@@ -179,7 +180,6 @@
         .checkbox-group input[type="checkbox"] { appearance: none; min-width: 22px; height: 22px; border: 1px solid #da0037; background: #000; cursor: pointer; position: relative; transition: 0.3s; margin-top: 3px; }
         .checkbox-group input[type="checkbox"]:checked { background: #da0037; box-shadow: 0 0 10px #da0037; }
         .checkbox-group input[type="checkbox"]:checked::after { content: '✔'; position: absolute; color: #fff; font-size: 14px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        #forbiddenWarning { display: none; color: #ff0000; font-size: 0.85rem; margin-top: 8px; font-weight: bold; text-align: right; }
         .btn-gold { background: transparent; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 18px; width: 100%; font-size: 1.1rem; font-weight: bold; transition: 0.3s; letter-spacing: 2px; cursor: pointer; position: relative; overflow: hidden; }
         .btn-gold::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent); transition: 0.5s; }
         .btn-gold:hover::before { left: 100%; }
@@ -217,9 +217,9 @@
 
         /* 🔥 강화된 글리치 텍스트 (위협적인 붉은색) */
         .glitch-text { 
-            display: inline-block; color: #ff0000; font-weight: 900; font-size: 1.1rem;
+            display: inline-block; cursor: crosshair; color: #ff0000; font-weight: 900; font-size: 1.1rem;
             text-shadow: 2px 0 red, -2px 0 blue; animation: heavyGlitch 0.1s infinite; position: relative;
-            border-bottom: 2px solid #ff0000; cursor: default;
+            border-bottom: 2px solid #ff0000;
         }
         @keyframes heavyGlitch {
             0% { transform: translate(0) skew(0deg); }
@@ -230,10 +230,55 @@
             100% { transform: translate(0) skew(0deg); }
         }
 
+        /* 💀 둠 모드 (코즈믹 호러 상태) */
+        body.doom-mode {
+            background-color: #030000 !important;
+            color: #da0037 !important;
+            font-family: '궁서', 'Noto Serif KR', serif !important;
+            animation: doomFlicker 0.15s infinite !important;
+        }
+        
+        /* 둠 모드에서 특정 요소들만 어둡게, 레이아웃 파괴 방지 */
+        body.doom-mode .modal-window, body.doom-mode .staff-card, body.doom-mode .lore-card, body.doom-mode .recruit-container, body.doom-mode .ppt-wrapper {
+            border-color: #500 !important;
+            background: rgba(15, 0, 0, 0.8) !important;
+            box-shadow: inset 0 0 20px #000 !important;
+            transition: none !important;
+        }
+        body.doom-mode h1, body.doom-mode h2, body.doom-mode h3, body.doom-mode p, body.doom-mode span:not(.close-btn), body.doom-mode a, body.doom-mode label, body.doom-mode div {
+            color: #da0037 !important;
+            text-shadow: 0 0 5px #da0037 !important;
+        }
+        body.doom-mode img {
+            filter: grayscale(1) contrast(200%) invert(1) drop-shadow(0 0 15px red) !important;
+            mix-blend-mode: hard-light;
+        }
+        @keyframes doomFlicker {
+            0% { opacity: 1; filter: invert(0); transform: translateX(0) skewX(0); }
+            33% { opacity: 0.9; filter: hue-rotate(90deg); transform: translateX(-4px) skewX(3deg); }
+            66% { opacity: 1; filter: invert(0.1); transform: translateX(4px) skewX(-3deg); }
+            100% { opacity: 0.95; filter: contrast(150%); transform: translateX(0); }
+        }
+        
+        /* 둠 모드 전환용 침묵 오버레이 */
+        #silenceOverlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000; z-index: 999999;
+            flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        #silenceOverlay span {
+            color: #da0037; font-size: 2rem; letter-spacing: 20px; font-weight: 900;
+            animation: heavyGlitch 0.1s infinite;
+        }
+
+        #warningModal1 .modal-window, #warningModal2 .modal-window { border-color: var(--accent-red); box-shadow: 0 0 30px rgba(218,0,55,0.5); }
+        #warningModal1 .modal-header, #warningModal2 .modal-header { background: rgba(218,0,55,0.1); }
+        
         .pc-br { display: block; } .mobile-br { display: none; }
         @media (max-width: 768px) {
             .section-wrap { padding: 3rem 5%; }
-            .page-header h2 { font-size: 1.8rem; }
+            .page-header h2 { font-size: clamp(1.8rem, 5vw, 2.2rem); }
+            .section-wrap.hero h1 { font-size: clamp(1.8rem, 6vw, 2.5rem); }
             .intro-logo { font-size: 3.5rem; letter-spacing: 5px; }
             header { flex-direction: column; padding: 1rem; gap: 10px; }
             .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; }
@@ -258,8 +303,12 @@
     <div id="abyss-dust"></div>
 
     <audio id="bgmNormal" src="NORMAL.mp3" loop></audio>
-    
-    <div id="yt-player-god" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px;"></div>
+    <audio id="bgmGod" src="GOD.mp3" loop></audio>
+    <audio id="bgmError" src="error.mp3" loop></audio>
+
+    <div id="silenceOverlay">
+        <span>...</span>
+    </div>
 
     <div id="introOverlay">
         <div id="introCompany">
@@ -380,7 +429,7 @@
                     
                     <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
                         <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="겜창 뿔 부러진 날">제1차 이승 정보망 붕괴 및 파이몬 뿔 손실 사태</h3><span class="toggle-icon">▼</span></div>
-                        <div class="accordion-content"><p data-prank="아 뿔 부러진 날? 옛날엔 꽤 날렸는데 지금은 그냥 내 넷플릭스 셔틀임.">천만년 전, 이승의 네트워크를 집어삼키려던 최상급 전자 악령과의 대규모 교전 기록입니다. 당시 상급 악마였던 <strong>파이몬</strong>이 홀로 적의 본진에 침투해 코어를 해킹하는 데 성공했으나, 동귀어진을 시도한 악령의 최후 발악에 휘말려 왼쪽 뿔을 상실했습니다. 이 사고로 파이몬은 보유 마력의 90%를 잃었고, 강력했던 데이터 조작 및 해킹 능력은 현재 하루 3번으로 사용이 제한되었습니다.</p></div>
+                        <div class="accordion-content"><p data-prank="아 뿔 부러진 날? 옛날엔 꽤 날렸는데 지금은 그냥 내 넷플릭스 셔틀임.">천만년 전, 이승의 네트워크를 집어삼키려던 최상급 전자 악령과의 대규모 교전 기록입니다. 당시 상급 악마였던 <strong>파이몬</strong>이 홀로 적의 본진에 침투해 코어를 해킹하는 데 성공했으나, 동귀어진을 시도한 악령의 최후 발악에 휘말려 모든 뿔을 상실했습니다. 이 사고로 파이몬은 보유 마력의 90%를 잃었고, 강력했던 데이터 조작 및 해킹 능력은 현재 하루 3번으로 사용이 제한되었습니다.</p></div>
                     </div>
 
                     <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
@@ -425,7 +474,7 @@
 
                     <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
                         <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="겜창의 최후">파이몬의 천계 서버 디도스 맞대응</h3><span class="toggle-icon">▼</span></div>
-                        <div class="accordion-content"><p data-prank="파이몬이 천국 서버 해킹해서 게임하다가 털려서 회사 인터넷 다 터짐 ㅋㅋ 유튜브 못 봐서 화냈잖아.">파이몬이 게임 핑을 줄이려 천계 홀리망(Holy Network)을 무단 해킹하다가 대천사들의 디도스 반격을 받아 에테르나 사내망이 12시간 다운되었습니다. 고드님의 유튜브가 버퍼링에 걸려 파이몬은 크게 혼났습니다.</p></div>
+                        <div class="accordion-content"><p data-prank="파이몬이 천국 서버 해킹해서 게임하다가 대천사들한테 털려서 회사 인터넷 다 터짐 ㅋㅋ 유튜브 못 봐서 화냈잖아.">파이몬이 게임 핑을 줄이려 천계 홀리망(Holy Network)을 무단 해킹하다가 대천사들의 디도스 반격을 받아 에테르나 사내망이 12시간 다운되었습니다. 고드님의 유튜브가 버퍼링에 걸려 파이몬은 크게 혼났습니다.</p></div>
                     </div>
 
                     <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
@@ -565,6 +614,46 @@
         </main>
     </div>
 
+    <div id="warningModal1" class="modal-overlay">
+        <div class="modal-window" style="max-width: 450px; text-align: center; border-color: var(--accent-red); box-shadow: 0 0 30px rgba(218,0,55,0.5);">
+            <div class="modal-header" style="background: rgba(218,0,55,0.1);">
+                <span style="color:var(--accent-red);">[ SYSTEM WARNING ]</span>
+            </div>
+            <div class="modal-body" style="padding: 3rem;">
+                <h3 style="color: var(--accent-red); margin-bottom: 1.5rem; font-size: 1.5rem; letter-spacing: 2px;">시스템 경고</h3>
+                <p style="color: #bbb; margin-bottom: 2.5rem; font-size: 1rem; line-height: 1.8;">
+                    해당 데이터는 열람 시 시각적인 충격(강한 화면 깜빡임, 노이즈)이 발생합니다.<br>
+                    광과민성 증후군이 있는 분은 열람을 삼가시기 바랍니다.<br>
+                    <strong>열람하시겠습니까?</strong>
+                </p>
+                <div style="display: flex; gap: 15px;">
+                    <button class="btn-scan" onclick="acceptWarning1()" style="flex:1;">다음</button>
+                    <button class="btn-return" onclick="closeWarning()" style="flex:1; margin-top:0;">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="warningModal2" class="modal-overlay">
+        <div class="modal-window" style="max-width: 450px; text-align: center; border-color: var(--accent-red); box-shadow: 0 0 30px rgba(218,0,55,0.8);">
+            <div class="modal-header" style="background: rgba(218,0,55,0.2);">
+                <span style="color:var(--accent-red);">[ FINAL WARNING ]</span>
+            </div>
+            <div class="modal-body" style="padding: 3rem;">
+                <h3 style="color: var(--accent-red); margin-bottom: 1.5rem; font-size: 1.5rem; letter-spacing: 2px;">최종 경고</h3>
+                <p style="color: #bbb; margin-bottom: 2.5rem; font-size: 1rem; line-height: 1.8;">
+                    본 데이터를 열람할 경우 사이트 전반에 심각한 오류가 발생하며,<br>
+                    새로고침을 하기 전까지 정상적인 이용이 불가능합니다.<br>
+                    <strong>계속하시겠습니까?</strong>
+                </p>
+                <div style="display: flex; gap: 15px;">
+                    <button class="btn-scan" onclick="acceptWarning2()" style="flex:1; background: #da0037; color: #fff;">열람 (되돌릴 수 없음)</button>
+                    <button class="btn-return" onclick="closeWarning()" style="flex:1; margin-top:0;">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="unifiedModal" class="modal-overlay" onclick="closeModal(event)">
         <div class="modal-window" onclick="event.stopPropagation()">
             <div class="modal-header">
@@ -603,54 +692,14 @@
         const body = document.getElementById('bodyEl');
         const header = document.getElementById('mainHeader');
         const bgmNormal = document.getElementById('bgmNormal');
+        const bgmGod = document.getElementById('bgmGod');
+        const bgmError = document.getElementById('bgmError');
         
         let currentActiveTab = 'home';
         let isAdminMode = false;
         let isPrankMode = false;
         let eyeTrackingHandler = null;
-
-        // 🔥 YouTube IFrame API를 통한 고드 노래 설정
-        let ytPlayerGod;
-        const bgmGod = {
-            play: function() {
-                if (ytPlayerGod && typeof ytPlayerGod.playVideo === 'function') {
-                    ytPlayerGod.playVideo();
-                }
-                return Promise.resolve();
-            },
-            pause: function() {
-                if (ytPlayerGod && typeof ytPlayerGod.pauseVideo === 'function') {
-                    ytPlayerGod.pauseVideo();
-                }
-            },
-            set currentTime(val) {
-                if (ytPlayerGod && typeof ytPlayerGod.seekTo === 'function') {
-                    ytPlayerGod.seekTo(2702); 
-                }
-            }
-        };
-
-        function onYouTubeIframeAPIReady() {
-            ytPlayerGod = new YT.Player('yt-player-god', {
-                height: '100',
-                width: '100',
-                videoId: 'fDxYULCo3T0',
-                playerVars: { 'autoplay': 0, 'controls': 0, 'start': 2702, 'end': 2965 },
-                events: {
-                    'onStateChange': function(event) {
-                        if (event.data === YT.PlayerState.ENDED) {
-                            ytPlayerGod.seekTo(2702);
-                            ytPlayerGod.playVideo();
-                        }
-                    }
-                }
-            });
-        }
-
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        let isDoomed = false; 
 
         function enterSite() {
             document.getElementById('introOverlay').classList.add('fade-out');
@@ -681,7 +730,6 @@
             card.classList.toggle('active');
         }
 
-        // 파이몬 능력/설명 업데이트
         const charData = {
             'god': { name: '고드', role: '장기 체류자', img: 'https://igx.kr/u/zP/c/1', age: '알 수 없음', mbti: 'INTP', tags: ['창조신', '우주1짱', '단거최고', '사탕중독'], desc: '본인이 우주 서열 1위라는 사실을 아주 잘 알고 있으나 증명하는 것조차 귀찮아합니다.', ability: '【 인과율 초월 및 우주적 재창조 】\n\n물리 법칙, 시간, 공간의 제약을 무시하고 의지만으로 우주를 소멸시키거나 재구축합니다.\n\n<span style="color:#da0037; font-size:0.8em;">(※ 접근 금지 등급. 그녀의 심기를 건드리지 마십시오.)</span>' },
             'leviathan': { name: '레비아탄', role: '최상급 악령 (방관자)', img: 'https://igx.kr/u/zP/w/1', age: '5000만 세', mbti: 'ISTP', tags: ['심해의지배자', '행방불명'], desc: '심연과 어둠의 공포에서 태어난 최상급 악령입니다. 현재 에테르나의 통제를 벗어나 현세 어딘가에서 방관 중입니다.', ability: '【 심해의 압박 & 심연의 공포 】\n주변 공간의 영적 밀도를 높여 존재를 압착시킵니다.' },
@@ -695,7 +743,7 @@
             'eris': { name: '에리스', role: '이승 담당', img: 'https://igx.kr/u/zP/n/1', age: '1500 세', mbti: 'ESFP', tags: ['인싸', '피지컬천재'], desc: '에리나의 쌍둥이 첫째입니다. 순수 피지컬로 악령을 소멸시키는 요원입니다.', ability: '【 능력 없음 】\n친화력과 열정으로 업무를 완수합니다.' },
             'erina': { name: '에리나', role: '이승 담당', img: 'https://igx.kr/u/zP/t/1', age: '1500 세', mbti: 'INFP', tags: ['영혼터치', '혈육바라기'], desc: '에리스의 쌍둥이 동생입니다. 언니에 대한 찬양글을 씁니다.', ability: '【 영체 간섭 】\n순수 인간임에도 영혼을 만질 수 있습니다.' },
             'baal': { name: '바알', role: '이승 담당', img: 'https://igx.kr/u/zP/r/1', age: '5800만 세', mbti: 'INTJ', tags: ['손재주장인', '다정한업어주기'], desc: '날개와 뿔이 없는 콤플렉스를 숨긴 무뚝뚝한 장인입니다.', ability: '【 그림자 직조 】\n그림자를 자아내 절대 끊어지지 않는 결계를 칩니다.' },
-            'paimon': { name: '파이몬', role: '이승 담당 (전 상급)', img: 'https://igx.kr/u/zP/q/1', age: '4000만 세', mbti: 'INTJ', tags: ['해커', '게이머1위'], desc: '인간계 CCTV 해커입니다. 틈날 때마다 게임 서버를 해킹해 랭킹 1위를 차지하는 것이 낙입니다. 천만년 전 최상급 악령을 상대하다 뿔을 잃고 대부분의 마력을 잃었습니다. 언제나 플랜 Z까지 세워두는 철저한 전략가입니다.', ability: '【 네트워크 접속 및 조작 】\n전자기기나 네트워크망에 직접 접속해 데이터를 조작하거나 해킹하는 능력. (과거 마력 손실로 인해 현재는 하루 3번만 사용 가능)' },
+            'paimon': { name: '파이몬', role: '이승 담당 (전 상급)', img: 'https://igx.kr/u/zP/q/1', age: '4000만 세', mbti: 'INTJ', tags: ['해커', '게이머1위'], desc: '인간계 CCTV 해커입니다. 틈날 때마다 게임 서버를 해킹해 랭킹 1위를 차지하는 것이 낙입니다. 천만년 전 최상급 악령을 상대하다 모든 뿔을 잃고 대부분의 마력을 잃었습니다. 언제나 플랜 Z까지 세워두는 철저한 전략가입니다.', ability: '【 네트워크 접속 및 조작 】\n전자기기나 네트워크망에 직접 접속해 데이터를 조작하거나 해킹하는 능력. (과거 마력 손실로 인해 현재는 하루 3번만 사용 가능)' },
             'lucifer': { name: '루시퍼', role: '무소속', img: 'https://igx.kr/u/zP/v/1', age: '2000만 세', mbti: 'ESTP', tags: ['기억상실', '종이비행기'], desc: '천계 시절 고드님 옆에서 신경을 긁다 추방당해 기억을 잃었습니다.', ability: '【 빛과 어둠의 검 】\n신성력, 마력 모두 사용 가능합니다.' },
             'rabbit': { name: '미스 래빗', role: '연구 개체', img: 'https://igx.kr/u/zP/k/1', age: '20 세', mbti: 'ISFP', tags: ['애정결핍', '울보토끼'], desc: '토끼들의 슬픔이 모인 존재로, 인사해주지 않으면 밤새 웁니다.', ability: '【 귀여운 분열 】\n매우 귀여워지며 작게 분열합니다.' }
         };
@@ -726,7 +774,93 @@
             });
         }
 
+        function handleAgeClick() {
+            document.getElementById('warningModal1').style.display = 'flex';
+        }
+
+        function acceptWarning1() {
+            document.getElementById('warningModal1').style.display = 'none';
+            document.getElementById('warningModal2').style.display = 'flex';
+        }
+        
+        function acceptWarning2() {
+            document.getElementById('warningModal2').style.display = 'none';
+            triggerDoomMode();
+        }
+
+        function closeWarning() {
+            document.getElementById('warningModal1').style.display = 'none';
+            document.getElementById('warningModal2').style.display = 'none';
+        }
+
+        function triggerDoomMode() {
+            if(isDoomed) return;
+            isDoomed = true;
+
+            document.getElementById('unifiedModal').classList.remove('active');
+
+            bgmNormal.pause();
+            bgmGod.pause();
+            document.getElementById('silenceOverlay').style.display = 'flex';
+
+            setTimeout(() => {
+                document.getElementById('silenceOverlay').style.display = 'none';
+                
+                bgmError.volume = 0.8;
+                bgmError.play().catch(()=>{});
+
+                document.body.classList.add('doom-mode');
+                document.body.classList.remove('god-prank-mode');
+                isPrankMode = false; 
+
+                const praiseTexts = [
+                    "오직 고드님뿐", "우리는 먼지입니다", "영원히 찬양하라", "살려주세요",
+                    "모든 것이 무의미하다", "그는 신이야", "위대하신 고드님", "도망쳐", 
+                    "오직 그만이 유일한 진리다", "절대자 고드", "빛이자 어둠", "파멸", "끝", "1짱"
+                ];
+
+                document.querySelectorAll('h1, h2, h3, p, a, button, label, span:not(.close-btn)').forEach(el => {
+                    if(Math.random() > 0.1) {
+                        el.innerText = praiseTexts[Math.floor(Math.random() * praiseTexts.length)];
+                    }
+                });
+
+                document.querySelectorAll('img').forEach(img => {
+                    img.src = charData['god'].img;
+                });
+
+                for(let key in charData) {
+                    charData[key].name = "고드";
+                    charData[key].img = charData['god'].img;
+                    charData[key].desc = "그는 신이야. 오직 그만이 유일한 진리이며, 우리는 그저 먼지에 불과하다. 숨을 죽이고 찬양하라.";
+                    charData[key].ability = "【 절대적인 권능 】\n\n모든 것을 창조하고 파멸시킬 수 있는 유일한 존재.";
+                    charData[key].tags = ["신", "유일신", "절대자"];
+                }
+                for(let key in prankCharData) {
+                    prankCharData[key] = charData['god'];
+                }
+
+                document.querySelectorAll('.staff-name').forEach(el => el.innerText = '고드');
+
+                let doomOverlay = document.createElement('div');
+                doomOverlay.style.position = 'fixed';
+                doomOverlay.style.top = '0';
+                doomOverlay.style.left = '0';
+                doomOverlay.style.width = '100vw';
+                doomOverlay.style.height = '100vh';
+                doomOverlay.style.pointerEvents = 'none';
+                doomOverlay.style.zIndex = '9999999';
+                doomOverlay.style.background = 'url("https://www.transparenttextures.com/patterns/tv-noise.png")';
+                doomOverlay.style.opacity = '0.4';
+                doomOverlay.style.animation = 'heavyGlitch 0.2s infinite';
+                document.body.appendChild(doomOverlay);
+
+            }, 2000); 
+        }
+
         function openModal(id) {
+            if(isDoomed) id = 'god';
+
             const data = isPrankMode ? prankCharData[id] : charData[id];
             if(!data) return;
             currentProfileId = id;
@@ -737,7 +871,11 @@
             document.getElementById('profRole').innerHTML = data.role;
             
             if (id === 'god') {
-                document.getElementById('profAge').innerHTML = `<span class="glitch-text">측정불가 (지직...)</span>`;
+                if(!isDoomed) {
+                    document.getElementById('profAge').innerHTML = `<span class="glitch-text" onclick="handleAgeClick()">측정불가</span>`;
+                } else {
+                    document.getElementById('profAge').innerHTML = `<span style="color:red;">끝</span>`;
+                }
             } else {
                 document.getElementById('profAge').innerHTML = data.age;
             }
@@ -750,11 +888,13 @@
             data.tags.forEach(t => tags.innerHTML += `<span class="prof-tag">#${t}</span>`);
 
             const prankBtn = document.getElementById('godPrankBtn');
-            if(id === 'god') {
+            if(id === 'god' && !isDoomed) {
                 prankBtn.style.display = 'inline-block';
                 prankBtn.innerText = isPrankMode ? '🍬 장난 끄기 귀찮다...' : '🍬 대충 만든 장난 버튼...';
 
-                bgmNormal.pause(); bgmGod.play().catch(() => {});
+                bgmNormal.pause(); 
+                bgmGod.currentTime = 0;
+                bgmGod.play().catch(() => {});
                 
                 eyeTrackingHandler = (e) => {
                     const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
@@ -764,7 +904,9 @@
                 document.addEventListener('mousemove', eyeTrackingHandler);
             } else {
                 prankBtn.style.display = 'none';
-                bgmGod.pause(); bgmNormal.play().catch(() => {});
+                if(!isDoomed) {
+                    bgmGod.pause(); bgmNormal.play().catch(() => {});
+                }
             }
 
             showProfile();
@@ -774,6 +916,8 @@
         }
 
         function togglePrankMode() {
+            if(isDoomed) return; 
+
             isPrankMode = !isPrankMode;
             if (isPrankMode) {
                 document.body.classList.add('god-prank-mode');
@@ -806,7 +950,10 @@
             }
 
             document.getElementById('unifiedModal').classList.remove('active');
-            bgmGod.pause(); bgmNormal.play().catch(() => {});
+            
+            if(!isDoomed) {
+                bgmGod.pause(); bgmNormal.play().catch(() => {});
+            }
         }
 
         function showAbility() {
@@ -824,6 +971,7 @@
         }
 
         function filterCategory(event, cat) {
+            if(isDoomed) return;
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.currentTarget.classList.add('active');
             document.querySelectorAll('.staff-card').forEach(card => {
@@ -833,6 +981,7 @@
 
         function submitForm(event) {
             event.preventDefault(); 
+            if(isDoomed) return;
             const btn = document.getElementById('submitBtn');
             btn.innerHTML = isPrankMode ? '대충 계약 도장 찍는 중...💖' : '영혼 서명 각인 중... (Processing)';
             btn.classList.add('loading');

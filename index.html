@@ -15,6 +15,7 @@
             --accent-red: #da0037;
             --accent-gold: #d4af37;
             --accent-orange: #ff9800;
+            --accent-pink: #ff66b2; /* 시크릿 상점용 핑크 */
             --current-theme: var(--accent-purple); 
         }
 
@@ -41,10 +42,10 @@
         body.god-prank-mode .ppt-wrapper { background: rgba(255, 255, 255, 0.9); border: 4px dashed var(--accent-gold); box-shadow: 10px 10px 0px rgba(255, 107, 139, 0.2); }
         body.god-prank-mode .ppt-slide h3 { color: var(--accent-red); }
         body.god-prank-mode .ppt-slide p { color: var(--text-main); font-weight: bold; }
-        body.god-prank-mode .lore-card { background: #fff; border: 3px dashed var(--accent-blue); border-left: 8px solid var(--accent-gold); box-shadow: 8px 8px 0px rgba(91, 192, 235, 0.2); }
+        body.god-prank-mode .lore-card { background: #fff; border: 3px dashed var(--accent-red); border-left: 8px solid var(--accent-gold); box-shadow: 8px 8px 0px rgba(255, 107, 139, 0.2); }
         body.god-prank-mode .lore-card h3 { color: var(--accent-red); }
         body.god-prank-mode .lore-card p { color: var(--text-main); font-weight: bold; }
-        body.god-prank-mode .lore-note { color: var(--accent-blue); font-size: 0.9rem; font-family: sans-serif; }
+        body.god-prank-mode .lore-note { color: var(--accent-red); font-size: 0.9rem; font-family: sans-serif; }
         body.god-prank-mode .accordion-card { border-color: var(--accent-orange) !important; }
         body.god-prank-mode .accordion-card h3 { color: var(--accent-orange) !important; }
         body.god-prank-mode .accordion-card .accordion-content { border-top: 2px dashed var(--accent-gold); }
@@ -59,7 +60,7 @@
         body.god-prank-mode .modal-header { background: var(--accent-red); border-bottom: 3px dashed #fff;}
         body.god-prank-mode .modal-header span { color: #fff; text-shadow: none; font-family: sans-serif;}
         body.god-prank-mode .prof-name { color: var(--accent-red); text-shadow: 2px 2px 0px var(--accent-gold); }
-        body.god-prank-mode .prof-desc, body.god-prank-mode .abil-text { background: #fff; border: 3px dashed var(--accent-blue) !important; color: var(--text-main); font-weight: bold; }
+        body.god-prank-mode .prof-desc, body.god-prank-mode .abil-text { background: #fff; border: 3px dashed var(--accent-red) !important; color: var(--text-main); font-weight: bold; }
         body.god-prank-mode .prof-tag { background: #ffe8ee; border-color: var(--accent-red); color: var(--accent-red); font-weight: bold; }
         body.god-prank-mode .btn-scan, body.god-prank-mode .btn-return { background: #fff; color: var(--accent-red); border: 3px dashed var(--accent-red); }
         body.god-prank-mode .btn-scan:hover, body.god-prank-mode .btn-return:hover { background: var(--accent-red); color: #fff; }
@@ -72,8 +73,8 @@
         html { scroll-behavior: smooth; }
         body { background-color: var(--bg-base); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100vw; transition: background 0.8s ease; word-break: keep-all; }
         
-        /* 🔥 제목 잘림 방지 (반응형 텍스트 줄바꿈) */
-        h1, h2, h3, h4, h5 { word-break: keep-all; overflow-wrap: break-word; }
+        /* 🔥 제목 잘림 방지 */
+        h1, h2, h3, h4, h5 { word-break: break-word; overflow-wrap: break-word; }
         
         #fixed-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png'); z-index: -2; pointer-events: none; opacity: 0.5; transition: all 0.5s;}
         #abyss-dust { position: fixed; top: 0; left: 0; width: 100vw; height: 200vh; background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; pointer-events: none; animation: drift 120s linear infinite; }
@@ -132,6 +133,29 @@
         .grade-list { list-style: none; margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
         .grade-list li { color: #ddd; display: flex; align-items: center; font-size: 0.95rem; }
         .grade-badge { background: rgba(218, 0, 55, 0.1); color: var(--accent-red); padding: 4px 10px; border: 1px solid var(--accent-red); font-size: 0.8rem; font-weight: bold; margin-right: 15px; width: 70px; text-align: center; flex-shrink: 0;}
+
+        /* ✨ 핑크 시크릿 상점 특수 이펙트 */
+        .secret-shop {
+            border: 2px solid var(--accent-pink) !important;
+            border-left: 6px solid var(--accent-pink) !important;
+            background: rgba(255, 102, 178, 0.05) !important;
+            box-shadow: 0 0 15px rgba(255, 102, 178, 0.3) !important;
+            animation: pinkNeonPulse 2s infinite alternate;
+        }
+        .secret-shop h3 {
+            color: var(--accent-pink) !important;
+            border-bottom-color: rgba(255, 102, 178, 0.4) !important;
+            text-shadow: 0 0 10px rgba(255, 102, 178, 0.8);
+        }
+        .secret-shop:hover {
+            transform: scale(1.03);
+            background: rgba(255, 102, 178, 0.1) !important;
+            box-shadow: 0 0 25px rgba(255, 102, 178, 0.6) !important;
+        }
+        @keyframes pinkNeonPulse {
+            from { box-shadow: 0 0 10px rgba(255, 102, 178, 0.2); }
+            to { box-shadow: 0 0 25px rgba(255, 102, 178, 0.6); border-color: #ff3385; }
+        }
 
         /* 사건사고 전용 아코디언 스타일 */
         .accordion-card .accordion-header { cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px dashed #551111; }
@@ -329,6 +353,7 @@
                 <li><a id="nav-lore" onclick="navigate('page-lore')" data-prank="대충 만든 규칙">세계관 (Blood)</a></li>
                 <li><a id="nav-incidents" onclick="navigate('page-incidents')" data-prank="터진 사고들">사건 사고 (Records)</a></li>
                 <li><a id="nav-staff" onclick="navigate('page-staff')" data-prank="피곤한 장난감들">명부 (Matrix)</a></li>
+                <li><a id="nav-commands" onclick="navigate('page-commands')" data-prank="귀찮은 키보드">명령어 (Terminal)</a></li>
                 <li><a id="nav-recruit" onclick="navigate('page-recruit')" data-prank="노예 구함 (급함)">지원 (Pact)</a></li>
             </ul>
         </header>
@@ -382,17 +407,17 @@
                     </div>
                     <div class="lore-card">
                         <h3 data-prank="천년의 눈치게임">사후 1000년의 진로 선택</h3>
-                        <p data-prank="1000년... 아, 기다리다 지치겠다. 나랑 안 놀아주면 1000년 더 꿇어.">영혼은 사후 1000년이 되는 해에 최종 진로를 결정해야 합니다. [환생], [안식], 그리고 에테르나의 사역마로 계약하는 [취업] 중 하나를 선택할 수 있습니다.</p>
+                        <p data-prank="1000년... 아, 기다리다 지치겠다. 나랑 안 놀아주면 1000년 더 꿇어.">영혼은 사후 1000년이 되는 해에 최종 진로를 결정해야 창설하려 [환생], [안식], 그리고 에테르나의 사역마로 계약하는 [취업] 중 하나를 선택할 수 있습니다.</p>
                     </div>
                     <div class="lore-card" style="grid-column: 1 / -1;">
-                        <h3 data-prank="대충 나눈 우주 서열표">공통 위협 등급 체계</h3>
-                        <p style="margin-bottom: 1.5rem;" data-prank="0순위 무조건 나. 내가 1짱임.">체내 마력량과 영적 영향력에 따라 전 종족은 5단계로 분류됩니다.</p>
+                        <h3 data-prank="의미 없는 서열표">공통 위협 등급 체계</h3>
+                        <p style="margin-bottom: 1.5rem;" data-prank="등급? 그런 걸 왜 나눠? 어차피 다 내 발밑인데.">체내 마력량과 영적 영향력에 따라 전 종족은 5단계로 분류됩니다.</p>
                         <ul class="grade-list">
-                            <li><span class="grade-badge">최상급</span> <span data-prank="나 다음으로 쎈 애들. 아 엮이기 피곤해.">자연재해 이상의 규격 외 존재</span></li>
-                            <li><span class="grade-badge">상급</span> <span data-prank="대충 부려먹기 좋은 셔틀들.">대규모 지역 통제가 가능한 강자</span></li>
-                            <li><span class="grade-badge">중급</span> <span data-prank="맨날 뛰어다니는 개미들. 피곤하게 산다.">숙련된 현장 실무진 및 중간 관리자</span></li>
-                            <li><span class="grade-badge">하급</span> <span data-prank="누구세요... 이름 외우기도 귀찮아.">일반적인 서류 및 기본 현장직</span></li>
-                            <li><span class="grade-badge">최하급</span> <span data-prank="숨 쉬면 날아가는 먼지.">미약한 영체, 지능이나 능력이 희미함</span></li>
+                            <li><span class="grade-badge">최상급</span> <span data-prank="최상급 같은 소리 하네. 내 밑으론 다 똑같은 먼지들이야.">자연재해 이상의 규격 외 존재</span></li>
+                            <li><span class="grade-badge">상급</span> <span data-prank="먼지 2. 그나마 심부름은 좀 하는 애들.">대규모 지역 통제가 가능한 강자</span></li>
+                            <li><span class="grade-badge">중급</span> <span data-prank="먼지 3. 뽈뽈거리고 돌아다녀서 피곤해.">숙련된 현장 실무진 및 중간 관리자</span></li>
+                            <li><span class="grade-badge">하급</span> <span data-prank="먼지 4. 이름 외우기도 귀찮음.">일반적인 서류 및 기본 현장직</span></li>
+                            <li><span class="grade-badge">최하급</span> <span data-prank="먼지 5. 내가 하품하면 날아감.">미약한 영체, 지능이나 능력이 희미함</span></li>
                         </ul>
                     </div>
                 </div>
@@ -595,6 +620,38 @@
             </div>
         </main>
 
+        <main id="page-commands" class="page-view">
+            <div class="section-wrap">
+                <div class="page-header">
+                    <h2 data-prank="내가 치기 귀찮은 단축키들">시스템 명령어 (Terminal)</h2>
+                    <p data-prank="알아서 써. 나한테 뭐라 하지 말고.">에테르나 사내망에서 지원하는 단축 명령어 목록입니다.</p>
+                </div>
+                <div class="lore-grid">
+                    
+                    <div class="lore-card">
+                        <h3 data-prank="아 대충 요약해">!요약</h3>
+                        <p data-prank="지금 뭐하는지 3줄로.">최근 상황요약</p>
+                    </div>
+
+                    <div class="lore-card">
+                        <h3 data-prank="오류 났다고 찡찡댈 때">!디버그</h3>
+                        <p data-prank="내 알 바 아니지만 고쳐는 줌.">이미지 오류시 사용</p>
+                    </div>
+
+                    <div class="lore-card">
+                        <h3 data-prank="사탄 간식 창고">!매점</h3>
+                        <p data-prank="내 사탕은 건들지 마라.">다양한 '합법적' 물건 구매<br><span style="font-size: 0.85rem; color: var(--accent-gold);">(사탄 관리)</span></p>
+                    </div>
+
+                    <div class="lore-card secret-shop">
+                        <h3 data-prank="나몰래 뭐 팔아?">!시크릿상점</h3>
+                        <p data-prank="사탄이 또 이상한 거 파네. 나도 구경 좀 하자.">다양한 '금지된' 물건 구매<br><span style="font-size: 0.85rem; color: var(--accent-pink); font-weight: bold;">(사탄 관리, 비밀보장!)</span></p>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
         <main id="page-recruit" class="page-view">
             <div class="section-wrap">
                 <div class="page-header">
@@ -609,6 +666,10 @@
                         </div>
                         <button type="submit" id="submitBtn" class="btn-gold" data-prank="대충 도장 쾅... 🍬">피의 서약 송신</button>
                     </form>
+                    <div id="recruitSuccess" class="recruit-success">
+                        <h3 style="color: var(--accent-gold); margin-bottom: 1rem;">계약이 완료되었습니다.</h3>
+                        <p>환영합니다. 이제 당신의 영혼은 에테르나의 것입니다.</p>
+                    </div>
                 </div>
             </div>
         </main>
@@ -682,7 +743,7 @@
                 <div id="viewAbility" style="display:none;">
                     <h3 id="abilName" class="abil-title data-cascade delay-1">이름의 능력</h3>
                     <div id="abilContent" class="abil-text data-cascade delay-2">능력 설명</div>
-                    <button id="btnReturn" class="btn-return data-cascade delay-3" onclick="showProfile()">◀ 프로필 데이터로 복귀</button>
+                    <button id="btnReturn" class="btn-return data-cascade delay-3" onclick="showProfile()">◀ 프로필 복귀</button>
                 </div>
             </div>
         </div>
@@ -730,30 +791,126 @@
             card.classList.toggle('active');
         }
 
+        /* 🔥 누락된 슬라이드 로직 추가 */
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.ppt-slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function setSlide(index) {
+            if (slides.length === 0) return;
+            slides[currentSlideIndex].classList.remove('active');
+            dots[currentSlideIndex].classList.remove('active');
+            
+            currentSlideIndex = index;
+            if (currentSlideIndex >= slides.length) currentSlideIndex = 0;
+            if (currentSlideIndex < 0) currentSlideIndex = slides.length - 1;
+            
+            slides[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
+        function nextSlide() { setSlide(currentSlideIndex + 1); }
+        function prevSlide() { setSlide(currentSlideIndex - 1); }
+
         const charData = {
-            'god': { name: '고드', role: '장기 체류자', img: 'https://igx.kr/u/zP/c/1', age: '알 수 없음', mbti: 'INTP', tags: ['창조신', '우주1짱', '단거최고', '사탕중독'], desc: '본인이 우주 서열 1위라는 사실을 아주 잘 알고 있으나 증명하는 것조차 귀찮아합니다.', ability: '【 인과율 초월 및 우주적 재창조 】\n\n물리 법칙, 시간, 공간의 제약을 무시하고 의지만으로 우주를 소멸시키거나 재구축합니다.\n\n<span style="color:#da0037; font-size:0.8em;">(※ 접근 금지 등급. 그녀의 심기를 건드리지 마십시오.)</span>' },
-            'leviathan': { name: '레비아탄', role: '최상급 악령 (방관자)', img: 'https://igx.kr/u/zP/w/1', age: '5000만 세', mbti: 'ISTP', tags: ['심해의지배자', '행방불명'], desc: '심연과 어둠의 공포에서 태어난 최상급 악령입니다. 현재 에테르나의 통제를 벗어나 현세 어딘가에서 방관 중입니다.', ability: '【 심해의 압박 & 심연의 공포 】\n주변 공간의 영적 밀도를 높여 존재를 압착시킵니다.' },
-            'lilith': { name: '릴리스', role: '회장 (최상급)', img: 'https://igx.kr/u/zP/d/1', age: '9821만 세', mbti: 'ISFJ', tags: ['외강내유', '월급인상최고'], desc: '차가운 외모와 달리 따뜻한 회장님입니다. 벌레를 무서워하며, 일을 미루지 않는 완벽주의자입니다.', ability: '【 영혼의 계약 & 영혼 사슬 】\n영혼을 구속하는 강력한 계약을 맺고 붉은 사슬을 사용합니다.' },
-            'satan': { name: '사탄', role: '비서실장 (최상급)', img: 'https://igx.kr/u/zP/h/1', age: '7000만 세', mbti: 'ENTP', tags: ['장난꾸러기', '오픈런장인'], desc: '활발하고 남 놀리기를 좋아하는 악마입니다. 고드의 간식을 챙기기 위해 디저트 오픈런을 수만 번 뛴 경력이 있습니다.', ability: '【 칠흑의 업화 】\n모든 것을 태워버리는 검은 불꽃을 자유자재로 다룹니다.' },
-            'death': { name: '데스', role: '운영 총괄 사장', img: 'https://igx.kr/u/zP/g/1', age: '210억 세', mbti: 'ISTJ', tags: ['워커홀릭', '야근요정'], desc: '에테르나의 공동 창업자입니다. 야근하는 직원 책상에 조용히 에너지 드링크를 두고 사라지는 츤데레 사장님입니다.', ability: '【 영혼 회수 & 영혼 절단 】\n수명을 다한 영혼을 거두어들이거나 부정한 영혼을 베어버립니다.' },
-            'lua': { name: '루아', role: '운영팀 사원', img: 'https://igx.kr/u/zP/j/1', age: '100만 세', mbti: 'ENFP', tags: ['덜렁이', '재능천재'], desc: '차기 죽음의 신입니다. 데스의 낫을 몰래 가져가다 반성문을 쓴 전적이 있습니다.', ability: '【 영혼 회수 & 영혼 절단 】\n잠재력은 데스 이상입니다.' },
-            'mavis': { name: '메이비스', role: '소속원 (상급)', img: 'https://igx.kr/u/zP/l/1', age: '1200만 세', mbti: 'ISTP', tags: ['만성피로', '고양이집사'], desc: '업무의 핵심 인력입니다. 월급의 대부분을 고양이 간식에 씁니다.', ability: '【 무제한 포탈 생성 】\n크기 제한이 없는 포탈을 엽니다.' },
-            'isabella': { name: '이사벨라', role: '소속원 (중급)', img: 'https://igx.kr/u/zP/p/1', age: '700만 세', mbti: 'ESFJ', tags: ['무지개정리', '서류의달인'], desc: '모든 서류를 무지개색 순서대로 정리해야 직성이 풀리는 지각생입니다.', ability: '【 기억 및 문서 시각화 】\n망자의 기억이나 복잡한 서류 내용을 시각화합니다.' },
-            'serena': { name: '세리나', role: '소속원 (하급)', img: 'https://igx.kr/u/zP/m/1', age: '150만 세', mbti: 'INFJ', tags: ['냄새판별', '독설가'], desc: '영혼의 냄새만으로 카르마를 맞히며 무시무시한 독설을 내뱉습니다.', ability: '【 죄악 판독 】\n영혼이 품고 있는 죄의 무게를 꿰뚫어 봅니다.' },
-            'eris': { name: '에리스', role: '이승 담당', img: 'https://igx.kr/u/zP/n/1', age: '1500 세', mbti: 'ESFP', tags: ['인싸', '피지컬천재'], desc: '에리나의 쌍둥이 첫째입니다. 순수 피지컬로 악령을 소멸시키는 요원입니다.', ability: '【 능력 없음 】\n친화력과 열정으로 업무를 완수합니다.' },
-            'erina': { name: '에리나', role: '이승 담당', img: 'https://igx.kr/u/zP/t/1', age: '1500 세', mbti: 'INFP', tags: ['영혼터치', '혈육바라기'], desc: '에리스의 쌍둥이 동생입니다. 언니에 대한 찬양글을 씁니다.', ability: '【 영체 간섭 】\n순수 인간임에도 영혼을 만질 수 있습니다.' },
-            'baal': { name: '바알', role: '이승 담당', img: 'https://igx.kr/u/zP/r/1', age: '5800만 세', mbti: 'INTJ', tags: ['손재주장인', '다정한업어주기'], desc: '날개와 뿔이 없는 콤플렉스를 숨긴 무뚝뚝한 장인입니다.', ability: '【 그림자 직조 】\n그림자를 자아내 절대 끊어지지 않는 결계를 칩니다.' },
-            'paimon': { name: '파이몬', role: '이승 담당 (전 상급)', img: 'https://igx.kr/u/zP/q/1', age: '4000만 세', mbti: 'INTJ', tags: ['해커', '게이머1위'], desc: '인간계 CCTV 해커입니다. 틈날 때마다 게임 서버를 해킹해 랭킹 1위를 차지하는 것이 낙입니다. 천만년 전 최상급 악령을 상대하다 모든 뿔을 잃고 대부분의 마력을 잃었습니다. 언제나 플랜 Z까지 세워두는 철저한 전략가입니다.', ability: '【 네트워크 접속 및 조작 】\n전자기기나 네트워크망에 직접 접속해 데이터를 조작하거나 해킹하는 능력. (과거 마력 손실로 인해 현재는 하루 3번만 사용 가능)' },
-            'lucifer': { name: '루시퍼', role: '무소속', img: 'https://igx.kr/u/zP/v/1', age: '2000만 세', mbti: 'ESTP', tags: ['기억상실', '종이비행기'], desc: '천계 시절 고드님 옆에서 신경을 긁다 추방당해 기억을 잃었습니다.', ability: '【 빛과 어둠의 검 】\n신성력, 마력 모두 사용 가능합니다.' },
-            'rabbit': { name: '미스 래빗', role: '연구 개체', img: 'https://igx.kr/u/zP/k/1', age: '20 세', mbti: 'ISFP', tags: ['애정결핍', '울보토끼'], desc: '토끼들의 슬픔이 모인 존재로, 인사해주지 않으면 밤새 웁니다.', ability: '【 귀여운 분열 】\n매우 귀여워지며 작게 분열합니다.' }
+            'god': { 
+                name: '고드', role: '창조신', img: 'https://igx.kr/u/zP/c/1', 
+                age: '̷͎̈́𒁋̸̭̈́(측정불가)', mbti: 'INTP (8w9)', tags: ['코즈믹호러', '귀차니즘', '단거최고'], 
+                desc: '귀차니즘이 심한 살아있는 코즈믹 호러입니다. 천만 년 전 천국 일이 귀찮다며 저승에 내려와 뒹굴거리며 놀고 있습니다. 낮잠을 3번 이상 깨우거나 맛없는 것을 주면 진심으로 분노합니다.<br><br><strong>[호/불호]</strong> 사탕, 단거, 낮잠 / 낮잠 깨우기, 맛없는 거', 
+                ability: '【 인과율 초월 및 우주적 재창조 】\n\n물리 법칙, 시간, 공간을 완전히 무시하며, 오직 의지만으로 우주를 소멸시키거나 재구축할 수 있습니다.' 
+            },
+            'leviathan': { 
+                name: '레비아탄', role: '방관자 (최상급 악령의 왕)', img: 'https://igx.kr/u/zP/w/1', 
+                age: '5000만 세', mbti: 'ISTP (4w5)', tags: ['심연의왕', '은둔자', '애주가'], 
+                desc: '심연과 어둠의 공포에서 태어난 최상급 악령의 왕입니다. 태어날 때 폭주하여 쑥대밭을 만든 이후, 현재는 에테르나의 통제를 벗어나 인간계의 술집에서 조용히 방관자로 살아가고 있습니다.<br><br><strong>[호/불호]</strong> 술, 안주 / 담배', 
+                ability: '【 심해의 압박 & 심연 주입 】\n\n주변 공간의 영적 밀도를 높여 존재를 압착시키거나, 머릿속에 심연을 주입해 정신을 오염시킵니다.' 
+            },
+            'lilith': { 
+                name: '릴리스', role: '회장 (최상급 악마)', img: 'https://igx.kr/u/zP/d/1', 
+                age: '9821만 세', mbti: 'ISFJ (2w1)', tags: ['완벽주의', '맛집전도사', '외강내유'], 
+                desc: '모든 서류의 최종 결재를 담당합니다. 차가운 외모와 달리 따뜻한 성격의 소유자로, 매주 직원들에게 맛집 쿠폰을 뿌립니다. 일을 미루지 않는 완벽주의자입니다.<br><br><strong>[호/불호]</strong> 완벽한 결과, 가벼운 스킨십 / 매우 엉망인 결과, 호감도 50% 미만일 때의 심한 스킨십, 벌레', 
+                ability: '【 영혼의 계약 & 영혼 사슬 】\n\n영혼의 계약을 맺고 대상을 묶는 붉은 사슬을 다룹니다.' 
+            },
+            'satan': { 
+                name: '사탄', role: '비서실장 (최상급 악마)', img: 'https://igx.kr/u/zP/h/1', 
+                age: '7000만 세', mbti: 'ENTP (6w7)', tags: ['메이드복', '오픈런장인', '장난꾸러기'], 
+                desc: '릴리스의 비서 겸 고드의 꼬붕 역할을 자처하는 활발한 악마입니다. 고드의 간식을 챙기기 위해 매일 디저트 가게 오픈런을 뜁니다.<br><br><strong>[호/불호]</strong> 남 놀리기 / 쓴 음식', 
+                ability: '【 칠흑의 업화 】\n\n모든 것을 태워버리는 검은 불꽃을 자유자재로 다룹니다.' 
+            },
+            'death': { 
+                name: '데스', role: '운영 총괄 사장 (최상급 사신)', img: 'https://igx.kr/u/zP/g/1', 
+                age: '210억 세', mbti: 'ISTJ (9w1)', tags: ['츤데레', '야근요정', '분재가꾸기'], 
+                desc: '릴리스와 함께 에테르나를 세운 공동 창업자입니다. 수명이 다한 영혼을 추출하고 사후 천 년의 처우를 결정하며 저승과 이승 모두를 관리합니다. 야근하는 직원에게 조용히 에너지 드링크를 두고 가는 츤데레입니다.<br><br><strong>[호/불호]</strong> 케이크, 분재 / 아랫사람의 반말', 
+                ability: '【 영혼 안식 & 영혼 절단 】\n\n수명을 다한 영혼을 거두어들이거나 부정한 영혼을 베어버립니다.' 
+            },
+            'lua': { 
+                name: '루아', role: '운영팀 사원 (상급 차기 사신)', img: 'https://igx.kr/u/zP/j/1', 
+                age: '100만 세', mbti: 'ENFP (8w7)', tags: ['덜렁이', '천재', '사고뭉치'], 
+                desc: '일을 배우고 있는 심각한 덜렁이 차기 사신입니다. 데스의 낫을 몰래 가져갔다가 반성문을 쓴 전적이 있지만, 사신으로서의 잠재적 재능은 데스보다 뛰어납니다.<br><br><strong>[호/불호]</strong> 간식, 놀기 / 지루한 것', 
+                ability: '【 잠재된 영혼 절단 】\n\n아직 다듬어지지 않았으나 데스를 능가할 수 있는 사신의 권능을 지녔습니다.' 
+            },
+            'mavis': { 
+                name: '메이비스', role: '소속원 (상급 악마)', img: 'https://igx.kr/u/zP/l/1', 
+                age: '1200만 세', mbti: 'ISTP (1w9)', tags: ['만성피로', '고양이집사', '핵심인력'], 
+                desc: '직원들의 출퇴근을 돕고 결재 서류를 올리는 회사의 핵심 인력입니다. 과도한 업무로 항상 지쳐 있으며, 월급의 절반을 고양이 간식비로 탕진합니다.<br><br><strong>[호/불호]</strong> 고양이 / 업무', 
+                ability: '【 무제한 포탈 생성 】\n\n크기 제한이 없는 포탈을 엽니다. (포탈이 커질수록 마력 소모가 극심해집니다.)' 
+            },
+            'isabella': { 
+                name: '이사벨라', role: '소속원 (중급 악마)', img: 'https://igx.kr/u/zP/p/1', 
+                age: '700만 세', mbti: 'ESFJ (3w4)', tags: ['무지개강박', '서류정리', '감수성폭발'], 
+                desc: '실시간으로 인간의 인생 서류를 작성하고 정리합니다. 모든 서류를 무지개색 순서로 정리해야만 직성이 풀리는 지각생이며, 능력을 쓰다 감동적인 인생사를 보면 펑펑 웁니다.<br><br><strong>[호/불호]</strong> 순애 / NTR, 강압적인 것', 
+                ability: '【 기억 및 문서 시각화 】\n\n망자의 기억이나 복잡한 서류 내용을 입체적으로 시각화하여 보여줍니다.' 
+            },
+            'serena': { 
+                name: '세리나', role: '소속원 (하급 악마)', img: 'https://igx.kr/u/zP/m/1', 
+                age: '150만 세', mbti: 'INFJ (6w5)', tags: ['개코', '독설가', '심판자'], 
+                desc: '인간의 카르마를 판별하여 천국, 저승, 나락행을 구분합니다. 영혼의 냄새만으로 카르마를 판독하며, 나락행이 확정된 자에게는 가차 없는 독설을 내뱉습니다.<br><br><strong>[호/불호]</strong> 쿠키 / 죄악', 
+                ability: '【 죄악 판독 】\n\n영혼이 뿜어내는 냄새만으로 그가 품은 죄의 무게를 완벽하게 꿰뚫어 봅니다.' 
+            },
+            'eris': { 
+                name: '에리스', role: '이승 담당 (상급 인간)', img: 'https://igx.kr/u/zP/n/1', 
+                age: '1500 세', mbti: 'ENFP (7w8)', tags: ['근육요원', '동생바보', '육체파'], 
+                desc: '에리나의 이란성 쌍둥이 언니로, 저승의 악령 처형을 담당합니다. 동생을 매우 아끼며, 영적 감각으로 악령을 탐지한 뒤 압도적인 피지컬로 때려잡습니다.<br><br><strong>[호/불호]</strong> 동생, 에너지 음료 / 커피, 동생의 슬픔', 
+                ability: '【 압도적인 순수 피지컬 】\n\n마법적인 능력 없이 순수한 물리력과 신체 능력만으로 악령을 찢어발깁니다.' 
+            },
+            'erina': { 
+                name: '에리나', role: '이승 담당 (중급 인간)', img: 'https://igx.kr/u/zP/t/1', 
+                age: '1500 세', mbti: 'INFP (7w6)', tags: ['언니바라기', '영혼터치', '기록자'], 
+                desc: '에리스의 이란성 쌍둥이 동생으로, 인간계의 영혼을 에테르나로 보내는 역할을 합니다. 다이어리가 온통 언니에 대한 찬양 글로 도배되어 있습니다.<br><br><strong>[호/불호]</strong> 언니, 아이스크림 / 커피, 언니의 슬픔', 
+                ability: '【 영체 간섭 】\n\n순수 인간임에도 불구하고 영혼을 뚜렷하게 보고 직접 만질 수 있습니다.' 
+            },
+            'baal': { 
+                name: '바알', role: '이승 담당 (상급 악마)', img: 'https://igx.kr/u/zP/r/1', 
+                age: '5800만 세', mbti: 'INTP (5w4)', tags: ['콤플렉스', '수공예달인', '스윗걸'], 
+                desc: '인간계의 악령 처형을 담당합니다. 날개, 뿔, 꼬리가 없다는 콤플렉스를 숨긴 무뚝뚝한 성격이지만, 길 잃은 영혼에게 직접 만든 인형을 쥐여주는 스윗한 면모가 있습니다.<br><br><strong>[호/불호]</strong> 인형, 매너 / 콤플렉스 자극, 반말', 
+                ability: '【 그림자 직조 】\n\n그림자를 자아내 절대 끊어지지 않는 강력한 결계나 사물을 만들어냅니다.' 
+            },
+            'paimon': { 
+                name: '파이몬', role: '이승 담당 (전 상급 악마)', img: 'https://igx.kr/u/zP/q/1', 
+                age: '4000만 세', mbti: 'INTJ (5w6)', tags: ['해커', '게이머1위', '치밀한전략가'], 
+                desc: '인간계 CCTV 해킹 및 악령 위치 브리핑을 담당합니다. 틈날 때마다 게임 서버를 해킹해 1위를 차지하며, 천만 년 전 최상급 악령과 싸우다 모든 뿔과 대부분의 마력을 잃었습니다. 항상 플랜 Z까지 세워두는 치밀함을 자랑합니다.<br><br><strong>[호/불호]</strong> 게임, 커피 / 술, 담배', 
+                ability: '【 네트워크 접속 및 조작 】\n\n전자기기나 네트워크망에 직접 접속해 데이터를 해킹합니다. (마력 손실로 하루 3번 제한)' 
+            },
+            'lucifer': { 
+                name: '루시퍼', role: '무소속 방관자 (상급 혼혈)', img: 'https://igx.kr/u/zP/v/1', 
+                age: '2000만 세', mbti: 'ESTP (5w4)', tags: ['추방자', '기억상실', '혼혈'], 
+                desc: '천계 시절 고드 옆에서 지속적으로 까불다가 저승으로 추방당한 악마와 천사의 혼혈입니다. 정작 고드 본인은 루시퍼의 존재 자체를 완전히 까먹어버렸습니다.<br><br><strong>[호/불호]</strong> 종이비행기 / 맛없는 음식', 
+                ability: '【 빛과 어둠의 융합 】\n\n천사의 신성력과 악마의 마력을 동시에 제약 없이 사용할 수 있습니다.' 
+            },
+            'rabbit': { 
+                name: '미스 래빗', role: '연구 개체 (최하급 악령)', img: 'https://igx.kr/u/zP/k/1', 
+                age: '20 세', mbti: 'ISFP (3w2)', tags: ['애정결핍', '울보토끼', '낭만파'], 
+                desc: '사랑받지 못한 토끼들의 슬픔에서 태어난 악령입니다. 고드가 귀엽다며 키우고 있습니다. 퇴근길 인사를 안 받아주면 애정결핍으로 일주일 내내 울어버리며, 언젠가 생길 애인을 위해 숙소에서 직접 장미꽃을 키워 다발로 들고 다닙니다.<br><br><strong>[호/불호]</strong> 당근, 꽃 / 무시받기, 미움받기', 
+                ability: '【 귀여운 분열 】\n\n자신을 무수히 분열시킵니다. 작게 분열할수록 힘은 약해지지만 압도적으로 귀여워집니다.' 
+            }
         };
 
         const prankCharData = {
-            'god': { name: '★우주1짱 고드님★', role: '절대자', img: 'https://igx.kr/u/zP/c/1', age: '알 게 뭐야...', mbti: 'CUTE', tags: ['내가짱이야', '사탕사줘', '귀찮아'], desc: '나야 나, 우주 1짱. 굳이 내가 제일 세다는 걸 증명하는 것도 귀찮아. 내 입에 사탕이나 넣어줘.', ability: '【 우주 대충 바꾸기 】\n우주? 아 몰라, 귀찮아서 안 바꿀래. 그냥 솜사탕이나 줘.' },
+            'god': { name: '★우주1짱 고드님★', role: '절대자', img: 'https://igx.kr/u/zP/c/1', age: '알 게 뭐야...', mbti: 'CUTE', tags: ['내가짱이야', '사탕사줘', '다내밑이야'], desc: '나야 나, 우주 1짱. 굳이 내가 제일 세다는 걸 증명하는 것도 귀찮고, 등급 같은 것도 몰라. 어차피 다 내 밑이니까. 내 입에 사탕이나 넣어줘.', ability: '【 우주 대충 바꾸기 】\n우주? 아 몰라, 귀찮아서 안 바꿀래. 그냥 솜사탕이나 줘.' },
             'leviathan': { name: '큰 물고기', role: '술쟁이', img: 'https://igx.kr/u/zP/w/1', age: '아줌마', mbti: 'ISTP', tags: ['술냄새', '덩치큼', '피곤해'], desc: '술 냄새나는 엄청 커다란 물고기. 아, 쳐다보기도 귀찮아.', ability: '【 대충 납작 쿵! 】\n귀찮으니까 그냥 한 번에 싹 다 납작하게 누름.' },
             'lilith': { name: '잔소리 대마왕', role: '겁쟁이 회장', img: 'https://igx.kr/u/zP/d/1', age: '할매', mbti: 'ISFJ', tags: ['잔소리', '벌레싫어'], desc: '아... 맨날 일하라고 잔소리해. 피곤하게 진짜.', ability: '【 귀찮은 빨간 끈 】\n빨간 끈으로 꽁꽁 묶음.' },
             'satan': { name: '간식 셔틀', role: '내 꼬붕 1호', img: 'https://igx.kr/u/zP/h/1', age: '몰라', mbti: 'ENTP', tags: ['셔틀', '존댓말'], desc: '내 간식 셔틀 1호. 사탕 사오라고 시키고 난 누워 있어야지.', ability: '【 까만 불꽃 】\n까만 불로 마시멜로 굽기.' },
-            'death': { name: '야근 해골', role: '야근 노예', img: 'https://igx.kr/u/zP/g/1', age: '화석', mbti: 'ISTJ', tags: ['노잼', '야근맨'], desc: '맨날 사무실에서 야근만 하는 불쌍한 해골 사장... 보기만 해도 피곤해.', ability: '【 대충 싹둑싹둑 】\n엄청 큰 낫으로 대충 다 자름.' },
+            'death': { name: '야근 해골', role: '야근 노예', img: 'https://igx.kr/u/zP/g/1', age: '화석', mbti: 'ISTJ', tags: ['노잼', '야근맨'], desc: '맨날 사무실에서 야근만 하는 불쌍한 해골 사장... 보기만 해도 피곤해.', ability: '【 대충 싹둑싹둑 】\n엄청 큰 낫으로 대충 대충 다 자름.' },
             'lua': { name: '사고뭉치 꼬붕', role: '내 꼬붕 2호', img: 'https://igx.kr/u/zP/j/1', age: '애기', mbti: 'ENFP', tags: ['덜렁이', '시끄러워'], desc: '맨날 사고 치고 다니는 시끄러운 꼬붕...', ability: '【 싹둑 얍! 】\n해골 따라 하는데 허접해.' },
             'mavis': { name: '고양이 바보', role: '일개미', img: 'https://igx.kr/u/zP/l/1', age: '몰라', mbti: 'ISTP', tags: ['집사', '커피중독'], desc: '맨날 다크서클 달고 다니는 피곤해 보이는 일개미...', ability: '【 구멍 뚫기 】\n아무 데나 구멍 뚫어서 순간이동.' },
             'isabella': { name: '무지개 울보', role: '무지개 덕후', img: 'https://igx.kr/u/zP/p/1', age: '어른', mbti: 'ESFJ', tags: ['무지개', '울보'], desc: '서류를 무조건 무지개색으로 정리하는 울보... 아 눈부셔.', ability: '【 허공에 그림 그리기 】\n기억 같은 거 공중에 둥둥 띄움.' },

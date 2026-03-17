@@ -407,7 +407,7 @@
 
                     <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
                         <div class="accordion-header" onclick="toggleAccordion(this)"><h3 style="color: #ff9800;" data-prank="내가 자는 동안 생긴 일">제3차 이승 멸망 위기 (종말의 씨앗)</h3><span class="toggle-icon">▼</span></div>
-                        <div class="accordion-content"><p data-prank="나 꿀잠 자고 일어났더니 밑에 동네 대륙 하나가 없어졌대. 릴리스가 땀 뻘뻘 흘리면서 보고하길래 걍 알았다고 하고 다시 잤음.">이승의 광신도 집단이 심연 깊은 곳에 봉인된 '종말의 씨앗'을 발아시키려 한 극비 사건입니다. 고드님이 낮잠을 주무시는 동안 사태가 터졌고, 데스와 릴리스가 급히 현신하여 어쩔 수 없이 대륙 하나를 통째로 절단하여 가라앉히는 선에서 사태를 진압했습니다.</p></div>
+                        <div class="accordion-content"><p data-prank="나 꿀잠 자고 일어났더니 밑에 동네 대륙 하나가 없어졌대. 릴리스가 땀 뻘뻘 흘리면서 보고하길래 걍 알았다고 하고 다시 잤음.">이승의 광신도 집단이 심연 깊은 곳에 봉인된 '종말의 씨앗'을 발아시키려 한 극비 사건입니다. 고드님이 낮잠 주무시는 동안 사태가 터졌고, 데스와 릴리스가 급히 현신하여 어쩔 수 없이 대륙 하나를 통째로 절단하여 가라앉히는 선에서 사태를 진압했습니다.</p></div>
                     </div>
 
                     <div class="lore-card accordion-card" style="border-color: #ff9800; padding-bottom: 1.5rem;">
@@ -612,8 +612,8 @@
                         <div class="form-group">
                             <label data-prank="어디서 구를래?">희망 근무 부서</label>
                             <select class="form-control">
-                                <option>저승 관리부 (데스 사장님 직속)</option>
-                                <option>이승 방역 및 심판팀 (에리스/에리나/바알)</option>
+                                <option>저승 관리 및 처형부 (데스 사장님 / 에리스)</option>
+                                <option>이승 방역 및 심판팀 (에리나 / 바알 / 파이몬)</option>
                                 <option>연구 및 특수격리부 (미스 래빗 돌보기)</option>
                                 <option>고드님 전속 간식 셔틀 (사탄 비서실장 보조)</option>
                             </select>
@@ -709,7 +709,6 @@
         let isPrankMode = false;
         let eyeTrackingHandler = null;
 
-        // 🔥 음악 재생 로직 강화
         function enterSite() {
             document.getElementById('introOverlay').classList.add('fade-out');
             
@@ -727,7 +726,6 @@
             }, 800);
         }
 
-        // 🔥 드롭다운 메뉴 토글 로직
         function toggleMenu() {
             const nav = document.getElementById('navLinks');
             const icon = document.getElementById('menuToggleIcon');
@@ -752,7 +750,6 @@
                 if(document.getElementById(navId)) document.getElementById(navId).classList.add('active');
             }, 100);
             
-            // 메뉴 클릭 시 자동으로 닫히게 설정
             document.getElementById('navLinks').classList.remove('show');
             document.getElementById('menuToggleIcon').style.transform = 'rotate(0deg)';
             

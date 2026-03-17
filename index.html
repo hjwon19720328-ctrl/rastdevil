@@ -133,7 +133,7 @@
         .dot { width: 10px; height: 10px; background: rgba(255,255,255,0.2); border-radius: 50%; cursor: pointer; transition: 0.3s;}
         .dot.active { background: var(--current-theme); box-shadow: 0 0 10px var(--current-theme); transform: scale(1.2);}
 
-        /* 카드 공통 (세계관 푸른색 버그 붉은색으로 수정 완료) */
+        /* 카드 공통 */
         .lore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .lore-card { background: #070202; border: 1px solid #331111; border-left: 4px solid var(--accent-red); padding: 2.5rem; transition: 0.4s; position: relative; overflow: hidden; }
         .lore-card:hover { border-color: var(--accent-red); box-shadow: 10px 10px 0 rgba(218, 0, 55, 0.1); }
@@ -530,9 +530,9 @@
                         <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/m/1" alt="세레나"></div>
                         <div class="staff-name" data-prank="냄새 예민보스">세레나</div><div class="staff-role" data-prank="팩폭기">소속원</div>
                     </div>
-                    <div class="staff-card" data-category="human" onclick="openModal('eris')">
+                    <div class="staff-card" data-category="underworld" onclick="openModal('eris')">
                         <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/n/1" alt="에리스"></div>
-                        <div class="staff-name" data-prank="힘쎈 인간">에리스</div><div class="staff-role" data-prank="맛집 담당">이승 담당</div>
+                        <div class="staff-name" data-prank="힘쎈 인간">에리스</div><div class="staff-role" data-prank="맛집 담당">저승 담당</div>
                     </div>
                     <div class="staff-card" data-category="human" onclick="openModal('erina')">
                         <div class="staff-img-wrap"><img src="https://igx.kr/u/zP/t/1" alt="에리나"></div>
@@ -840,7 +840,7 @@
                 ability: '【 죄악 판독 】\n\n영혼이 뿜어내는 냄새만으로 그가 품은 죄의 무게를 완벽하게 꿰뚫어 봅니다.' 
             },
             'eris': { 
-                name: '에리스', role: '이승 담당 (상급 인간)', img: 'https://igx.kr/u/zP/n/1', 
+                name: '에리스', role: '저승 담당 (상급 인간)', img: 'https://igx.kr/u/zP/n/1', 
                 age: '1500 세', mbti: 'ENFP (7w8)', tags: ['근육요원', '동생바보', '육체파'], 
                 desc: '에리나의 이란성 쌍둥이 언니로, 저승의 악령 처형을 담당합니다. 동생을 매우 아끼며, 영적 감각으로 악령을 탐지한 뒤 압도적인 피지컬로 때려잡습니다.<br><br><strong>[호/불호]</strong> 동생, 에너지 음료 / 커피, 동생의 슬픔', 
                 ability: '【 압도적인 순수 피지컬 】\n\n마법적인 능력 없이 순수한 물리력과 신체 능력만으로 악령을 찢어발깁니다.' 

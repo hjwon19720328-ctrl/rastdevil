@@ -15,7 +15,7 @@
             --accent-red: #da0037;
             --accent-gold: #d4af37;
             --accent-orange: #ff9800;
-            --accent-pink: #ff66b2; /* 시크릿 상점용 핑크 */
+            --accent-pink: #ff66b2;
             --current-theme: var(--accent-purple); 
         }
 
@@ -37,6 +37,8 @@
         body.god-prank-mode #abyss-dust { background-image: radial-gradient(circle, rgba(255, 215, 0, 0.4) 3px, transparent 3px); background-size: 80px 80px; }
         body.god-prank-mode header { background: rgba(255, 255, 255, 0.9); border-bottom: 3px dashed var(--accent-red) !important; }
         body.god-prank-mode .logo-text { color: var(--accent-red); text-shadow: 2px 2px 0px var(--accent-gold) !important; font-family: sans-serif;}
+        body.god-prank-mode .menu-toggle { color: var(--accent-red) !important; }
+        body.god-prank-mode .nav-links { background: rgba(255,255,255,0.95) !important; border: 3px dashed var(--accent-gold) !important; box-shadow: 0 10px 20px rgba(255,107,139,0.2) !important;}
         body.god-prank-mode .nav-links a { color: var(--text-main); font-weight: bold; }
         body.god-prank-mode .nav-links a.active { color: var(--accent-red) !important; text-shadow: 0 0 10px var(--accent-gold); }
         body.god-prank-mode .ppt-wrapper { background: rgba(255, 255, 255, 0.9); border: 4px dashed var(--accent-gold); box-shadow: 10px 10px 0px rgba(255, 107, 139, 0.2); }
@@ -91,14 +93,23 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
 
-        /* 헤더 */
-        header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: rgba(2, 2, 2, 0.85); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); position: fixed; width: 100%; top: 0; z-index: 1000; transition: border 0.5s; }
+        /* 🔥 헤더 및 삼각형 드롭다운 메뉴 */
+        header { display: none; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: rgba(2, 2, 2, 0.85); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); position: fixed; width: 100%; top: 0; z-index: 1000; transition: border 0.5s; }
         .logo-container { cursor: pointer; position: relative; }
         .logo-text { font-size: 1.6rem; font-weight: 900; letter-spacing: 4px; color: #fff; transition: 0.3s, text-shadow 0.5s; }
         .logo-container:hover .logo-text { text-shadow: 0 0 15px var(--current-theme); }
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; flex-wrap: wrap; }
-        .nav-links a { font-size: 0.95rem; color: var(--text-dim); transition: 0.3s; text-decoration: none; letter-spacing: 1px; cursor: pointer; position: relative; padding-bottom: 5px;}
-        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%; background-color: var(--current-theme); transition: width 0.3s ease, left 0.3s ease, background-color 0.5s; transform: translateX(-50%); }
+        
+        .menu-wrapper { position: relative; display: flex; align-items: center; }
+        .menu-toggle { color: #fff; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: color 0.3s; user-select: none; letter-spacing: 1px;}
+        .menu-toggle:hover { color: var(--current-theme); }
+        .menu-toggle-icon { transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: inline-block; font-size: 0.85rem;}
+        
+        .nav-links { display: none; position: absolute; top: 180%; right: 0; background: rgba(8, 8, 12, 0.95); padding: 1.5rem; border: 1px solid rgba(255,255,255,0.05); border-top: 3px solid var(--current-theme); border-radius: 8px; flex-direction: column; gap: 1.5rem; box-shadow: 0 15px 40px rgba(0,0,0,0.9); width: max-content; min-width: 200px; backdrop-filter: blur(15px); text-align: right; z-index: 1001;}
+        .nav-links.show { display: flex; animation: slideDown 0.3s ease forwards; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .nav-links a { font-size: 1rem; color: var(--text-dim); transition: 0.3s; text-decoration: none; letter-spacing: 1px; cursor: pointer; position: relative; padding-bottom: 5px; display: inline-block;}
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; right: 0; background-color: var(--current-theme); transition: width 0.3s ease, background-color 0.5s; }
         .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
         .nav-links a.active { color: #fff; font-weight: bold; }
 
@@ -122,7 +133,7 @@
         .dot { width: 10px; height: 10px; background: rgba(255,255,255,0.2); border-radius: 50%; cursor: pointer; transition: 0.3s;}
         .dot.active { background: var(--current-theme); box-shadow: 0 0 10px var(--current-theme); transform: scale(1.2);}
 
-        /* 카드 공통 (세계관 푸른색 버그 붉은색으로 수정) */
+        /* 카드 공통 (세계관 푸른색 버그 붉은색으로 수정 완료) */
         .lore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .lore-card { background: #070202; border: 1px solid #331111; border-left: 4px solid var(--accent-red); padding: 2.5rem; transition: 0.4s; position: relative; overflow: hidden; }
         .lore-card:hover { border-color: var(--accent-red); box-shadow: 10px 10px 0 rgba(218, 0, 55, 0.1); }
@@ -134,28 +145,10 @@
         .grade-badge { background: rgba(218, 0, 55, 0.1); color: var(--accent-red); padding: 4px 10px; border: 1px solid var(--accent-red); font-size: 0.8rem; font-weight: bold; margin-right: 15px; width: 70px; text-align: center; flex-shrink: 0;}
 
         /* ✨ 핑크 시크릿 상점 특수 이펙트 */
-        .secret-shop {
-            border: 2px solid var(--accent-pink) !important;
-            border-left: 6px solid var(--accent-pink) !important;
-            background: rgba(255, 102, 178, 0.05) !important;
-            box-shadow: 0 0 15px rgba(255, 102, 178, 0.2) !important;
-            animation: pinkNeonPulse 2s infinite alternate;
-            cursor: pointer;
-        }
-        .secret-shop h3 {
-            color: var(--accent-pink) !important;
-            border-bottom-color: rgba(255, 102, 178, 0.4) !important;
-            text-shadow: 0 0 10px rgba(255, 102, 178, 0.5);
-        }
-        .secret-shop:hover {
-            transform: scale(1.03);
-            background: rgba(255, 102, 178, 0.1) !important;
-            box-shadow: 0 0 25px rgba(255, 102, 178, 0.6) !important;
-        }
-        @keyframes pinkNeonPulse {
-            from { box-shadow: 0 0 10px rgba(255, 102, 178, 0.2); }
-            to { box-shadow: 0 0 25px rgba(255, 102, 178, 0.6); border-color: #ff3385; }
-        }
+        .secret-shop { border: 2px solid var(--accent-pink) !important; border-left: 6px solid var(--accent-pink) !important; background: rgba(255, 102, 178, 0.05) !important; box-shadow: 0 0 15px rgba(255, 102, 178, 0.2) !important; animation: pinkNeonPulse 2s infinite alternate; cursor: pointer; }
+        .secret-shop h3 { color: var(--accent-pink) !important; border-bottom-color: rgba(255, 102, 178, 0.4) !important; text-shadow: 0 0 10px rgba(255, 102, 178, 0.5); }
+        .secret-shop:hover { transform: scale(1.03); background: rgba(255, 102, 178, 0.1) !important; box-shadow: 0 0 25px rgba(255, 102, 178, 0.6) !important; }
+        @keyframes pinkNeonPulse { from { box-shadow: 0 0 10px rgba(255, 102, 178, 0.2); } to { box-shadow: 0 0 25px rgba(255, 102, 178, 0.6); border-color: #ff3385; } }
         .secret-modal { border: 2px solid var(--accent-pink) !important; box-shadow: 0 0 40px rgba(255, 102, 178, 0.5) !important; }
         .secret-btn { background: var(--accent-pink) !important; color: #fff !important; border: none !important; box-shadow: 0 0 15px var(--accent-pink) !important; margin-top: 2rem !important; }
 
@@ -194,19 +187,19 @@
 
         /* 폼 & 지원서 */
         .recruit-container { max-width: 700px; margin: 0 auto; background: rgba(15, 12, 5, 0.8); border: 1px solid rgba(212, 175, 55, 0.5); padding: 3rem; position: relative; border-radius: 8px; box-shadow: inset 0 0 50px rgba(0,0,0,0.8); }
-        .form-group { margin-bottom: 1.8rem; position: relative; }
+        .form-group { margin-bottom: 1.8rem; position: relative; text-align: left; }
         .form-group label { display: block; color: var(--accent-gold); margin-bottom: 0.8rem; font-size: 0.95rem; font-weight: bold; letter-spacing: 1px;}
         .form-control { width: 100%; padding: 15px; background: rgba(0,0,0,0.7); border: 1px solid rgba(212, 175, 55, 0.3); color: #fff; font-size: 1rem; transition: 0.3s; border-radius: 4px; }
         .form-control:focus { border-color: var(--accent-gold); background: rgba(10,8,0,0.9); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
         .form-group textarea.form-control { height: 120px; resize: vertical; }
         select.form-control { appearance: none; background-image: url('data:image/svg+xml;utf8,<svg fill="%23d4af37" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); background-repeat: no-repeat; background-position-x: 98%; background-position-y: 50%; cursor: pointer; }
         select.form-control option { background: #111; color: #fff; padding: 10px; }
-        .checkbox-group { display: flex; align-items: flex-start; gap: 15px; margin-top: 2.5rem; margin-bottom: 2rem; padding: 15px; background: rgba(218, 0, 55, 0.05); border-left: 3px solid #da0037; }
+        .checkbox-group { display: flex; align-items: flex-start; gap: 15px; margin-top: 1rem; margin-bottom: 1.5rem; padding: 15px; background: rgba(218, 0, 55, 0.05); border-left: 3px solid #da0037; text-align: left; }
         .checkbox-group label { color: #ccc; font-size: 0.9rem; margin-bottom: 0; font-weight: normal; cursor: pointer; line-height: 1.6;}
         .checkbox-group input[type="checkbox"] { appearance: none; min-width: 22px; height: 22px; border: 1px solid #da0037; background: #000; cursor: pointer; position: relative; transition: 0.3s; margin-top: 3px; }
         .checkbox-group input[type="checkbox"]:checked { background: #da0037; box-shadow: 0 0 10px #da0037; }
         .checkbox-group input[type="checkbox"]:checked::after { content: '✔'; position: absolute; color: #fff; font-size: 14px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-        .btn-gold { background: transparent; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 18px; width: 100%; font-size: 1.1rem; font-weight: bold; transition: 0.3s; letter-spacing: 2px; cursor: pointer; position: relative; overflow: hidden; }
+        .btn-gold { background: transparent; color: var(--accent-gold); border: 1px solid var(--accent-gold); padding: 18px; width: 100%; font-size: 1.1rem; font-weight: bold; transition: 0.3s; letter-spacing: 2px; cursor: pointer; position: relative; overflow: hidden; margin-top: 1rem; }
         .btn-gold::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent); transition: 0.5s; }
         .btn-gold:hover::before { left: 100%; }
         .btn-gold:hover { background: var(--accent-gold); color: #000; box-shadow: 0 0 25px rgba(212, 175, 55, 0.5); }
@@ -243,15 +236,13 @@
 
         .pc-br { display: block; } .mobile-br { display: none; }
         
-        /* 🔥 제목 잘림 방지를 위해 모바일 헤더 여백 대폭 강화 */
         @media (max-width: 768px) {
             .section-wrap { padding: 3rem 5%; }
             .page-header h2 { font-size: clamp(1.8rem, 5vw, 2.2rem); }
             .section-wrap.hero h1 { font-size: clamp(1.8rem, 6vw, 2.5rem); }
             .intro-logo { font-size: 3.5rem; letter-spacing: 5px; }
-            header { flex-direction: column; padding: 1rem; gap: 10px; }
-            .nav-links { gap: 12px; flex-wrap: wrap; justify-content: center; line-height: 1.8;}
-            .page-view { padding-top: 240px; } /* 메뉴바가 가리지 않도록 넉넉한 여백 추가 */
+            header { padding: 1rem 5%; }
+            .page-view { padding-top: 100px; } 
             .ppt-wrapper { width: 95%; margin: 0 auto; border-radius: 15px; }
             .ppt-slide { padding: 2rem 3.5rem; min-height: auto; } 
             .lore-grid { grid-template-columns: 1fr; }
@@ -271,13 +262,13 @@
     <div id="fixed-bg"></div>
     <div id="abyss-dust"></div>
 
-    <audio id="bgmNormal" src="NORMAL.mp3" loop></audio>
-    <audio id="bgmGod" src="GOD.mp3" loop></audio>
+    <audio id="bgmNormal" src="NORMAL.mp3" preload="auto" loop></audio>
+    <audio id="bgmGod" src="GOD.mp3" preload="auto" loop></audio>
 
     <div id="introOverlay">
         <div id="introCompany">
             <div class="intro-logo" data-prank="GOD'S PLAYGROUND">AETERNA</div>
-            <div class="intro-text" data-prank="아... 대충 환영해. 사탕나 먹고 가...🍬">
+            <div class="intro-text" data-prank="아... 대충 환영해. 사탕이나 먹고 가...🍬">
                 여러분의 모든 것을 책임지겠습니다.<br>
                 <span style="color:var(--accent-red); font-weight:bold; font-size:1.1rem;" data-prank="다 같이 누워서 숨이나 쉬자...">영혼까지도.</span>
             </div>
@@ -287,15 +278,22 @@
 
     <div id="mainWrapper">
         <header id="mainHeader">
-            <div class="logo-container" id="logoBtn"><span class="logo-text" data-prank="GOD'S TOYBOX">AETERNA</span></div>
-            <ul class="nav-links">
-                <li><a id="nav-home" class="active" onclick="navigate('page-home')" data-prank="귀찮은 놀이터">홈 (The Void)</a></li>
-                <li><a id="nav-lore" onclick="navigate('page-lore')" data-prank="대충 만든 규칙">세계관 (Blood)</a></li>
-                <li><a id="nav-incidents" onclick="navigate('page-incidents')" data-prank="터진 사고들">사건 사고 (Records)</a></li>
-                <li><a id="nav-staff" onclick="navigate('page-staff')" data-prank="피곤한 장난감들">명부 (Matrix)</a></li>
-                <li><a id="nav-commands" onclick="navigate('page-commands')" data-prank="귀찮은 키보드">명령어 (Terminal)</a></li>
-                <li><a id="nav-recruit" onclick="navigate('page-recruit')" data-prank="노예 구함 (급함)">지원 (Pact)</a></li>
-            </ul>
+            <div class="logo-container" id="logoBtn" onclick="navigate('page-home')"><span class="logo-text" data-prank="GOD'S TOYBOX">AETERNA</span></div>
+            
+            <div class="menu-wrapper">
+                <div class="menu-toggle" onclick="toggleMenu()">
+                    <span data-prank="대충 메뉴">MENU</span>
+                    <span class="menu-toggle-icon" id="menuToggleIcon">▼</span>
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a id="nav-home" class="active" onclick="navigate('page-home')" data-prank="귀찮은 놀이터">홈 (The Void)</a></li>
+                    <li><a id="nav-lore" onclick="navigate('page-lore')" data-prank="대충 만든 규칙">세계관 (Blood)</a></li>
+                    <li><a id="nav-incidents" onclick="navigate('page-incidents')" data-prank="터진 사고들">사건 사고 (Records)</a></li>
+                    <li><a id="nav-staff" onclick="navigate('page-staff')" data-prank="피곤한 장난감들">명부 (Matrix)</a></li>
+                    <li><a id="nav-commands" onclick="navigate('page-commands')" data-prank="귀찮은 키보드">명령어 (Terminal)</a></li>
+                    <li><a id="nav-recruit" onclick="navigate('page-recruit')" data-prank="노예 구함 (급함)">지원 (Pact)</a></li>
+                </ul>
+            </div>
         </header>
 
         <main id="page-home" class="page-view">
@@ -600,15 +598,47 @@
                 </div>
                 <div class="recruit-container">
                     <form id="applyForm" onsubmit="submitForm(event)">
+                        
                         <div class="form-group">
                             <label data-prank="너 이름이 뭐야? 타이핑하기도 귀찮네.">지원자 이름 (또는 진명)</label>
-                            <input type="text" class="form-control" required autocomplete="off">
+                            <input type="text" class="form-control" required autocomplete="off" placeholder="예: 김뫄뫄 / 흑염룡">
                         </div>
+
+                        <div class="form-group">
+                            <label data-prank="얼마나 살았냐?">생전 나이 (수명)</label>
+                            <input type="number" class="form-control" required autocomplete="off" placeholder="예: 25">
+                        </div>
+
+                        <div class="form-group">
+                            <label data-prank="어디서 구를래?">희망 근무 부서</label>
+                            <select class="form-control">
+                                <option>저승 관리부 (데스 사장님 직속)</option>
+                                <option>이승 방역 및 심판팀 (에리스/에리나/바알)</option>
+                                <option>연구 및 특수격리부 (미스 래빗 돌보기)</option>
+                                <option>고드님 전속 간식 셔틀 (사탄 비서실장 보조)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-prank="왜 여기 왔냐? 나불대봐.">지원 동기 및 각오</label>
+                            <textarea class="form-control" required placeholder="영혼을 바쳐 일할 각오를 적어주세요. (릴리스 회장님 직접 검토)"></textarea>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="pact1" required>
+                            <label for="pact1" data-prank="내 밑으로 들어온다고 서명해.">본인은 사후 1000년의 환생 권리를 포기하며, 에테르나 코퍼레이션에 영혼을 영구 귀속할 것에 동의합니다.</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="pact2" required>
+                            <label for="pact2" data-prank="열정페이 동의해라.">업무 특성상 발생하는 영적 손상, 야근(수당 없음), 코즈믹 호러 경험에 대한 산재 처리를 요구하지 않겠습니다.</label>
+                        </div>
+
                         <button type="submit" id="submitBtn" class="btn-gold" data-prank="대충 도장 쾅... 🍬">피의 서약 송신</button>
                     </form>
                     <div id="recruitSuccess" class="recruit-success">
                         <h3 style="color: var(--accent-gold); margin-bottom: 1rem;">계약이 완료되었습니다.</h3>
-                        <p>환영합니다. 이제 당신의 영혼은 에테르나의 것입니다.</p>
+                        <p>환영합니다. 이제 당신의 영혼은 에테르나의 것입니다.<br>사원증 발급을 위해 데스 사장님 사무실로 이동해 주십시오.</p>
                     </div>
                 </div>
             </div>
@@ -679,18 +709,36 @@
         let isPrankMode = false;
         let eyeTrackingHandler = null;
 
+        // 🔥 음악 재생 로직 강화
         function enterSite() {
             document.getElementById('introOverlay').classList.add('fade-out');
+            
+            bgmNormal.volume = 0.4;
+            bgmNormal.play().then(() => {
+                console.log("BGM 재생 성공");
+            }).catch((e) => {
+                console.log("브라우저 정책으로 인한 BGM 재생 차단:", e);
+            });
+
             setTimeout(() => {
                 document.getElementById('introOverlay').style.display = 'none';
                 header.style.display = 'flex';
                 setTimeout(() => { document.getElementById('page-home').classList.add('active'); }, 50);
             }, 800);
+        }
+
+        // 🔥 드롭다운 메뉴 토글 로직
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            const icon = document.getElementById('menuToggleIcon');
             
-            // 노래 재생 (브라우저 정책 상 사용자의 명시적 클릭이 있어야만 재생됨)
-            bgmNormal.volume = 0.4;
-            bgmNormal.currentTime = 0;
-            bgmNormal.play().catch((e) => { console.log("BGM 재생 불가:", e); });
+            if(nav.classList.contains('show')) {
+                nav.classList.remove('show');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                nav.classList.add('show');
+                icon.style.transform = 'rotate(180deg)';
+            }
         }
 
         function navigate(id) {
@@ -703,6 +751,11 @@
                 const navId = 'nav-' + currentActiveTab;
                 if(document.getElementById(navId)) document.getElementById(navId).classList.add('active');
             }, 100);
+            
+            // 메뉴 클릭 시 자동으로 닫히게 설정
+            document.getElementById('navLinks').classList.remove('show');
+            document.getElementById('menuToggleIcon').style.transform = 'rotate(0deg)';
+            
             window.scrollTo(0,0);
         }
 
@@ -850,7 +903,6 @@
             });
         }
 
-        // 시크릿 상점 모달 제어 함수
         function openSecretShop() {
             document.getElementById('secretShopModal').classList.add('active');
         }
